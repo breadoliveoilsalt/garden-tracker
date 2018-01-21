@@ -1,0 +1,13 @@
+<h1>Welcome to Garden Tracker</h1>
+
+<% if signed_in? %>
+  <!-- links: -->
+  Gardens: Create, Update, or Delete
+  Species: Create, Update, or delete
+  Planting ?
+  Log Out
+
+<% else %>
+  <h2><%= link_to "Create an Account", new_user_path %></h2>
+  <h2><%= link_to "Sign In", signin_path %></h2>
+<% end %>
