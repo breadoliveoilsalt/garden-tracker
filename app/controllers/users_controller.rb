@@ -24,16 +24,16 @@ class UsersController < ApplicationController
       # Note what was in solution:
         # @message = params[:message] if params[:message]
         # @message ||= false
-    if session[:user_id]
-      @user = User.find_by(id: params[:id])
-      if @user = User.find_by(id: session[:user_id])
-        render 'users/show'
-      else
-        redirect_to root_path
-      end
+    if signed_in?
+      # @user = User.find_by(id: params[:id])
+      # if @user = User.find_by(id: session[:user_id])
+      render 'users/show'
     else
       redirect_to root_path
     end
+    # else
+    #   redirect_to root_path
+    # end
   end
 
 # Do I need edit?
