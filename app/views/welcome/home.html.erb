@@ -1,3 +1,9 @@
+
+<% if flash[:message] %>
+  <h3> <%= flash[:message] %> </h3>
+<% end  %>
+
+
 <h1>Welcome to Garden Tracker</h1>
 
 <% if signed_in? %>
