@@ -3,4 +3,6 @@
   <h3> <%= flash[:message] %> </h3>
 <% end  %>
 
-Hi, <%= @user.name %>
+<h1> Hi, <%= @user.name %>! </h3>
+
+<h2> <%= link_to "Sign Out", signout_path, method: :delete %> </h2>

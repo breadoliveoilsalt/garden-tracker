@@ -2,9 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
     #RESEARCH USE OF CALLBACKS
 
-
-# ---- HERE IS WHAT I HAD ORIGINALLY:
-
   def new
     if signed_in?
       flash[:message] = "You have an account already."
@@ -27,7 +24,6 @@ class UsersController < ApplicationController
 
   def show
       # Only allow user to see its own user #show page:
-    binding.pry
     if signed_in? && current_user_show_page
       render 'users/show'
       # If user is signed in but trying to view another user's page, redirect
