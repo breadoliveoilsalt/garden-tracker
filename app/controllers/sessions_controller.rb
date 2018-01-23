@@ -26,6 +26,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def create_from_github
+    @user = User.find_or_create_from_auth_hash(auth_hash)
+    # self.current_user = @user # GOING TO NEED TO FIGURE OUT HOW THIS INTERACTS WITH SESSION[:USER_ID]
+    redirect_to '/'
+
+  end
+
   def destroy
     session[:user_id] = nil
     redirect_to root_url
@@ -33,20 +40,27 @@ class SessionsController < ApplicationController
 
   private
 
-  # The following are needed to be able to add errors to @user under #create above
+  # From the omniauth page: (see create_from_github above)
 
-  attr_reader :errors
-
-  def read_attribute_for_validation(attr)
-    send(attr)
+  def auth_hash
+    request.env['omniauth.auth']
   end
 
-  def self.human_attribute_name(attr, options = {})
-    attr
-  end
 
-  def self.lookup_ancestors
-    [self]
-  end
+  # # The following are needed to be able to add errors to @user under #create above
+  #
+  # attr_reader :errors
+  #
+  # def read_attribute_for_validation(attr)
+  #   send(attr)
+  # end
+  #
+  # def self.human_attribute_name(attr, options = {})
+  #   attr
+  # end
+  #
+  # def self.lookup_ancestors
+  #   [self]
+  # end
 
 end
