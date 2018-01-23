@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user.id)
     else
-      raise @user.errors.inspect
+
 
       flash[:message] = "User information incomplete."
       render 'users/new'
