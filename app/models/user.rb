@@ -4,4 +4,15 @@ class User < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true#, message: "Error: You might not have provided a name, or your name might have been taken already."
   #validates :password, presence: true#, message: "Error: Please provide a password."
 
+
+  def self.create_user_from_github(auth)
+    create! do |user|
+      user.name = auth["info"]["name"]
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.oath_token = = auth.credentials.token # Should I put this in bracket form like the others?
+    end
+  end
+
+
 end
