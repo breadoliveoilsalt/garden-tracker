@@ -2,6 +2,7 @@ class Garden < ActiveRecord::Base
 
   validates :name, presence: true
   validates :square_feet, numericality: {only_integer: true}
+  validates :user_id, presence: true, numericality: {only_integer: true}
 
   belongs_to :user
   has_many :garden_species
