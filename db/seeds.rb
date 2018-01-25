@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create(name: "Tommy", password: "tommytommy")
+
+User.create(name: "Betty", password: "bettybetty")
+
 Garden.create(name: "Backyard", description: "Pretty shady back there", square_feet: 50) #garden_id: 1
 
 Garden.create(name: "Front Yard", description: "Sunny but small", square_feet: 20) #garden_id: 2
