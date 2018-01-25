@@ -12,10 +12,10 @@ class User < ActiveRecord::Base
   def self.create_user_from_github(auth)
     create! do |user|
       user.name = auth.extra.all_emails[0].email
-      user.password = auth.uid
+      user.password = SecureRandom.hex(10)
       user.provider = auth.provider
       user.uid = auth.uid
-      user.oath_token = auth.credentials.token # Should I put this in bracket form like the others?
+      # user.oath_token = auth.credentials.token # Should I put this in bracket form like the others?
     end
   end
 
