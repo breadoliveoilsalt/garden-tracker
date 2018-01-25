@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   #validates :password, presence: true#, message: "Error: Please provide a password."
 
 
+  has_many :gardens
+  has_many :species
+  has_many :plantings
+
   def self.create_user_from_github(auth)
     create! do |user|
       user.name = auth.extra.all_emails[0].email
