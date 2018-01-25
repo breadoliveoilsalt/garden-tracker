@@ -10,23 +10,25 @@ Garden.create(name: "Backyard", description: "Pretty shady back there", square_f
 
 Garden.create(name: "Front Yard", description: "Sunny but small", square_feet: 20) #garden_id: 2
 
+#####
 
-
-Species.create(name: "Tomato", type: "vegetable", sunlight: "full-sun")
+Species.create(name: "Tomato", product: "vegetable", sunlight: "full-sun")
 
 GardenSpecies.create(garden_id: 1, species_id: 1) # Backyard has tomatoes
 
-Species.create(name: "Grapes", type: "fruit", sunlight: "part-shade")
+Species.create(name: "Grapes", product: "fruit", sunlight: "part-shade")
 
 GardenSpecies.create(garden_id: 2, species_id: 2) # Front yard has grapes
 
-Species.create(name: "Hosta", type: "non-edible", sunlight: "shade")
+Species.create(name: "Hosta", product: "non-edible", sunlight: "shade")
 
 GardenSpecies.create(garden_id: 1, species_id: 3) # Backyard has hostas
 
-Species.create(name: "Basil", type: "herb", sunlight: "full-sun")
+Species.create(name: "Basil", product: "herb", sunlight: "full-sun")
 
 GardenSpecies.create(garden_id: 2, species_id: 4) # Front yard has grapes
+
+######
 
 Planting.create(quantity: 4, garden_id: 1, species_id: 1) # 4 tomatoes in Backyard
 
