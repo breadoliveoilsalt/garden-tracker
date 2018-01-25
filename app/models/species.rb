@@ -10,12 +10,5 @@ class Species < ActiveRecord::Base
   has_many :gardens, through: :garden_species
   has_many :plantings
 
-product
-end result
-matures_into
-produces
-harvest
-purpose
-becomes
 
 end

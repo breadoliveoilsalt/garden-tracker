@@ -12,34 +12,36 @@ User.create(name: "Betty", password: "bettybetty")
 
 #####
 
-Garden.create(name: "Backyard", description: "Pretty shady back there", square_feet: 50) #garden_id: 1
+Garden.create(name: "Backyard", description: "Pretty shady back there", square_feet: 50, user_id: 1) #garden_id: 1
 
-Garden.create(name: "Front Yard", description: "Sunny but small", square_feet: 20) #garden_id: 2
+Garden.create(name: "Front Yard", description: "Sunny but small", square_feet: 20, user_id: 1) #garden_id: 2
+
+Garden.create(name: "Raised Beds", description: "Sunny, good drainage", square_feet: 8, user_id: 2)
 
 #####
 
-Species.create(name: "Tomato", product: "vegetable", sunlight: "full-sun")
+Species.create(name: "Tomato", product: "vegetable", sunlight: "full-sun", user_id: 1)
 
-GardenSpecies.create(garden_id: 1, species_id: 1) # Backyard has tomatoes
+GardenSpecies.create(garden_id: 1, species_id: 1) # Tommy's Backyard has tomatoes
 
-Species.create(name: "Grapes", product: "fruit", sunlight: "part-shade")
+Species.create(name: "Grapes", product: "fruit", sunlight: "part-shade", user_id: 1)
 
-GardenSpecies.create(garden_id: 2, species_id: 2) # Front yard has grapes
+GardenSpecies.create(garden_id: 2, species_id: 2) # Tommy's Front yard has grapes
 
-Species.create(name: "Hosta", product: "non-edible", sunlight: "shade")
+Species.create(name: "Hosta", product: "non-edible", sunlight: "shade", user_id: 1)
 
-GardenSpecies.create(garden_id: 1, species_id: 3) # Backyard has hostas
+GardenSpecies.create(garden_id: 1, species_id: 3) # Tommy's Backyard has hostas
 
-Species.create(name: "Basil", product: "herb", sunlight: "full-sun")
+Species.create(name: "Basil", product: "herb", sunlight: "full-sun", user_id: 1)
 
-GardenSpecies.create(garden_id: 2, species_id: 4) # Front yard has grapes
+GardenSpecies.create(garden_id: 2, species_id: 4) # Tommy's Front yard has grapes
 
 ######
 
-Planting.create(quantity: 4, garden_id: 1, species_id: 1) # 4 tomatoes in Backyard
+Planting.create(quantity: 4, garden_id: 1, species_id: 1, user_id: 1) # 4 tomatoes in Tommy's Backyard
 
-Planting.create(quantity: 2, garden_id: 2, species_id: 2) # 2 grapes in Front Yard
+Planting.create(quantity: 2, garden_id: 2, species_id: 2, user_id: 1) # 2 grapes in Tommy's Front Yard
 
-Planting.create(quantity: 6, garden_id: 1, species_id: 3) # 6 hostas in Backyard
+Planting.create(quantity: 6, garden_id: 1, species_id: 3, user_id: 1) # 6 hostas in Tommy's Backyard
 
-Planting.create(quantity: 10, garden_id: 2, species_id: 4) # 10 basil plants in Front Yard
+Planting.create(quantity: 10, garden_id: 2, species_id: 4, user_id: 1) # 10 basil plants in Tommy's Front Yard
