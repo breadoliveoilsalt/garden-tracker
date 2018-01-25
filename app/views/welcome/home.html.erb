@@ -6,6 +6,7 @@
 
 <h1>Welcome to Garden Tracker</h1>
 
+
 <% if signed_in? %>
   <!-- links: -->
   Gardens: Create, Update, or Delete
@@ -14,8 +15,8 @@
   Log Out
 
 <% else %>
-  <h2><%= link_to "Sign In", signin_path %></h2>
+
+  <h2><%= link_to "Sign In", signin_path %> or <%= link_to "Log in with GitHub", "/auth/github" %></h2>
   <h2><%= link_to "Create an Account", new_user_path %></h2>
-  <h2><%= link_to('Log in with GitHub', '/auth/github') %></h2>
 
 <% end %>

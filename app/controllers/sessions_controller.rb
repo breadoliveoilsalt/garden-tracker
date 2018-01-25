@@ -27,22 +27,26 @@ class SessionsController < ApplicationController
   end
 
   def create_from_github
-
+    # raise "you hit create from github in sessions".inspect
     # @user = User.find_or_create_from_auth_hash(auth_hash)
     # # self.current_user = @user # GOING TO NEED TO FIGURE OUT HOW THIS INTERACTS WITH SESSION[:USER_ID]
     #   # probably will rest on the signed_in? helper...as well as the current_user helper
     # redirect_to '/'
 
    auth = request.env["omniauth.auth"]
-   user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_user_from_github(auth)     session[:user_id] = user.id
-   flash[:message] = "Successfully signed in with Github"
-   redirect_to user_path(user.idß)
+   user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_user_from_github(auth)
+   session[:user_id] = user.id
+   flash[:message] = "Successfully signed in with GitHub"
+   redirect_to user_path(user.id)
  end
 
 
   def destroy
-    session[:user_id] = nil
-    redirect_to root_url
+    if signed_in_with_github?
+      flash[:message] = "****You must sign out from github.com to completely sign out!!!****"
+    end
+    session.clear
+    redirect_to root_path #'/'
   end
 
   private

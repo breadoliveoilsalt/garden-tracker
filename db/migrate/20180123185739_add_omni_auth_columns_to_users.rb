@@ -2,6 +2,6 @@ class AddOmniAuthColumnstoUsers < ActiveRecord::Migration[5.1]
   def change
     add_column :users, :provider, :string
     add_column :users, :uid, :string
-    add column :users, :oath_token, :string
+    add_column :users, :oath_token, :string
   end
 end

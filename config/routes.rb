@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :users
 
   #get 'callback', to: 'sessions#create_from_github'
-  get '/auth/github/callback', to: 'sessions#create_from_github'
+  get '/auth/:provider/callback', to: 'sessions#create_from_github'
     # if the above not work, try to replace :provider with github
   get "/signin", to: "sessions#new"
   post "/sessions/create", to: "sessions#create"
