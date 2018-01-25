@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123185739) do
+ActiveRecord::Schema.define(version: 20180125203137) do
+
+  create_table "garden_species", force: :cascade do |t|
+    t.integer "garden_id"
+    t.integer "species_id"
+  end
+
+  create_table "gardens", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "square_feet"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plantings", force: :cascade do |t|
+    t.integer "quantity"
+    t.integer "garden_id"
+    t.integer "species_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "species", force: :cascade do |t|
+    t.string "name"
+    t.string "type", default: "vegetable"
+    t.string "sunlight", default: "full-sun"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"

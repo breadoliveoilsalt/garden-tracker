@@ -5,3 +5,33 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Garden.create(name: "Backyard", description: "Pretty shady back there", square_feet: 50) #garden_id: 1
+
+Garden.create(name: "Front Yard", description: "Sunny but small", square_feet: 20) #garden_id: 2
+
+
+
+Species.create(name: "Tomato", type: "vegetable", sunlight: "full-sun")
+
+GardenSpecies.create(garden_id: 1, species_id: 1) # Backyard has tomatoes
+
+Species.create(name: "Grapes", type: "fruit", sunlight: "part-shade")
+
+GardenSpecies.create(garden_id: 2, species_id: 2) # Front yard has grapes
+
+Species.create(name: "Hosta", type: "non-edible", sunlight: "shade")
+
+GardenSpecies.create(garden_id: 1, species_id: 3) # Backyard has hostas
+
+Species.create(name: "Basil", type: "herb", sunlight: "full-sun")
+
+GardenSpecies.create(garden_id: 2, species_id: 4) # Front yard has grapes
+
+Planting.create(quantity: 4, garden_id: 1, species_id: 1) # 4 tomatoes in Backyard
+
+Planting.create(quantity: 2, garden_id: 2, species_id: 2) # 2 grapes in Front Yard
+
+Planting.create(quantity: 6, garden_id: 1, species_id: 3) # 6 hostas in Backyard
+
+Planting.create(quantity: 10, garden_id: 2, species_id: 4) # 10 basil plants in Front Yard
