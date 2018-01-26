@@ -6,8 +6,8 @@ class Species < ActiveRecord::Base
   validates :user_id, presence: true, numericality: {only_integer: true}
 
   belongs_to :user
-  has_many :garden_species
-  has_many :gardens, through: :garden_species
+  has_many :species_garden
+  has_many :gardens, through: :species_garden
   has_many :plantings
 
 
