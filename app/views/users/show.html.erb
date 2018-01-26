@@ -6,3 +6,14 @@
 <h1> Hi, <%= @user.name %>! </h3>
 
 <h2> <%= link_to "Sign Out", signout_path, method: :delete %> </h2>
+
+<h1> ------------------- </h1>
+
+<h2> <%= link_to "Add a Garden", new_garden_path %> or View an Existing Garden:</h2>
+
+  <ul>
+    <% Garden.all.each do |garden| %>
+      <li> <%= link_to garden.name, garden_path(garden.id)  %></li>
+    <% end %>
+
+  </ul>
