@@ -1,0 +1,22 @@
+
+
+<%= form_for garden do |f| %>
+  <div>
+    <%= f.label :name, "Garden Name: " %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :description, "Description (optional): " %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :square_feet, "Square Feet: " %>
+    <%= f.text_field :square_feet %>
+  </div>
+
+  <div> 
+    <%= f.submit "Add Garden" %>
+  </div>
+<% end %>

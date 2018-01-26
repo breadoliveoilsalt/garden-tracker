@@ -15,6 +15,10 @@
  */
 
 
+div {
+  margin: 15px;
+}
+
 .field_with_errors {
   border-style: solid;
   border-width: 1px;
