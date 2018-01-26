@@ -34,6 +34,7 @@ class SessionsController < ApplicationController
     # redirect_to '/'
 
    auth = request.env["omniauth.auth"]
+   binding.pry
    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_user_from_github(auth)
    session[:user_id] = user.id
    flash[:message] = "Successfully signed in with GitHub"

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
         # Double check that you don't need require 'securerandom' somewhere.
       user.provider = auth.provider
       user.uid = auth.uid
-      # user.oath_token = auth.credentials.token 
+      # user.oath_token = auth.credentials.token
         # Commented out line above b/c not sure why I'd need it.  Got it form one of those tutorials on line
     end
   end
