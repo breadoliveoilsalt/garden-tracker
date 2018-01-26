@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   def self.create_user_from_github(auth)
     create! do |user|
-      user.name = auth.extra.all_emails[0].email
+      user.name = auth.info.nickname
       user.password = SecureRandom.hex(10) # has_secure_password requires a password. This generates random one.
         # Double check that you don't need require 'securerandom' somewhere.
       user.provider = auth.provider
