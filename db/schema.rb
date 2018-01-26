@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125203137) do
+ActiveRecord::Schema.define(version: 20180125214817) do
 
   create_table "garden_species", force: :cascade do |t|
     t.integer "garden_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20180125203137) do
     t.string "name"
     t.string "description"
     t.integer "square_feet"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,14 +30,16 @@ ActiveRecord::Schema.define(version: 20180125203137) do
     t.integer "quantity"
     t.integer "garden_id"
     t.integer "species_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "species", force: :cascade do |t|
     t.string "name"
-    t.string "type", default: "vegetable"
+    t.string "product", default: "vegetable"
     t.string "sunlight", default: "full-sun"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,11 +47,11 @@ ActiveRecord::Schema.define(version: 20180125203137) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "provider"
     t.string "uid"
     t.string "oath_token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
