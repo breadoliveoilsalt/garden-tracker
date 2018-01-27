@@ -8,7 +8,7 @@ class SpeciesController < ApplicationController
   end
 
   def create
-    @species = current_user.speciess.build(species_params)
+    @species = current_user.species.build(species_params)
     if @species.save
       redirect_to species_path(@species.id)
     else
@@ -32,18 +32,18 @@ class SpeciesController < ApplicationController
 
   def destroy
     @species.destroy
-    #destroy each planting too...but maybe not species
+    # Probably have to destroy each planting that belongs to this species!
     redirect_to user_path(current_user.id)
   end
 
   private
 
   def species_params
-    params.require(:species).permit(:name, :description, :square_feet)
+    params.require(:species).permit(:name, :product, :sunlight)
   end
 
   def set_species
-    @species = species.find(params[:id])
+    @species = Species.find(params[:id])
   end
 
   def check_permission

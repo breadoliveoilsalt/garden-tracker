@@ -1,9 +1,5 @@
 <h1><%= @species.name %> ( <%= link_to "Edit", edit_species_path(@species.id) %> | <%= link_to 'Destroy', @species, method: :delete, data: { confirm: 'Are you sure you want to delete this species?' } %>) </h1>
 
-<h2> Description: <%= @species.description %> </h2>
+<h2> Produces: <%= @species.product %> </h2>
 
-<h2> Square Feet: <%= @species.square_feet %> </h2>
-
-Add plantings
-
-Add edit link
+<h2> Sun Level: <%= @species.sunlight %> </h2>

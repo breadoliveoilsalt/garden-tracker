@@ -1,12 +1,12 @@
 class Species < ActiveRecord::Base
 
   PRODUCT_TYPES = [
-    "vegetable",
-    "fruit",
-    "herb",
-    "legume",
-    "seed",
-    "nut",
+    "vegetables",
+    "fruits",
+    "herbs",
+    "legumes",
+    "seeds",
+    "nuts",
     "non-edible",
     "other"
   ]
@@ -18,7 +18,7 @@ class Species < ActiveRecord::Base
   ]
 
   validates :name, presence: true
-  validates :product, presence: true, inclusion: { in: Species::PRODUCT_TYPES }#%w(vegetable fruit herb legume seed nut non-edible other)} # message: "%{value} is not a valid size" }
+  validates :product, presence: true, inclusion: { in: Species::PRODUCT_TYPES }
   validates :sunlight, presence: true, inclusion: { in: Species::SUN_LEVELS }
   validates :user_id, presence: true, numericality: {only_integer: true}
 
@@ -26,9 +26,5 @@ class Species < ActiveRecord::Base
   has_many :species_garden
   has_many :gardens, through: :species_garden
   has_many :plantings
-
-  def gimme
-    self.class.PRODUCT_TYPES
-  end
 
 end
