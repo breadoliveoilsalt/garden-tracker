@@ -1,6 +1,6 @@
 
 
-<%= render partial: 'layouts/errors', locals: {errors: @garden.errors} if @garden.errors.any? %>
+<%= render partial: 'layouts/errors', locals: {errors: garden.errors} if garden.errors.any? %>
 
 <%= form_for garden do |f| %>
   <div>
