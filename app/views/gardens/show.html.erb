@@ -1,1 +1,9 @@
-<%= @garden.name %>
+<h1><%= @garden.name %> ( <%= link_to "Edit", edit_garden_path(@garden.id) %> | Delete ) </h1>
+
+<h2> Description: <%= @garden.description %> </h2>
+
+<h2> Square Feet: <%=  %> </h2>
+
+Add plantings
+
+Add edit link

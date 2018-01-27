@@ -23,12 +23,4 @@ div {
   color: red;
   display: inline;
   margin-left: -2px;
-  /* @extend .has-error; */
-  /* border-style: solid;
-  border-width: 1px;
-  border-color: red;
-
-
-  /* display: inline-block; */
-
 }
