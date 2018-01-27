@@ -24,3 +24,8 @@ div {
   display: inline;
   margin-left: -2px;
 }
+
+.error-messages {
+  border: 2px solid red;
+
+}

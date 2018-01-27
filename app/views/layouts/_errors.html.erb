@@ -1,7 +1,11 @@
 
-<h3> Sorry, the following error(s) occurred: </h3>
-  <ul>
-    <%  errors.full_messages.each do |msg| %>
-      <li> <%= msg %></li>
-    <% end %>
-  </ul>
+<div class="error-messages">
+
+  <h3> Sorry, the following error(s) occurred: </h3>
+    <ul>
+      <%  errors.full_messages.each do |msg| %>
+        <li> <%= msg %></li>
+      <% end %>
+    </ul>
+
+</div>
