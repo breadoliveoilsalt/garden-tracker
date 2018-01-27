@@ -1,10 +1,6 @@
 
-<h3> Sorry, the following error(s) occurred: </h3>
-  <ul>
-    <%  @garden.errors.full_messages.each do |msg| %>
-      <li> <%= msg %></li>
-    <% end %>
-  </ul>
+
+<%= render partial: 'layouts/errors', locals: {errors: @garden.errors} if @garden.errors.any? %>
 
 <%= form_for garden do |f| %>
   <div>

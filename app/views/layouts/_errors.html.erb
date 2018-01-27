@@ -1,7 +1,7 @@
 
 <h3> Sorry, the following error(s) occurred: </h3>
   <ul>
-    <%  @user.errors.full_messages.each do |msg| %>
+    <%  errors.full_messages.each do |msg| %>
       <li> <%= msg %></li>
     <% end %>
   </ul>
