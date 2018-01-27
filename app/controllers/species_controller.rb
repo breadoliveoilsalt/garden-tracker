@@ -8,11 +8,21 @@ class SpeciesController < ApplicationController
   end
 
   def create
-    @species = current_user.species.build(species_params)
-    if @species.save
-      redirect_to species_path(@species.id)
-    else
+    if species_exists_already?
+      #@species.errors << "You already created that species."
+      #@species.errors.add("You already created that species.")
+      #@species.errors[:base] << "You already created that species."
+      #@species.errors.add(:name, "exists already.")
+      @species.errors[:base] << "You already created that species. Change the form below to edit the species."
+      #binding.pry
       render :new
+    else
+      @species = current_user.species.build(species_params)
+      if @species.save
+        redirect_to species_path(@species.id)
+      else
+        render :new
+      end
     end
   end
 
@@ -53,5 +63,8 @@ class SpeciesController < ApplicationController
     end
   end
 
+  def species_exists_already?
+    @species = current_user.species.find_by(name: params[:species][:name])
+  end
 
 end
