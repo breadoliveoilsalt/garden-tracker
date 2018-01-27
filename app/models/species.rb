@@ -1,5 +1,22 @@
 class Species < ActiveRecord::Base
 
+  PRODUCT_TYPES = [
+    "vegetable",
+    "fruit",
+    "herb",
+    "legume",
+    "seed",
+    "nut",
+    "non-edible",
+    "other"
+  ]
+
+  SUN_LEVELS = [
+    "shade",
+    "part-shade",
+    "full-sun"
+  ]
+
   validates :name, presence: true
   validates :product, presence: true, inclusion: { in: %w(vegetable fruit herb legume seed nut non-edible other)} # message: "%{value} is not a valid size" }
   validates :sunlight, presence: true, inclusion: { in: %w(shade part-shade full-sun)}

@@ -12,12 +12,12 @@
 
   <div>
     <%= f.label :product, "Type: " %>
-    <%= f.select :product, ["Apple", "Orange", "Banana", "Song"] %>
+    <%= f.select :product, Species::PRODUCT_TYPES %>
   </div>
 
   <div>
     <%= f.label :sunlight, "Sun Level: " %>
-    <%= f.text_field :sunlight %>
+    <%= f.select :sunlight, Species::SUN_LEVELS %>
   </div>
 
   <div>
