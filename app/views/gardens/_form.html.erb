@@ -1,4 +1,10 @@
 
+<h3> Sorry, the following error(s) occurred: </h3>
+  <ul>
+    <%  @garden.errors.full_messages.each do |msg| %>
+      <li> <%= msg %></li>
+    <% end %>
+  </ul>
 
 <%= form_for garden do |f| %>
   <div>
@@ -12,11 +18,11 @@
   </div>
 
   <div>
-    <%= f.label :square_feet, "Square Feet: " %>
+    <%= f.label :square_feet, "Square Feet (optional): " %>
     <%= f.text_field :square_feet %>
   </div>
 
-  <div> 
+  <div>
     <%= f.submit "Add Garden" %>
   </div>
 <% end %>

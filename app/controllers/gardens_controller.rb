@@ -12,7 +12,7 @@ class GardensController < ApplicationController
     if @garden.save
       redirect_to garden_path(@garden.id)
     else
-      raise @garden.errors.inspect
+      render 'gardens/new'
     end
   end
 
