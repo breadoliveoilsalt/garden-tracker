@@ -16,19 +16,18 @@ class GardensController < ApplicationController
     if @garden.save
       redirect_to garden_path(@garden.id)
     else
-      render 'gardens/new' # I can probably just do render :new
+      render :new # 'gardens/new' # I can probably just do render :new
     end
   end
 
   def edit
-    #@garden = Garden.find_by(id: params[:id])
   end
 
   def update
     if @garden.update(garden_params)
       redirect_to garden_path(@garden.id)
     else
-      render 'gardens/edit'
+      render :edit
     end
   end
 
@@ -36,6 +35,11 @@ class GardensController < ApplicationController
     #@garden = Garden.find_by(id: params[:id])
   end
 
+  def destroy
+    @garden.destroy
+    #destroy each planting too...but maybe not species
+    redirect_to user_path(current_user.id)
+  end
 
   private
 
