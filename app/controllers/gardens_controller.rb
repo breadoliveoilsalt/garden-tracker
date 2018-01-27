@@ -2,11 +2,6 @@ class GardensController < ApplicationController
 
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
   before_action :check_permission, only: [:show, :edit, :update, :destroy]
-# need a call back before each to make sure user is logged in and it is his or her stuff
-# you are allowed to look at.  Or else redirect with a flash message.
-
-
-# TN: remember to set callbacks -- eg before edit and show.  Need edit one b/c of partial that is rendered in edit View
 
   def new
     @garden = Garden.new
@@ -17,7 +12,7 @@ class GardensController < ApplicationController
     if @garden.save
       redirect_to garden_path(@garden.id)
     else
-      render :new # 'gardens/new' # I can probably just do render :new
+      render :new
     end
   end
 
@@ -33,7 +28,6 @@ class GardensController < ApplicationController
   end
 
   def show
-    #@garden = Garden.find_by(id: params[:id])
   end
 
   def destroy
@@ -54,9 +48,9 @@ class GardensController < ApplicationController
 
   def check_permission
     if @garden.user.id != current_user.id
-      flash[:message] = "Sorry, request denied.  That garden belongs to another user."
+      flash[:message] = "Sorry, request denied. That garden belongs to another user."
       redirect_to user_path(current_user.id)
     end
   end
-  
+
 end
