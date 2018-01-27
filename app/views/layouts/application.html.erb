@@ -9,6 +9,12 @@
   </head>
 
   <body>
+    <!-- navbar -->
+
+    <% if signed_in? %>
+      <h2><%= link_to "Home", user_path(current_user.id) %> | <%= link_to "Sign Out", signout_path, method: :delete %></h2>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
