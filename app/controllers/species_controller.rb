@@ -13,7 +13,7 @@ class SpeciesController < ApplicationController
       #@species.errors.add("You already created that species.")
       #@species.errors[:base] << "You already created that species."
       #@species.errors.add(:name, "exists already.")
-      @species.errors[:base] << "You already created that species. Change the form below to edit the species."
+      @species.errors[:base] << "You already created that species. Change the form below to EDIT the species."
       #binding.pry
       render :new
     else
