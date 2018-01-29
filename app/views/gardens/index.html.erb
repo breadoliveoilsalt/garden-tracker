@@ -1,1 +1,15 @@
-You made it to garden index.
+<% if @user %>
+  <h1> <%= @user.name %>'s Gardens </h1>
+<% else %>
+  <h1> Users' Gardens </h1>
+<% end %>
+
+<ul>
+  <% @gardens.each do |garden| %>
+      <li> <%= link_to garden.name, garden_path(garden.id) %>
+        <% if !@user %>
+          - By <%= link_to garden.user.name, user_gardens_path(garden.user.id) %>
+        <% end %>
+       </li>
+   <% end  %>
+</ul>
