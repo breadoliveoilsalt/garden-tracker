@@ -24,3 +24,12 @@
       <% end %>
 
     </ul>
+
+  <h2> View Gardens of Other Users: </h2>
+
+    <ul>
+      <% @other_users.each do |user| %>
+        <li> <%= link_to user.name, user_gardens_path(user.id) %> </li>
+      <% end %>
+
+    </ul>

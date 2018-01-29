@@ -21,5 +21,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.all_except(user)
+    where.not(id: user.id)
+  end
+
 
 end

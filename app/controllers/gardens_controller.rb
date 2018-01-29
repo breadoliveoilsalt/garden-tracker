@@ -1,7 +1,7 @@
 class GardensController < ApplicationController
 
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
-  before_action :check_permission, only: [:show, :edit, :update, :destroy]
+  before_action :check_permission, only: [:edit, :update, :destroy]
 
   def new
     @garden = Garden.new

@@ -22,13 +22,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    if signed_in? #&& current_user_show_page
+      # Only allow current_user to see its own home page
+    if signed_in? && current_user_show_page
+      @other_users = User.all_except(current_user)
       render 'users/show'
       # If user is signed in but trying to view another user's page, redirect
       # to its own show page with flash message
-    # elsif signed_in? && !current_user_show_page
-    #   flash[:message] = "Sorry, you do not have permission to view that user's profile."
-    #   redirect_to user_path(current_user.id)
+    elsif signed_in? && !current_user_show_page
+      flash[:message] = "Sorry, you do not have permission to view that user's profile."
+      redirect_to user_path(current_user.id)
     #   # Otherwise, direct user to welcome page.
     else
       flash[:message] = "Please sign in or create an account."
@@ -79,7 +81,7 @@ class UsersController < ApplicationController
     end
 
     def current_user_show_page # This was needed when I only wanted users to view their own gardens and
-        # no one elses, so consider deleting
+        # no one elses, so consider deleting # later: i still found this useful
       current_user.id == params[:id].to_i
     end
 end
