@@ -6,10 +6,10 @@
 
 <ul>
   <% @gardens.each do |garden| %>
-      <li> <%= link_to garden.name, garden_path(garden.id) %>
-        <% if !@user %>
-          - By <%= link_to garden.user.name, user_gardens_path(garden.user.id) %>
-        <% end %>
-       </li>
+    <% if @user %>
+        <li> <%= link_to garden.name, user_garden_path(@user.id, garden.id) %> </li>
+    <% else %>
+      <li> <%= link_to garden.name, garden_path(garden.id) %> - By <%= link_to garden.user.name, user_gardens_path(garden.user.id) %> </li>
+    <% end %>
    <% end  %>
 </ul>
