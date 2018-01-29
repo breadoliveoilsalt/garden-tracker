@@ -19,6 +19,13 @@
   </div>
 
   <div>
+    <%= f.label :species, "Select Species" %>
+    <%= f.collection_select :species, current_user.species, :id, :name %>
+    <br>
+    Or <%= link_to "add a new Species", new_species_path %>
+  </div>
+
+  <div>
     <%= f.submit "Submit" %>
   </div>
 <% end %>
