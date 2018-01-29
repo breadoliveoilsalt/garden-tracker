@@ -27,8 +27,45 @@ class GardensController < ApplicationController
     end
   end
 
-  def show
+  def index
+    if params[:user_id] # Check if the route is a nested route, such as users/1/gardens
+      if @user = User.find_by(id: params[:user_id]) # See if user id params is valid, and if so, define @gardens
+        @gardens = @user.gardens
+      else
+        flash[:message] = "Sorry, user does not exist."
+        redirect_to user_path(current_user.id)
+      end
+    else # If not a nested route, show all the gardens
+      @gardens = Garden.all
+    end
   end
+
+  def show
+    if params[:user_id] # Check if the route is a nested route, such as users/1/gardens/1
+      if @user = User.find_by(id: params[:user_id]) && @user.gardens.include?(@garden) # See if the user id params is valid and if the garden specified (and set by #set_garden) belongs to the user. If yes to all, render the show page
+       render 'gardens/show'
+      else
+       flash[:message] = "Sorry, user or garden does not exist."
+       redirect_to user_path(current_user.id)
+      end
+    elsif @garden # if not a nested route, check that #set_garden has identified an existing garden and show that garden if so
+      render 'gardens/show'
+    else
+       flash[:message] = "Sorry, garden does not exist."
+       redirect_to user_path(current_user.id)
+     end
+   end
+  #     # check_garden_permission # this would not work for some reason -- would not redirect, would just come back here, even though it was definitely jumping to the method
+  #     if @garden == nil || @garde.user.id != current_user.id
+  #       flash[:message] = "Sorry, request denied. You do not have permission to view that garden."
+  #       redirect_to user_path(current_user.id)
+  #     else
+  #
+  #     end
+  #   else
+  #     @plantings = current_user.plantings
+  #   end
+  # end
 
   def destroy
     @garden.destroy
@@ -53,5 +90,6 @@ class GardensController < ApplicationController
       redirect_to user_path(current_user.id)
     end
   end
+
 
 end
