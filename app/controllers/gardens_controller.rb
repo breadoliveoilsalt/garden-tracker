@@ -33,6 +33,7 @@ class GardensController < ApplicationController
   def destroy
     @garden.destroy
     #destroy each planting too...but maybe not species
+    #Consider the above
     redirect_to user_path(current_user.id)
   end
 
