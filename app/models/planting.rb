@@ -9,4 +9,8 @@ class Planting < ActiveRecord::Base
   belongs_to :garden
   belongs_to :species
 
+
+  def name
+    self.species.name
+  end
 end

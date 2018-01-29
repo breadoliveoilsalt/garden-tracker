@@ -6,9 +6,10 @@ class PlantingsController < ApplicationController
 
 
   def index
-    check_garden_permission
     if params[:garden_id]
-      @plantings = Garden.find_by(id: params[:garden_id]).plantings
+      @garden = Garden.find_by(id: params[:garden_id])
+      check_garden_permission
+      @plantings = @garden.plantings
     else
       @plantings = current_user.plantings
     end
@@ -68,8 +69,8 @@ class PlantingsController < ApplicationController
 
   def check_garden_permission
     garden = Garden.find_by(id: params[:garden_id])
-    if garden.user.id != current_user.id
-      flash[:message] = "Sorry, request denied. That garden belongs to another user."
+    if garden == nil || garden.user.id != current_user.id
+      flash[:message] = "Sorry, request denied. You do not have permission to view that garden."
       redirect_to user_path(current_user.id)
     end
   end

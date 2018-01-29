@@ -1,0 +1,18 @@
+<h1> <%= @garden.name %> </h1>
+
+<h2> Plantings: </h2>
+
+  <ul>
+
+    <% @plantings.each do |planting| %>
+
+      <li> <%= link_to planting.name, garden_planting_path(@garden.id, planting.id) %> </li>
+        <ul>
+          <li> Quantity planted: <%= planting.quantity %></li>
+        </ul>
+
+    <% end  %>
+
+
+
+  </ul>
