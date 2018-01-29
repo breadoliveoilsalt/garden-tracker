@@ -4,7 +4,7 @@ class PlantingsController < ApplicationController
   before_action :check_permission, only: [:show, :edit, :update, :destroy]
     # above: need to think how check_permission interacts with nexted resources
 
-
+    # about to reconfigure so that users can see each others gardens
   def index
     if params[:garden_id]
       @garden = Garden.find_by(id: params[:garden_id])
