@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   post "/sessions/create", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
 
-  resources :gardens #do I need only show, edit, etc.?
+  resources :gardens do #do I need only show, edit, etc.?
+    resources :plantings, only: [:index, :show]
+  end
+
   resources :species
 
 end
