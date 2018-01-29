@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
-  resources :users #probably have to modify at some point whether person can delete account etc.
+  resources :users do
+    resources :gardens, only: [:index, :show]
+  end #probably have to modify at some point whether person can delete account etc.
 
   #get 'callback', to: 'sessions#create_from_github'
   get '/auth/:provider/callback', to: 'sessions#create_from_github'
@@ -12,10 +14,12 @@ Rails.application.routes.draw do
   post "/sessions/create", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
 
-  resources :gardens do #do I need only show, edit, etc.?
-    resources :plantings, only: [:index, :show]
-  end
+  resources :gardens
+  # resources :gardens do #do I need only show, edit, etc.?
+  #   resources :plantings, only: [:index, :show]
+  # end
 
+  # really really really think about permissions here and what you might have to block
   resources :species
 
   resources :plantings # Again, do I need to add only show, etc.?

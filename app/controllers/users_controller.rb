@@ -22,15 +22,14 @@ class UsersController < ApplicationController
   end
 
   def show
-      # Only allow user to see its own user #show page:
-    if signed_in? && current_user_show_page
+    if signed_in? #&& current_user_show_page
       render 'users/show'
       # If user is signed in but trying to view another user's page, redirect
       # to its own show page with flash message
-    elsif signed_in? && !current_user_show_page
-      flash[:message] = "Sorry, you do not have permission to view that user's profile."
-      redirect_to user_path(current_user.id)
-      # Otherwise, direct user to welcome page.
+    # elsif signed_in? && !current_user_show_page
+    #   flash[:message] = "Sorry, you do not have permission to view that user's profile."
+    #   redirect_to user_path(current_user.id)
+    #   # Otherwise, direct user to welcome page.
     else
       flash[:message] = "Please sign in or create an account."
       redirect_to root_path
@@ -79,7 +78,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :password)
     end
 
-    def current_user_show_page
+    def current_user_show_page # This was needed when I only wanted users to view their own gardens and
+        # no one elses, so consider deleting
       current_user.id == params[:id].to_i
     end
 end
