@@ -42,7 +42,10 @@ class GardensController < ApplicationController
 
   def show
     if params[:user_id] # Check if the route is a nested route, such as users/1/gardens/1
-      if @user = User.find_by(id: params[:user_id]) && @user.gardens.include?(@garden) # See if the user id params is valid and if the garden specified (and set by #set_garden) belongs to the user. If yes to all, render the show page
+          # See if the user id params is valid and if the garden specified (and set by #set_garden)
+          # belongs to the user. If yes to all, render the show page:
+      @user = User.find_by(id: params[:user_id])
+      if @user && @user.gardens.include?(@garden)
        render 'gardens/show'
       else
        flash[:message] = "Sorry, user or garden does not exist."
