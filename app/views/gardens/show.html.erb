@@ -6,13 +6,21 @@
   <% end %>
   </h1>
 
-<h2> Creater: <%= link_to @garden.user.name, user_gardens_path(@garden.user.id) %></h2>  
+<h2> Creater: <%= link_to @garden.user.name, user_gardens_path(@garden.user.id) %></h2>
 
 <h2> Description: <%= @garden.description %> </h2>
 
 <h2> Square Feet: <%= @garden.square_feet %> </h2>
 
-Add plantings
+<h3> Plantings: </h3>
 
-Add edit link
-Add something about user
+  <ul>
+
+    <% @garden.plantings.each do |planting| %>
+      <li> <%= planting.name %> </li>
+        <ul>
+          <li> Quantity: <%= planting.quantity %></li>
+        </ul>
+    <% end %>
+
+  </ul>
