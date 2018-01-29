@@ -2,6 +2,17 @@ class PlantingsController < ApplicationController
 
   before_action :set_planting, only: [:show, :edit, :update, :destroy]
   before_action :check_permission, only: [:show, :edit, :update, :destroy]
+    # above: need to think how check_permission interacts with nexted resources
+
+
+  def index
+    check_garden_permission
+    if params[:garden_id]
+      @plantings = Garden.find_by(id: params[:garden_id]).plantings
+    else
+      @plantings = current_user.plantings
+    end
+  end
 
   def new
     @planting = Planting.new
@@ -51,6 +62,14 @@ class PlantingsController < ApplicationController
   def check_permission
     if @planting.user.id != current_user.id
       flash[:message] = "Sorry, request denied. That planting belongs to another user."
+      redirect_to user_path(current_user.id)
+    end
+  end
+
+  def check_garden_permission
+    garden = Garden.find_by(id: params[:garden_id])
+    if garden.user.id != current_user.id
+      flash[:message] = "Sorry, request denied. That garden belongs to another user."
       redirect_to user_path(current_user.id)
     end
   end
