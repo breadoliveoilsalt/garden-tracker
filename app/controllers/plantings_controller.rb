@@ -8,8 +8,13 @@ class PlantingsController < ApplicationController
   def index
     if params[:garden_id]
       @garden = Garden.find_by(id: params[:garden_id])
-      check_garden_permission
-      @plantings = @garden.plantings
+      # check_garden_permission # this would not work for some reason -- would not redirect, would just come back here, even though it was definitely jumping to the method
+      if @garden == nil || @garden.user.id != current_user.id
+        flash[:message] = "Sorry, request denied. You do not have permission to view that garden."
+        redirect_to user_path(current_user.id)
+      else
+        @plantings = @garden.plantings
+      end
     else
       @plantings = current_user.plantings
     end
@@ -67,12 +72,11 @@ class PlantingsController < ApplicationController
     end
   end
 
-  def check_garden_permission
-    garden = Garden.find_by(id: params[:garden_id])
-    if garden == nil || garden.user.id != current_user.id
-      flash[:message] = "Sorry, request denied. You do not have permission to view that garden."
-      redirect_to user_path(current_user.id)
-    end
-  end
+  # def check_garden_permission
+  #   if @garden == nil || @garden.user.id != current_user.id
+  #     flash[:message] = "Sorry, request denied. You do not have permission to view that garden."
+  #     redirect_to user_path(current_user.id)
+  #   end
+  # end
 
 end
