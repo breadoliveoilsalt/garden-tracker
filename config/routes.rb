@@ -18,4 +18,5 @@ Rails.application.routes.draw do
 
   resources :species
 
+  resources :plantings # Again, do I need to add only show, etc.?
 end
