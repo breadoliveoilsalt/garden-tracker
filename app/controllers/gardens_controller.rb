@@ -13,11 +13,15 @@ class GardensController < ApplicationController
       # in the Song class.  However, after finally getting there, I get error when I call .build on
       # a planting within the custom writer: You cannot call create unless the parent is saved.  So
       # it seems I cannot user the format below
+      # NB That I addd hidden user_id to garden...but in theory I shouldn't have needed that b/c I
+      # did current_user.gardens.build...
     # binding.pry
-    @garden = current_user.gardens.create(garden_params)
-
+      if @garden = Garden.create(garden_params)
+    # @garden = current_user.gardens.build(garden_params)
+# @garden = current_user.gardens.create(garden_params) # thi worked when I saved in the custom write
     # if @garden.save
-      redirect_to garden_path(@garden.id)
+        redirect_to garden_path(@garden.id)
+    end
     # else
     #   render :new
     # end
@@ -87,7 +91,7 @@ class GardensController < ApplicationController
   private
 
   def garden_params
-    params.require(:garden).permit(:name, :description, :square_feet, planting_attributes: [:species_id, :quantity, :user_id])
+    params.require(:garden).permit(:name, :description, :square_feet, :user_id, planting_attributes: [:species_id, :quantity, :user_id])
   end
 
   def set_garden

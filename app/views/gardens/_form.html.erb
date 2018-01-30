@@ -4,8 +4,6 @@
 
 <%= form_for garden do |f| %>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-
   <div>
     <%= f.label :name, "Garden Name: " %>
     <%= f.text_field :name %>
@@ -20,6 +18,8 @@
     <%= f.label :square_feet, "Square Feet (optional): " %>
     <%= f.text_field :square_feet %>
   </div>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %>
 
   <div>
     Add your first planting (optional):
