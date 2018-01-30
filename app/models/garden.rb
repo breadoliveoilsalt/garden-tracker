@@ -12,9 +12,13 @@ class Garden < ActiveRecord::Base
   accepts_nested_attributes_for :plantings
 
   def planting_attributes=(planting_attributes_hash)
-    planting = self.plantings.build(planting_attributes_hash)
     binding.pry
+    planting = self.plantings.create(planting_attributes_hash)
+    self.plantings << planting
   end
+
+  # what about trying self.save?
+
 end
 
 

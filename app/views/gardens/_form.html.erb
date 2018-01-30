@@ -3,6 +3,9 @@
 <%= render partial: 'layouts/errors', locals: {errors: garden.errors} if garden.errors.any? %>
 
 <%= form_for garden do |f| %>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
   <div>
     <%= f.label :name, "Garden Name: " %>
     <%= f.text_field :name %>
@@ -24,7 +27,7 @@
     <div>
 
       <%= f.fields_for :planting_attributes, garden.plantings.build do | planting_attrib | %>
-        <%= planting_attrib.hidden_field :user_id, current_user.id.to_s %>
+        <%= planting_attrib.hidden_field :user_id, :value => current_user.id %>
 
         <%= planting_attrib.label :species_id, "Select Species" %>
         <%= planting_attrib.collection_select :species_id, current_user.species, :id, :name %>

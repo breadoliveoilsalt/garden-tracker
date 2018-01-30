@@ -8,12 +8,19 @@ class GardensController < ApplicationController
   end
 
   def create
-    @garden = current_user.gardens.build(garden_params)
-    if @garden.save
+
+      # I want garden_params to include planting_attributes that then get passed to a custom writer
+      # in the Song class.  However, after finally getting there, I get error when I call .build on
+      # a planting within the custom writer: You cannot call create unless the parent is saved.  So
+      # it seems I cannot user the format below
+    # binding.pry
+    @garden = current_user.gardens.create(garden_params)
+
+    # if @garden.save
       redirect_to garden_path(@garden.id)
-    else
-      render :new
-    end
+    # else
+    #   render :new
+    # end
   end
 
   def edit
