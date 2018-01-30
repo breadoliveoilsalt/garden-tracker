@@ -9,9 +9,17 @@ class Garden < ActiveRecord::Base
   has_many :species, through: :species_garden
   has_many :plantings
 
-  #accepts_nested_attributes_for :plantings
+  accepts_nested_attributes_for :plantings
 
-  def planting_attributes=(hash)
-    raise hash.inspect
+  def planting_attributes=(planting_attributes_hash)
+    planting = self.plantings.build(planting_attributes_hash)
+    binding.pry
   end
 end
+
+
+# def categories_attributes=(category_attributes)
+#     category_attributes.values.each do |category_attribute|
+#       category = Category.find_or_create_by(category_attribute)
+#       self.categories << category
+#     end
