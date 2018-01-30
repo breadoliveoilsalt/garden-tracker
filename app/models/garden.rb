@@ -9,4 +9,9 @@ class Garden < ActiveRecord::Base
   has_many :species, through: :species_garden
   has_many :plantings
 
+  #accepts_nested_attributes_for :plantings
+
+  def planting_attributes=(hash)
+    raise hash.inspect
+  end
 end

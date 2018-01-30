@@ -9,6 +9,7 @@ class GardensController < ApplicationController
 
   def create
     @garden = current_user.gardens.build(garden_params)
+    # binding.pry
     if @garden.save
       redirect_to garden_path(@garden.id)
     else
@@ -80,7 +81,7 @@ class GardensController < ApplicationController
   private
 
   def garden_params
-    params.require(:garden).permit(:name, :description, :square_feet)
+    params.require(:garden).permit(:name, :description, :square_feet, planting_attributes: {})#, planting_attributes: [])
   end
 
   def set_garden
