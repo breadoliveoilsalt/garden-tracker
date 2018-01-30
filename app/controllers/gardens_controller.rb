@@ -16,12 +16,17 @@ class GardensController < ApplicationController
       # NB That I addd hidden user_id to garden...but in theory I shouldn't have needed that b/c I
       # did current_user.gardens.build...
     # binding.pry
-      if @garden = Garden.create(garden_params)
+    @garden = Garden.create(garden_params)
+    if @garden.valid?
+        # binding.pry
     # @garden = current_user.gardens.build(garden_params)
 # @garden = current_user.gardens.create(garden_params) # thi worked when I saved in the custom write
     # if @garden.save
         redirect_to garden_path(@garden.id)
-    end
+      else
+        render :new
+      end
+
     # else
     #   render :new
     # end
