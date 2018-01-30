@@ -1,3 +1,34 @@
 <h1> Add Garden: </h1>
 
-<%= render partial: "gardens/form", locals: { garden: @garden} %>
+<%= render partial: 'layouts/errors', locals: {errors: @garden.errors} if @garden.errors.any? %>
+
+<%= form_for @garden do |f| %>
+
+  <%= render partial: "gardens/form", locals: { f: f } %>
+
+
+  <div>
+    Add your first planting by filling in a quantity below (optional):
+
+    <div>
+
+      <%= f.fields_for :planting_attributes, @garden.plantings.build do | planting_attrib | %>
+        <%= planting_attrib.hidden_field :user_id, :value => current_user.id %>
+
+        <%= planting_attrib.label :species_id, "Select Species" %>
+        <%= planting_attrib.collection_select :species_id, current_user.species, :id, :name %>
+            or <%= link_to "add a new Species", new_species_path %>
+        <br>
+        <%= planting_attrib.label :quantity, "Quantity Planted: " %>
+        <%= planting_attrib.text_field :quantity %>
+
+
+    <% end %>
+
+    </div>
+  </div>
+
+  <div>
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
