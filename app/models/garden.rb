@@ -22,7 +22,7 @@ class Garden < ActiveRecord::Base
       # In other words, even though this is triggered by Garden.create, the garden
       # instance is not saved yet with an id, and so we need to save it here to create the
       # child planting:
-      
+
     if self.save
 
         # Need to specify ".values" because, thanks to the has_nested_attributes_for
@@ -42,33 +42,23 @@ class Garden < ActiveRecord::Base
         elsif planting_attributes[:id]
           planting = Planting.find_by(id: planting_attributes[:id])
           planting.update(planting_attributes)
-          planting.save # Calling planting save to trigger error messages # did not appear to trigger error messages
+
+            # Tried to see if there was a way to get any errors in planting to pass on
+            # to the updated garden, as it does when a new garden is created with planting
+            # errors.  This did not work, however:
+          if planting.errors.details != {}
+              self.errors.details.merge!(planting.errors.details)
+          end
+
+          # planting.update(planting_attributes)
+          # binding.pry # I can see errors in planting here with line above
+
+
+          #planting.save  # did not appear to trigger error messages either
 
         end
       end
     end
-  end
-    # binding.pry # The update function is not calling this!! #It's b/c I forgot that it's plantingS_attributes, not planting_attributes, when i custom wrote it.
-
-    # This worked with #new in the full accepts_nested_attributes regime.
-    # if self.save
-    #   planting_attributes_hash.values.each do | planting_attributes |
-    #     if planting_attributes[:quantity] != ""
-    #       planting = self.plantings.build(planting_attributes)
-    #       planting.save
-    #     end
-    #   end
-    # end
-
-
-        # if planting_attribute[:quantity] != ""
-    # This is what I originally had when planting_attributes was at the top of the fields for
-    # if self.save && planting_attributes_hash[:quantity] != ""
-    #     planting = self.plantings.build(planting_attributes_hash)
-    #     planting.save
-    # end
-
-  def update_garden_nested_form(garden_params)
   end
 
 
