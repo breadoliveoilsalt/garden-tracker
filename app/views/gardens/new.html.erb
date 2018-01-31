@@ -12,7 +12,7 @@
 
     <div>
 
-      <%= f.fields_for :planting_attributes, @garden.plantings.build do | planting_attrib | %>
+      <%= f.fields_for :plantings, @garden.plantings.build do | planting_attrib | %>
         <%= planting_attrib.hidden_field :user_id, :value => current_user.id %>
 
         <%= planting_attrib.label :species_id, "Select Species" %>

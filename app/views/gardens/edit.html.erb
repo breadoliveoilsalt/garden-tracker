@@ -1,4 +1,4 @@
-<h1> Edit Garden: </h1>
+<h1> Edit Garden: <%= @garden.name %> </h1>
 
 <%= render partial: 'layouts/errors', locals: {errors: @garden.errors} if @garden.errors.any? %>
 
@@ -24,7 +24,7 @@
           <%= planting_attrib.text_field :quantity %>
           <br>
         </div>
-        
+
       <% end %>
 
     </div>
