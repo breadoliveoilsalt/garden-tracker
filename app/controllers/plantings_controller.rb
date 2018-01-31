@@ -6,17 +6,17 @@ class PlantingsController < ApplicationController
 
 
   def new
-    @garden = Garden.find_by(id: params[:garden_id])
+    set_garden
     @planting = Planting.new
   end
 
   def create
-    binding.pry
     @planting = current_user.plantings.build(planting_params)
       # above: have to make sure to link this to both a garden and a species
     if @planting.save
       redirect_to user_garden_path(current_user.id, @planting.garden.id)
     else
+      set_garden
       render :new
     end
   end
@@ -56,6 +56,10 @@ class PlantingsController < ApplicationController
       flash[:message] = "Sorry, request denied. That planting belongs to another user."
       redirect_to user_path(current_user.id)
     end
+  end
+
+  def set_garden
+    @garden = Garden.find_by(id: params[:garden_id])
   end
 
   # def check_garden_permission
