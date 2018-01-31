@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   post "/sessions/create", to: "sessions#create"
   delete "/signout", to: "sessions#destroy"
 
-  resources :gardens
+  resources :gardens do
+    resources :plantings, only: [:new, :create]
+  end
   # resources :gardens do #do I need only show, edit, etc.?
   #   resources :plantings, only: [:index, :show]
   # end
@@ -22,5 +24,5 @@ Rails.application.routes.draw do
   # really really really think about permissions here and what you might have to block
   resources :species
 
-  resources :plantings # Again, do I need to add only show, etc.?
+  resources :plantings, only: [:update, :destroy]# Again, do I need to add only show, etc.?
 end
