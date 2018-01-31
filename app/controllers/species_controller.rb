@@ -38,6 +38,7 @@ class SpeciesController < ApplicationController
   end
 
   def show
+    
   end
 
   def destroy
@@ -53,12 +54,12 @@ class SpeciesController < ApplicationController
   end
 
   def set_species
-    @species = Species.find(params[:id])
+    @species = Species.find_by(id: params[:id])
   end
 
   def check_permission
-    if @species.user.id != current_user.id
-      flash[:message] = "Sorry, request denied. That species belongs to another user."
+    if !@species || @species.user.id != current_user.id
+      flash[:message] = "Sorry, request denied."
       redirect_to user_path(current_user.id)
     end
   end

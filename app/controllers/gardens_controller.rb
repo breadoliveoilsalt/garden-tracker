@@ -44,20 +44,11 @@ class GardensController < ApplicationController
 
   def update
     @garden.update(garden_params)
-    binding.pry
     if @garden.valid?
-    #  binding.pry
       redirect_to garden_path(@garden.id)
     else
       render :edit
     end
-    # Next, see if the pry tells me the errors
-    # if @garden.update(garden_params)
-    #   binding.pry
-    #   redirect_to garden_path(@garden.id)
-    # else
-    #   render :edit
-    # end
   end
 
   def index
@@ -78,8 +69,8 @@ class GardensController < ApplicationController
         # Check if the route is a nested route, such as users/1/gardens/1
     if params[:user_id]
 
-        # See if the user id params is valid and if the garden specified (and set by #set_garden)
-        # belongs to the user. If yes to all, render the show page:
+        # See if the user id in the url is valid and if the garden specified (and set by #set_garden)
+        # belongs to the user specified in the url. If yes to all, render the show page:
       @user = User.find_by(id: params[:user_id])
       if @user && @user.gardens.include?(@garden)
        render 'gardens/show'
@@ -88,7 +79,7 @@ class GardensController < ApplicationController
        redirect_to user_path(current_user.id)
       end
 
-      # if not a nested route, check that #set_garden has identified an existing
+      # If not a nested route, check that #set_garden has identified an existing
       # garden and show that garden if so:
     elsif @garden
       render 'gardens/show'
