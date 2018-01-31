@@ -9,12 +9,7 @@ class SpeciesController < ApplicationController
 
   def create
     if species_exists_already?
-      #@species.errors << "You already created that species."
-      #@species.errors.add("You already created that species.")
-      #@species.errors[:base] << "You already created that species."
-      #@species.errors.add(:name, "exists already.")
       @species.errors[:base] << "You already created that species. Change the form below to EDIT the species."
-      #binding.pry
       render :new
     else
       @species = current_user.species.build(species_params)
@@ -38,14 +33,12 @@ class SpeciesController < ApplicationController
   end
 
   def show
-
   end
 
   def destroy
     destroy_assocated_plantings
     @species.destroy
     flash[:message] = "The species #{@species.name} was deleted from your species list."
-    # Probably have to destroy each planting that belongs to this species!
     redirect_to user_path(current_user.id)
   end
 
@@ -67,7 +60,7 @@ class SpeciesController < ApplicationController
   end
 
   def species_exists_already?
-    @species = current_user.speciSes.find_by(name: params[:species][:name])
+    @species = current_user.species.find_by(name: params[:species][:name])
   end
 
   def destroy_assocated_plantings
@@ -75,4 +68,5 @@ class SpeciesController < ApplicationController
       planting.destroy
     end
   end
+
 end

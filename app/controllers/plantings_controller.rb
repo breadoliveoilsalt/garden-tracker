@@ -12,7 +12,6 @@ class PlantingsController < ApplicationController
 
   def create
     @planting = current_user.plantings.build(planting_params)
-      # above: have to make sure to link this to both a garden and a species
     if @planting.save
       redirect_to user_garden_path(current_user.id, @planting.garden.id)
     else
@@ -61,12 +60,5 @@ class PlantingsController < ApplicationController
   def set_garden
     @garden = Garden.find_by(id: params[:garden_id])
   end
-
-  # def check_garden_permission
-  #   if @garden == nil || @garden.user.id != current_user.id
-  #     flash[:message] = "Sorry, request denied. You do not have permission to view that garden."
-  #     redirect_to user_path(current_user.id)
-  #   end
-  # end
 
 end
