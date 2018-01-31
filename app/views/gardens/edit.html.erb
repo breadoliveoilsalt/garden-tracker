@@ -6,6 +6,29 @@
 
   <%= render partial: "gardens/form", locals: { f: f } %>
 
+  <div>
+    Add your first planting by filling in a quantity below (optional):
+
+    <div>
+      <%= f.fields_for :plantings do | planting_attrib | %>
+
+        <div>
+
+          <%= planting_attrib.hidden_field :user_id, :value => current_user.id %>
+
+          <%= planting_attrib.label :species_id, "Select Species" %>
+          <%= planting_attrib.collection_select :species_id, current_user.species, :id, :name %>
+              or <%= link_to "add a new Species", new_species_path %>
+          <br>
+          <%= planting_attrib.label :quantity, "Quantity Planted: " %>
+          <%= planting_attrib.text_field :quantity %>
+          <br>
+        </div>
+        
+      <% end %>
+
+    </div>
+  </div>
 
   <div>
     <%= f.submit "Submit" %>
