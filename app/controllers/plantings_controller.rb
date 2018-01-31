@@ -20,18 +20,12 @@ class PlantingsController < ApplicationController
     end
   end
 
-  # def edit
-  # end
-
-  def update
-    if @planting.update(planting_params)
-      redirect_to planting_path(@planting.id)
-    else
-      render :edit
-    end
-  end
-  #
-  # def show
+  # def update
+  #   if @planting.update(planting_params)
+  #     redirect_to planting_path(@planting.id)
+  #   else
+  #     render :edit
+  #   end
   # end
 
   def destroy
