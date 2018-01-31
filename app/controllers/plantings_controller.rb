@@ -1,43 +1,28 @@
 class PlantingsController < ApplicationController
 
-  before_action :set_planting, only: [:show, :edit, :update, :destroy]
-  before_action :check_permission, only: [:show, :edit, :update, :destroy]
+  before_action :set_planting, only: [:update, :destroy] #:show, :edit,
+  before_action :check_permission, only: [:update, :destroy] #:show, :edit,
     # above: need to think how check_permission interacts with nexted resources
 
-    # about to reconfigure so that users can see each others gardens
-    # I may want to delete this b/c the "index" is in the garden show page.
-    # make sure to modify your routes accordingly, ie, if you delete #index
-  def index
-    if params[:garden_id]
-      @garden = Garden.find_by(id: params[:garden_id])
-      # check_garden_permission # this would not work for some reason -- would not redirect, would just come back here, even though it was definitely jumping to the method
-      if @garden == nil || @garden.user.id != current_user.id
-        flash[:message] = "Sorry, request denied. You do not have permission to view that garden."
-        redirect_to user_path(current_user.id)
-      else
-        @plantings = @garden.plantings
-      end
-    else
-      @plantings = current_user.plantings
-    end
-  end
 
   def new
+    @garden = Garden.find_by(id: params[:garden_id])
     @planting = Planting.new
   end
 
   def create
+    binding.pry
     @planting = current_user.plantings.build(planting_params)
       # above: have to make sure to link this to both a garden and a species
     if @planting.save
-      redirect_to planting_path(@planting.id)
+      redirect_to user_garden_path(current_user.id, @planting.garden.id)
     else
       render :new
     end
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
   def update
     if @planting.update(planting_params)
@@ -46,9 +31,9 @@ class PlantingsController < ApplicationController
       render :edit
     end
   end
-
-  def show
-  end
+  #
+  # def show
+  # end
 
   def destroy
     @planting.destroy
@@ -63,7 +48,7 @@ class PlantingsController < ApplicationController
   end
 
   def set_planting
-    @planting = Planting.find(params[:id])
+    @planting = Planting.find_by(id: params[:id])
   end
 
   def check_permission

@@ -104,7 +104,7 @@ class GardensController < ApplicationController
   end
 
   def set_garden
-    @garden = Garden.find(params[:id])
+    @garden = Garden.find_by(id: params[:id])
   end
 
   def check_permission
