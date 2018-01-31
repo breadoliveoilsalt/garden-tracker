@@ -21,7 +21,6 @@ class GardensController < ApplicationController
   end
 
   def update
-    # binding.pry
     if @garden.update(garden_params)
       redirect_to garden_path(@garden.id)
     else
@@ -82,7 +81,7 @@ class GardensController < ApplicationController
   private
 
   def garden_params
-    params.require(:garden).permit(:name, :description, :square_feet, :user_id, plantings_attributes:[:species_id, :quantity, :user_id])
+    params.require(:garden).permit(:name, :description, :square_feet, :user_id, plantings_attributes:[:id, :species_id, :quantity, :user_id])
     # This is what I had to get new form to work.  Have to modify it b/c otherwise cant use with has_nested_attributes
     # params.require(:garden).permit(:name, :description, :square_feet, :user_id, planting_attributes: [:species_id, :quantity, :user_id])
   end
