@@ -1,10 +1,11 @@
 <h1> Sign in to Garden Tracker </h1>
 
 <% if flash[:message] %>
-  <h3> Sorry, the following error(s) occured: </h3>
+  <h3 class="message"> Sorry, the following error(s) occured:
     <ul>
       <li><%= flash[:message] %> </li>
     </ul>
+  </h3>
 <% end  %>
 
 <%= form_for @user, url: sessions_create_path, method: :post do |f| %>

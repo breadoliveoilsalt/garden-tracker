@@ -23,6 +23,9 @@
           <%= planting_attrib.label :quantity, "Quantity Planted: " %>
           <%= planting_attrib.text_field :quantity %>
           <br>
+
+          <%= link_to "Click here to delete planting", planting_attrib.object, method: :delete, data: { confirm: 'Are you sure you want to delete this planting?' }%>
+
         </div>
 
       <% end %>

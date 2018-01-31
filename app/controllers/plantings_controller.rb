@@ -50,9 +50,8 @@ class PlantingsController < ApplicationController
 
   def destroy
     @planting.destroy
-    #destroy each planting too...but maybe not species
-    #Consider the above
-    redirect_to user_path(current_user.id)
+    flash[:message] = "#{@planting.species.name} planting deleted."
+    redirect_to garden_path(@planting.garden.id)
   end
 
   private

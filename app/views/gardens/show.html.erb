@@ -1,4 +1,8 @@
 
+<% if flash[:message] %>
+  <h3 class="message"> <%= flash[:message] %> </h3>
+<% end  %>
+
 
 <h1><%= @garden.name %>
   <% if @garden.user == current_user  %>
