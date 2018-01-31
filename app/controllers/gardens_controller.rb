@@ -8,24 +8,71 @@ class GardensController < ApplicationController
   end
 
   def create
+      # Garden.new does not appear to generate an error object if nested form is invalid,
+      # so went with Garden.create
+
+      # When mass assignment runs through garden_params and gets to the custom writer
+      # Garden.plantings_attributes=, the custom writer must save
+
+
     @garden = Garden.create(garden_params)
-    if @garden.valid?
-        redirect_to garden_path(@garden.id)
-      else
-        render :new
-      end
+
+      # If the garden instance was successfully created (and so has an id) but if there
+      # are still errors associated with the instance (because there was something wrong
+      # with the nested form form for plantings), then destroy the garden that was just created
+      # and go back to the new form.  If the last garden is not destroyed, a user could create
+      # two instances of gardens with the same name after re-submitting the form:
+    if @garden.id && @garden.errors.details != {}
+      @garden.destroy
+      render :new
+
+      # If there are otherwise errors (due to invalid information for the garden instance, resulting
+      # in the garden instance not being persisted), then go back to the new form as well:
+    elsif @garden.errors.details != {}
+      render :new
+
+      # If there are no errors, then go to the garden show page:
+    elsif #@garden.save
+      redirect_to garden_path(@garden.id)
+    end
+
   end
+    # binding.pry
+    # if @garden.save
+    #   redirect_to garden_path(@garden.id)
+    #   else
+    #     binding.pry
+    #     render :new
+    #   end
+    # # @garden = Garden.create(garden_params)
+    # if @garden.valid?
+    #   redirect_to garden_path(@garden.id)
+    #   else
+    #     binding.pry
+    #     render :new
+    #   end
+  #end
 
   def edit
 
   end
 
   def update
-    if @garden.update(garden_params)
+    @garden.update(garden_params)
+    binding.pry
+    if @garden.valid?
+      binding.pry
       redirect_to garden_path(@garden.id)
     else
       render :edit
     end
+    # Next, see if the pry tells me the errors
+    # if @garden.update(garden_params)
+    #   binding.pry
+    #   redirect_to garden_path(@garden.id)
+    # else
+    #   render :edit
+    # end
   end
 
   def index

@@ -18,17 +18,17 @@ class Garden < ActiveRecord::Base
 
       # When creating a new garden and mass assignment jumps to this method,
       # the garden (parent of planting) has to be saved first or else there
-      # will be an error when trying to create the associated planting in this method:
+      # will be an error when trying to create the associated planting in this method.
+      # In other words, even though this is triggered by Garden.create, the garden
+      # instance is not saved yet with an id, and so we need to save it here to create the
+      # child planting:
+      
     if self.save
 
         # Need to specify ".values" because, thanks to the has_nested_attributes_for
         # macro, the format looks like [plantings_attributes][0][hash_of_attributes].
         # So .values is used to run just the hash_of_attributes through the methods below:
       planting_attributes_hash.values.each do | planting_attributes |
-
-          # A planting should only be created or edited if a quantity is specified. There
-          # will always be a "product" due to the drop down menu, so [:product] is not the
-          # relevant critereon for whether a user meant to create or update a planting:
 
           # First, check if we are creating a new garden and creating a new planting with it.
           # This will be the case if the user has filled in something for [:quantity]
@@ -42,6 +42,8 @@ class Garden < ActiveRecord::Base
         elsif planting_attributes[:id]
           planting = Planting.find_by(id: planting_attributes[:id])
           planting.update(planting_attributes)
+          planting.save # Calling planting save to trigger error messages # did not appear to trigger error messages
+
         end
       end
     end
