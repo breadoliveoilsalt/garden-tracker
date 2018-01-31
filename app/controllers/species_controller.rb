@@ -38,11 +38,13 @@ class SpeciesController < ApplicationController
   end
 
   def show
-    
+
   end
 
   def destroy
+    destroy_assocated_plantings
     @species.destroy
+    flash[:message] = "The species #{@species.name} was deleted from your species list."
     # Probably have to destroy each planting that belongs to this species!
     redirect_to user_path(current_user.id)
   end
@@ -65,7 +67,12 @@ class SpeciesController < ApplicationController
   end
 
   def species_exists_already?
-    @species = current_user.species.find_by(name: params[:species][:name])
+    @species = current_user.speciSes.find_by(name: params[:species][:name])
   end
 
+  def destroy_assocated_plantings
+    @species.plantings.each do |planting|
+      planting.destroy
+    end
+  end
 end

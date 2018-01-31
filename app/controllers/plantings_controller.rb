@@ -5,6 +5,8 @@ class PlantingsController < ApplicationController
     # above: need to think how check_permission interacts with nexted resources
 
     # about to reconfigure so that users can see each others gardens
+    # I may want to delete this b/c the "index" is in the garden show page.
+    # make sure to modify your routes accordingly, ie, if you delete #index
   def index
     if params[:garden_id]
       @garden = Garden.find_by(id: params[:garden_id])
