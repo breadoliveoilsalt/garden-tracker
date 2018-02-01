@@ -6,7 +6,6 @@
 
 <h2> Gardens where this species appears: </h2>
 
-<%= binding.pry %>
   <ul>
     <% @species.gardens.each do |garden| %>
       <li> <%= link_to garden.name, garden_path(garden.id) %></li>

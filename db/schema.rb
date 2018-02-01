@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20180125214817) do
 
   create_table "species", force: :cascade do |t|
     t.string "name"
-    t.string "product", default: "vegetable"
+    t.string "product", default: "vegetables"
     t.string "sunlight", default: "full-sun"
     t.integer "user_id"
     t.datetime "created_at", null: false

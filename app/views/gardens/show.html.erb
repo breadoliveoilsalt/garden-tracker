@@ -3,8 +3,6 @@
   <h3 class="message"> <%= flash[:message] %> </h3>
 <% end  %>
 
-<%= binding.pry %>
-
 <h1><%= @garden.name %>
 
   <% if @garden.user == current_user  %>
