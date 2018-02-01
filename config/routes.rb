@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
-  resources :users do
+  resources :users, only: [:new, :create, :show] do
     resources :gardens, only: [:index, :show]
   end #probably have to modify at some point whether person can delete account etc.
 
