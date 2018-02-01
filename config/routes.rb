@@ -19,12 +19,7 @@ Rails.application.routes.draw do
 
 
   resources :gardens do
-    resources :plantings, only: [:new, :create]
+    resources :plantings, only: [:new, :create, :destroy]
   end
-  # resources :gardens do #do I need only show, edit, etc.?
 
-
-
-
-  resources :plantings, only: [:update, :destroy]# Again, do I need to add only show, etc.?
 end

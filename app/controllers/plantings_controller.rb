@@ -22,14 +22,6 @@ class PlantingsController < ApplicationController
     end
   end
 
-  # def update
-  #   if @planting.update(planting_params)
-  #     redirect_to planting_path(@planting.id)
-  #   else
-  #     render :edit
-  #   end
-  # end
-
   def destroy
     @planting.destroy
     flash[:message] = "#{@planting.species.name} planting deleted."

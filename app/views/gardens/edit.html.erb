@@ -24,7 +24,7 @@
           <%= planting_attrib.text_field :quantity %>
           <br>
 
-          <%= link_to "Click here to delete planting", planting_attrib.object, method: :delete, data: { confirm: 'Are you sure you want to delete this planting?' }%>
+          <%= link_to "Click here to delete planting", garden_planting_path(@garden.id, planting_attrib.object.id), method: :delete, data: { confirm: 'Are you sure you want to delete this planting?' }%>
 
         </div>
 
