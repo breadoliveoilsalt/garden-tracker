@@ -37,6 +37,7 @@ class SpeciesController < ApplicationController
 
   def destroy
     destroy_assocated_plantings
+    destroy_associated_SpeciesGarden_entries
     @species.destroy
     flash[:message] = "The species #{@species.name} was deleted from your species list."
     redirect_to user_path(current_user.id)
@@ -67,6 +68,10 @@ class SpeciesController < ApplicationController
     @species.plantings.each do |planting|
       planting.destroy
     end
+  end
+
+  def destroy_associated_SpeciesGarden_entries
+    SpeciesGarden.where(species_id: @species.id).destroy_all
   end
 
 end
