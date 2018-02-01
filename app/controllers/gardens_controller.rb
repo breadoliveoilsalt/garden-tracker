@@ -73,7 +73,7 @@ class GardensController < ApplicationController
         # belongs to the user specified in the url. If yes to all, render the show page:
       @user = User.find_by(id: params[:user_id])
       if @user && @user.gardens.include?(@garden)
-       render 'gardens/show'
+       render :show
       else
        flash[:message] = "Sorry, user or garden does not exist."
        redirect_to user_path(current_user.id)
@@ -82,7 +82,7 @@ class GardensController < ApplicationController
       # If not a nested route, check that #set_garden has identified an existing
       # garden and show that garden if so:
     elsif @garden
-      render 'gardens/show'
+      render :show
     else
        flash[:message] = "Sorry, garden does not exist."
        redirect_to user_path(current_user.id)

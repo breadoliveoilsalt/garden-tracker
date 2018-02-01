@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user.id)
     else
-      render 'users/new'
+      render :new
     end
   end
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       # A user's user/show page effecitvely serves as the user's gardens/index and species/index pages.
     if signed_in? && current_user_show_page
       @other_users = User.all_except(current_user)
-      render 'users/show'
+      render :show
 
       # If user is signed in but trying to view another user's show page, redirect
       # to its own show page with flash message

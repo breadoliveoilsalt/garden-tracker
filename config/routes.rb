@@ -11,12 +11,10 @@ Rails.application.routes.draw do
     # For creation of account through GitHub:
   get '/auth/:provider/callback', to: 'sessions#create_from_github'
 
-
   resources :users, only: [:new, :create, :show] do
     resources :gardens, only: [:index, :show]
     resources :species, except: :index
   end
-
 
   resources :gardens do
     resources :plantings, only: [:new, :create, :destroy]
