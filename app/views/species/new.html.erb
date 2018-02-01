@@ -1,3 +1,13 @@
 <h1> Add Species: </h1>
 
-<%= render partial: "species/form", locals: { species: @species} %>
+<%= render partial: 'layouts/errors', locals: {errors: @species.errors} if @species.errors.any? %>
+
+<%= form_for @species, url: user_species_index_path(current_user.id), method: :post do |f| %>
+
+  <%= render partial: "species/form", locals: { f: f } %>
+
+  <div>
+    <%= f.submit "Submit" %>
+  </div>
+
+<% end %>

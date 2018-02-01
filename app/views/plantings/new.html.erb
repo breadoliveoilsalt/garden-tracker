@@ -10,7 +10,7 @@
 
       <%= planting_attrib.label :species_id, "Select Species" %>
       <%= planting_attrib.collection_select :species_id, current_user.species, :id, :name %>
-          or <%= link_to "add a new Species", new_species_path %>
+          or <%= link_to "add a new Species", new_user_species_path(current_user.id) %>
       <br>
       <%= planting_attrib.label :quantity, "Quantity Planted: " %>
       <%= planting_attrib.text_field :quantity %>

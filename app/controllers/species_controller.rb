@@ -14,7 +14,7 @@ class SpeciesController < ApplicationController
     else
       @species = current_user.species.build(species_params)
       if @species.save
-        redirect_to species_path(@species.id)
+        redirect_to user_species_path(current_user.id, @species.id)
       else
         render :new
       end
@@ -26,7 +26,7 @@ class SpeciesController < ApplicationController
 
   def update
     if @species.update(species_params)
-      redirect_to species_path(@species.id)
+      redirect_to user_species_path(current_user.id, @species.id)
     else
       render :edit
     end

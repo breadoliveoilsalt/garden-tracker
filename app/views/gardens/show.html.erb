@@ -26,7 +26,7 @@
   <ul>
 
     <% @garden.plantings.each do |planting| %>
-      <li> <%= link_to planting.name, species_path(planting.species.id) %> </li>
+      <li> <%= link_to planting.name, user_species_path(current_user.id, planting.species.id) %> </li>
         <ul>
           <li> Quantity: <%= planting.quantity %></li>
         </ul>

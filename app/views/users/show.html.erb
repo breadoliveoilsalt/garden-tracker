@@ -14,11 +14,11 @@
 
   </ul>
 
-  <h2> <%= link_to "Add a Species", new_species_path %> or View/Edit an Existing Species:</h2>
+  <h2> <%= link_to "Add a Species", new_user_species_path(current_user.id) %> or View/Edit an Existing Species:</h2>
 
     <ul>
       <% current_user.species.all.each do |species| %>
-        <li> <%= link_to species.name, species_path(species.id)  %></li>
+        <li> <%= link_to species.name, user_species_path(current_user.id, species.id)  %></li>
       <% end %>
 
     </ul>

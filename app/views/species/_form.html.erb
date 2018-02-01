@@ -1,10 +1,6 @@
 
 
-<%= render partial: 'layouts/errors', locals: {errors: species.errors} if species.errors.any? %>
 
-<!-- Should @species above be just species? -->
-
-<%= form_for species do |f| %>
   <div>
     <%= f.label :name, "Species Name: " %>
     <%= f.text_field :name %>
@@ -19,8 +15,3 @@
     <%= f.label :sunlight, "Sun Level: " %>
     <%= f.select :sunlight, Species::SUN_LEVELS %>
   </div>
-
-  <div>
-    <%= f.submit "Submit" %>
-  </div>
-<% end %>
