@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # end
 
   # really really really think about permissions here and what you might have to block
-  resources :species
+  resources :species # species is ok as its own resource b/c it is agnostic of the garden...but it isn't agnostic of the user...
 
   resources :plantings, only: [:update, :destroy]# Again, do I need to add only show, etc.?
 end

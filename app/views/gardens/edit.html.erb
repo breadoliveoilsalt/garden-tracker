@@ -7,7 +7,7 @@
   <%= render partial: "gardens/form", locals: { f: f } %>
 
   <div>
-    Add your first planting by filling in a quantity below (optional):
+    Edit existing plantings below or <%= link_to "add a new planting", new_garden_planting_path(@garden.id) %>:
 
     <div>
       <%= f.fields_for :plantings do | planting_attrib | %>

@@ -13,6 +13,7 @@ class PlantingsController < ApplicationController
   def create
     @planting = current_user.plantings.build(planting_params)
     if @planting.save
+      flash[:message] = "#{@planting.name} added to #{@planting.garden.name}."
       redirect_to user_garden_path(current_user.id, @planting.garden.id)
     else
       set_garden
