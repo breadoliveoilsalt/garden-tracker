@@ -16,7 +16,6 @@ class GardensController < ApplicationController
       # the garden instance that was just created, or there will be errors persisting the
       # associated child (plantings).  This leads in part to the complications below:
     @garden = Garden.create(garden_params)
-    binding.pry
 
       # If the garden instance was successfully persisted through the custom writer
       # (and so has an id), but if there
@@ -45,27 +44,12 @@ class GardensController < ApplicationController
 
   def update
     @garden.custom_nested_updater(garden_params)
-    binding.pry
     if @garden.errors.messages != {}
       render :edit
     else
       redirect_to garden_path(@garden.id)
     end
-    # if @garden.valid?
-    #   redirect_to garden_path(@garden.id)
-    # else
-    #   render :edit
-    # end
   end
-  # Prior stuff that kind of worked but with errors:
-  # def update
-  #   @garden.update(garden_params)
-  #   if @garden.valid?
-  #     redirect_to garden_path(@garden.id)
-  #   else
-  #     render :edit
-  #   end
-  # end
 
   def index
     if params[:user_id] # Check if the route is a nested route, such as users/1/gardens
@@ -118,9 +102,6 @@ class GardensController < ApplicationController
 
   def garden_params
     params.require(:garden).permit(:name, :description, :square_feet, :user_id, plantings_attributes:[:id, :species_id, :quantity, :user_id])
-
-    #
-    # params.require(:garden).permit(:name, :description, :square_feet, :user_id, plantings_attributes:[:id, :species_id, :quantity, :user_id])
   end
 
   def set_garden
