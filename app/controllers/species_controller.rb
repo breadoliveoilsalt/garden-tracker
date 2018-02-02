@@ -8,16 +8,11 @@ class SpeciesController < ApplicationController
   end
 
   def create
-    if species_exists_already?
-      @species.errors[:base] << "You already created that species. Change the form below to EDIT the species."
-      render :new
+    @species = current_user.species.build(species_params)
+    if @species.save
+      redirect_to user_species_path(current_user.id, @species.id)
     else
-      @species = current_user.species.build(species_params)
-      if @species.save
-        redirect_to user_species_path(current_user.id, @species.id)
-      else
-        render :new
-      end
+      render :new
     end
   end
 
@@ -58,10 +53,6 @@ class SpeciesController < ApplicationController
       flash[:message] = "Sorry, request denied."
       redirect_to user_path(current_user.id)
     end
-  end
-
-  def species_exists_already?
-    @species = current_user.species.find_by(name: params[:species][:name])
   end
 
   def destroy_assocated_plantings
