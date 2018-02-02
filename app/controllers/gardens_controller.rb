@@ -105,7 +105,7 @@ class GardensController < ApplicationController
 
 
   def destroy
-    destroy_associated_plantings
+    destroy_associated_plantings(@garden)
     destroy_associated_SpeciesGarden_entries
     @garden.destroy
     flash[:message] = "#{@garden.name} was deleted from your list of gardens."
@@ -129,11 +129,11 @@ class GardensController < ApplicationController
     end
   end
 
-  def destroy_associated_plantings #can probably dry this up in application controller with SpeciesController
-    @garden.plantings.each do |planting|
-      planting.destroy
-    end
-  end
+  # def destroy_associated_plantings #can probably dry this up in application controller with SpeciesController
+  #   @garden.plantings.each do |planting|
+  #     planting.destroy
+  #   end
+  # end
 
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(garden_id: @garden.id).destroy_all
