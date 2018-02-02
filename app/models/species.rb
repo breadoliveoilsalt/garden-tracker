@@ -17,7 +17,9 @@ class Species < ActiveRecord::Base
     "full-sun"
   ]
 
-  validates :name, presence: true # don't want to use uniqueness here b/c species must be unique to the user, not the entire database
+
+  validates :name, presence: true, uniqueness: {scope: :user_id, case_sensitive: false }
+   # don't want to use uniqueness here b/c species must be unique to the user, not the entire database
   validates :product, presence: true, inclusion: { in: Species::PRODUCT_TYPES }
   validates :sunlight, presence: true, inclusion: { in: Species::SUN_LEVELS }
   validates :user_id, presence: true, numericality: {only_integer: true}
