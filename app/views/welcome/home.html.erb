@@ -1,18 +1,11 @@
 
-<% if flash[:message] %>
-  <h3 class="message"> <%= flash[:message] %> </h3>
-<% end  %>
-
+<%= flash_message %>
 
 <h1>Welcome to Garden Tracker</h1>
 
 
 <% if signed_in? %>
-  <!-- links: -->
-  Gardens: Create, Update, or Delete
-  Species: Create, Update, or delete
-  Planting ?
-  Log Out
+  <h3> <%= link_to "Visit your home page", user_path(current_user.id) %> </h3>
 
 <% else %>
 
