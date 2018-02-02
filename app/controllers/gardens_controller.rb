@@ -9,7 +9,7 @@ class GardensController < ApplicationController
 
   def create
       # Some of the patterning under #create is a bit non-standard.  This was done to ensure
-      # that errors appear when non-valid data is submitted in a nested form form plantings.
+      # that errors appear when non-valid data is submitted in a nested garden form with plantings.
       # README_gardens_controller_with_explanations walks through the choices here and explains them.
     @garden = Garden.create(garden_params)
     if @garden.id && @garden.errors.details != {}

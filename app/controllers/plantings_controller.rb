@@ -1,9 +1,7 @@
 class PlantingsController < ApplicationController
 
-  before_action :set_planting, only: [:update, :destroy] #:show, :edit,
-  before_action :check_permission, only: [:update, :destroy] #:show, :edit,
-    # above: need to think how check_permission interacts with nexted resources
-
+  before_action :set_planting, only: [:update, :destroy]
+  before_action :check_permission, only: [:update, :destroy] 
 
   def new
     set_garden
