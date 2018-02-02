@@ -3,9 +3,7 @@
 <%= display_any_errors(@user) %>
 
 <%= form_for @user do |f| %>
-  <h2><%= f.label :name, "Name:  " %>
-  <%= f.text_field :name %> </h2>
-  <h2> <%= f.label :password, "Password:  " %>
-  <%= f.password_field :password %> </h2>
-  <%= f.submit "Sign In" %>
+
+  <%= render partial: "users/form", locals: { f: f } %>
+
 <% end %>
