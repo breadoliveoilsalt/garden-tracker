@@ -1,5 +1,11 @@
 module ApplicationHelper
 
+  def flash_message
+    if flash[:message]
+      content_tag(:h3, flash[:message], class: "message")
+    end
+  end
+
   def link_to_largest_garden
     largest_garden = Garden.order("square_feet DESC").first
     link_to largest_garden.name, garden_path(largest_garden.id)
