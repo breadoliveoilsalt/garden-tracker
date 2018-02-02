@@ -11,6 +11,25 @@ class Garden < ActiveRecord::Base
 
   accepts_nested_attributes_for :plantings
 
+  def self.largest_garden
+    self.order("square_feet DESC").first
+  end
+
+  def self.garden_with_most_plantings
+    self.all.max_by do | garden |
+      garden.total_plantings_quantity
+    end
+  end
+
+  def total_plantings_quantity
+    total_quantity = 0
+    self.plantings.each do | planting |
+      total_quantity += planting.quantity
+    end
+    total_quantity
+  end
+
+      # Custom writer used to create a new Garden instance, with explanations below:
   def plantings_attributes=(plantings_attributes_hash)
 
       # When creating a new garden and mass assignment jumps to this method,
@@ -57,6 +76,5 @@ class Garden < ActiveRecord::Base
       end
     end
   end
-
 
 end
