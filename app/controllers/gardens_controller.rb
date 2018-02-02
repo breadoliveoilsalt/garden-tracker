@@ -33,7 +33,8 @@ class GardensController < ApplicationController
       render :new
 
       # If there are no errors, then go to the garden show page:
-    else #@garden.save
+    else
+      flash[:message] = "#{@garden.name} was added to your list of gardens."
       redirect_to garden_path(@garden.id)
     end
   end
@@ -43,30 +44,43 @@ class GardensController < ApplicationController
   end
 
   def update
-    @garden.custom_nested_updater(garden_params)
-    if @garden.errors.messages != {}
-      render :edit
+      # If garden_params do not include planting_attributes data (because
+      # there have been no prior plantings), then use normal AR #update:
+    if !garden_params[:plantings_attributes]
+      @garden.update(garden_params)
+      test_update_and_redirect
+
+      # If garden_params include planting_attributes data, then user
+      # custom updater, which was needed to ensure that any error messages about
+      # the nested forms appear:
     else
-      redirect_to garden_path(@garden.id)
+      @garden.custom_updater_for_nested_params(garden_params)
+      test_update_and_redirect
     end
   end
 
   def index
-    if params[:user_id] # Check if the route is a nested route, such as users/1/gardens
-      if @user = User.find_by(id: params[:user_id]) # See if user id params is valid, and if so, define @gardens
+
+       # Check if the url is a nested url, such as users/1/gardens:
+    if params[:user_id]
+
+        # See if user id params is valid, and if so, define @gardens:
+      if @user = User.find_by(id: params[:user_id])
         @gardens = @user.gardens
       else
         flash[:message] = "Sorry, user does not exist."
         redirect_to user_path(current_user.id)
       end
-    else # If not a nested route, show all the gardens
+
+        # If the url is not a nested url, show all the gardens:
+    else
       @gardens = Garden.all
     end
   end
 
   def show
 
-        # Check if the route is a nested route, such as users/1/gardens/1
+        # Check if the route is a nested url, such as users/1/gardens/1
     if params[:user_id]
 
         # See if the user id in the url is valid and if the garden specified (and set by #set_garden)
@@ -79,8 +93,8 @@ class GardensController < ApplicationController
        redirect_to user_path(current_user.id)
       end
 
-      # If not a nested route, check that #set_garden has identified an existing
-      # garden and show that garden if so:
+        # If not a nested route, check that #set_garden has identified an existing
+        # garden and show that garden if so:
     elsif @garden
       render :show
     else
@@ -123,6 +137,15 @@ class GardensController < ApplicationController
 
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(garden_id: @garden.id).destroy_all
+  end
+
+  def test_update_and_redirect
+    if @garden.errors.messages != {}
+      render :edit
+    else
+      flash[:message] = "#{@garden.name} was updated."
+      redirect_to garden_path(@garden.id)
+    end
   end
 
 end

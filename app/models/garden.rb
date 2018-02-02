@@ -60,7 +60,7 @@ class Garden < ActiveRecord::Base
 
     # Custom updater was needed because errors with the nested form would not show up
     # if plain old .update(gardens_params) was called and ran through planting_attributes=
-  def custom_nested_updater(garden_params)
+  def custom_updater_for_nested_params(garden_params)
     self.name = garden_params[:name]
     self.description = garden_params[:description]
     self.square_feet = garden_params[:square_feet]
