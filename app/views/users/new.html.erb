@@ -1,6 +1,6 @@
 <h1> Create an Account for Garden Tracker </h1>
 
-<%= render partial: 'layouts/errors', locals: {errors: @user.errors} if @user.errors.any? %>
+<%= display_any_errors(@user) %>
 
 <%= form_for @user do |f| %>
   <h2><%= f.label :name, "Name:  " %>

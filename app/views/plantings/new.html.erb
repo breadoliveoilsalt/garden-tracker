@@ -1,4 +1,5 @@
-<%= render partial: 'layouts/errors', locals: {errors: @planting.errors} if @planting.errors.any? %>
+
+<%= display_any_errors(@planting) %>
 
 <h1> Create a Planting for <%= @garden.name %> </h1>
 

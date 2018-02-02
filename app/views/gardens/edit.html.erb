@@ -1,6 +1,6 @@
 <h1> Edit Garden: <%= @garden.name %> </h1>
 
-<%= render partial: 'layouts/errors', locals: {errors: @garden.errors} if @garden.errors.any? %>
+<%= display_any_errors(@garden) %>
 
 <%= form_for @garden do |f| %>
 

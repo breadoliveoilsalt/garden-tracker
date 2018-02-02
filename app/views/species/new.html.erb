@@ -1,6 +1,6 @@
 <h1> Add Species: </h1>
 
-<%= render partial: 'layouts/errors', locals: {errors: @species.errors} if @species.errors.any? %>
+<%= display_any_errors(@species) %>
 
 <%= form_for @species, url: user_species_index_path(current_user.id), method: :post do |f| %>
 

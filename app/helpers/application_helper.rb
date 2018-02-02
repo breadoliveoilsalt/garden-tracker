@@ -16,4 +16,9 @@ module ApplicationHelper
     link_to garden.name, garden_path(garden.id)
   end
 
+  def display_any_errors(object)
+    render partial: 'layouts/errors', locals: {errors: object.errors} if object.errors.any?
+    # from new account - render partial: 'layouts/errors', locals: {errors: @user.errors} if @user.errors.any?
+  end
+  
 end
