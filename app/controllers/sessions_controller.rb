@@ -5,16 +5,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-
     @user = User.find_by(name: params[:user][:name])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     elsif !@user
-      flash[:message] = "Could not find your name."
+      flash[:message] = "Error: Could not find your name."
       redirect_to signin_path
     elsif !@user.authenticate(params[:user][:password])
-      flash[:message] = "Password invalid."
+      flash[:message] = "Error: Password invalid."
       redirect_to signin_path
     end
   end
