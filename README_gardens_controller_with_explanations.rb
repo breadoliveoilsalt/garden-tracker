@@ -8,15 +8,31 @@ class GardensController < ApplicationController
   end
 
   def create
-      # Some of the patterning under #create is a bit non-standard.  This was done to ensure
-      # that errors appear when non-valid data is submitted in a nested form form plantings.
-      # README_gardens_controller_with_explanations walks through the choices here and explains them.
+      # Garden.new does not appear to generate an error object when nested form is invalid,
+      # so went with Garden.create
+
+      # Note on the next line that when mass assignment runs through garden_params and gets
+      # to the custom writer (Garden.plantings_attributes=), the custom writer must save
+      # the garden instance that was just created, or there will be errors persisting the
+      # associated child (plantings).  This leads in part to the complications below:
     @garden = Garden.create(garden_params)
+
+      # If the garden instance was successfully persisted through the custom writer
+      # (and so has an id), but if there
+      # are still errors associated with the instance (because there was something wrong
+      # with the nested form form for plantings), then destroy the garden that was just created
+      # and go back to the new form.  If the last garden is not destroyed, a user could create
+      # two instances of gardens with the same name after re-submitting the form:
     if @garden.id && @garden.errors.details != {}
       @garden.destroy
       render :new
+
+      # If there are otherwise errors (due to invalid information for the garden instance, resulting
+      # in the garden instance not being persisted), then go back to the new form as well:
     elsif @garden.errors.details != {}
       render :new
+
+      # If there are no errors, then go to the garden show page:
     else
       flash[:message] = "#{@garden.name} was added to your list of gardens."
       redirect_to garden_path(@garden.id)
@@ -24,14 +40,19 @@ class GardensController < ApplicationController
   end
 
   def edit
+
   end
 
   def update
-      # The logic here was done to ensure that errors appear when non-valid data is submitted
-      # in a nested updating form.  See README_gardens_controller_with_explanations for explanations.
+      # If garden_params do not include planting_attributes data (because
+      # there have been no prior plantings), then use normal AR #update:
     if !garden_params[:plantings_attributes]
       @garden.update(garden_params)
       test_update_and_redirect
+
+      # If garden_params include planting_attributes data, then user
+      # custom updater, which was needed to ensure that any error messages about
+      # the nested forms appear:
     else
       @garden.custom_updater_for_nested_params(garden_params)
       test_update_and_redirect

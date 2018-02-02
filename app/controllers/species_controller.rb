@@ -57,12 +57,6 @@ class SpeciesController < ApplicationController
     end
   end
 
-  # def destroy_assocated_plantings
-  #   @species.plantings.each do |planting|
-  #     planting.destroy
-  #   end
-  # end
-
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(species_id: @species.id).destroy_all
   end
