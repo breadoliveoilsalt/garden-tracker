@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates :password, length: { in: 8..15 }
+  validates :password, length: { minimum: 8 }
 
   has_many :gardens
   has_many :species
