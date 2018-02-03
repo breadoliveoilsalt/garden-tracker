@@ -6,37 +6,49 @@
 <h2> <%= link_to "Add a Garden", new_garden_path %> or View/Edit an Existing Garden:</h2>
 
   <ul>
-    <% current_user.gardens.all.each do |garden| %>
-      <li> <%= link_to garden.name, user_garden_path(@user.id, garden.id)  %></li>
+
+    <% if current_user.gardens.any? %>
+      <% current_user.gardens.all.each do |garden| %>
+        <li> <%= link_to garden.name, user_garden_path(@user.id, garden.id)  %></li>
+      <% end %>
+    <% else %>
+      <li> No gardens have been created yet. </li>
     <% end %>
 
   </ul>
 
-  <h2> <%= link_to "Add a Species", new_user_species_path(current_user.id) %> or View/Edit an Existing Species:</h2>
+<h2> <%= link_to "Add a Species", new_user_species_path(current_user.id) %> or View/Edit an Existing Species:</h2>
 
     <ul>
-      <% current_user.species.all.each do |species| %>
-        <li> <%= link_to species.name, user_species_path(current_user.id, species.id)  %></li>
+      <% if current_user.species.any? %>
+        <% current_user.species.all.each do |species| %>
+          <li> <%= link_to species.name, user_species_path(current_user.id, species.id)  %></li>
+        <% end %>
+      <% else %>
+        <li> No species have been created yet. </li>
+      <% end %>
+    </ul>
+
+<h2> View Gardens of Other Users: </h2>
+
+    <ul>
+      <% if @other_users.any? %>
+        <% @other_users.each do |user| %>
+          <li> <%= link_to user.name, user_gardens_path(user.id) %> </li>
+        <% end %>
+      <% else %>
+        <li> There are no other users at this time. </li>
       <% end %>
 
     </ul>
 
-  <h2> View Gardens of Other Users: </h2>
-
-    <ul>
-      <% @other_users.each do |user| %>
-        <li> <%= link_to user.name, user_gardens_path(user.id) %> </li>
-      <% end %>
-
-    </ul>
-
-  <h2> Currently the largest garden by square feet: </h2>
+<h2> Currently the largest garden by square feet: </h2>
 
     <ul>
         <li> <%= link_to_largest_garden %> </li>
     </ul>
 
-  <h2> Currently the garden with the largest quantity of plantings: </h2>
+<h2> Currently the garden with the largest quantity of plantings: </h2>
 
     <ul>
       <li> <%= link_to_garden_with_most_plantings %></li>
