@@ -33,7 +33,7 @@ class SpeciesController < ApplicationController
   end
 
   def destroy
-    destroy_assocated_plantings(@species)
+    destroy_associated_plantings(@species)
     destroy_associated_SpeciesGarden_entries
     @species.destroy
     flash[:message] = "The species #{@species.name} was deleted from your species list."
