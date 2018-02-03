@@ -16,7 +16,11 @@
 <h2> Gardens where this species appears: </h2>
 
   <ul>
-    <% @species.gardens.each do |garden| %>
-      <li> <%= link_to garden.name, garden_path(garden.id) %></li>
+    <% if @species.gardens.any? %>
+      <% @species.gardens.each do |garden| %>
+        <li> <%= link_to garden.name, garden_path(garden.id) %></li>
+      <% end %>
+    <% else %>
+      <li> No gardens have been created yet.</li>  
     <% end %>
   </ul>

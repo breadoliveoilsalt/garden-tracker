@@ -23,11 +23,14 @@
 
   <ul>
 
-    <% @garden.plantings.each do |planting| %>
-      <li> <%= link_to planting.name, user_species_path(current_user.id, planting.species.id) %> </li>
-        <ul>
-          <li> Quantity: <%= planting.quantity %></li>
-        </ul>
+    <% if @garden.plantings.any? %>
+      <% @garden.plantings.each do |planting| %>
+        <li> <%= link_to planting.name, user_species_path(current_user.id, planting.species.id) %> </li>
+          <ul>
+            <li> Quantity: <%= planting.quantity %></li>
+          </ul>
+      <% end %>
+    <% else %>
+        <li> There are no plantings yet. </li>
     <% end %>
-
   </ul>
