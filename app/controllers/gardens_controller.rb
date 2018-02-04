@@ -9,8 +9,9 @@ class GardensController < ApplicationController
 
   def create
       # Some of the patterning under #create is a bit non-standard.  This was done to ensure
-      # that errors appear when non-valid data is submitted in a nested garden form with plantings.
-      # README_gardens_controller_with_explanations walks through the choices here and explains them.
+      # that when a new garden is created, errors appear when non-valid data appears in the
+      # nested form for plantings. README_gardens_controller_with_explanations walks through
+      # the choices here and explains them.
     @garden = Garden.create(garden_params)
     if @garden.id && @garden.errors.details != {}
       @garden.destroy
@@ -28,7 +29,7 @@ class GardensController < ApplicationController
 
   def update
       # The logic here was done to ensure that errors appear when non-valid data is submitted
-      # in a nested updating form.  See README_gardens_controller_with_explanations for explanations.
+      # in a nested edit form.  See README_gardens_controller_with_explanations for explanations.
     if !garden_params[:plantings_attributes]
       @garden.update(garden_params)
       test_update_and_redirect
@@ -62,7 +63,7 @@ class GardensController < ApplicationController
         # Check if the route is a nested url, such as users/1/gardens/1
     if params[:user_id]
 
-        # See if the user id in the url is valid and if the garden specified (and set by #set_garden)
+        # Check if the user id in the url is valid and if the garden specified (and set by #set_garden)
         # belongs to the user specified in the url. If yes to all, render the show page:
       @user = User.find_by(id: params[:user_id])
       if @user && @user.gardens.include?(@garden)

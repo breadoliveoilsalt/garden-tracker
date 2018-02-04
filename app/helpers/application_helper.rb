@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def link_to_largest_garden
     if Garden.any?
-      largest_garden = Garden.order("square_feet DESC").first
+      largest_garden = Garden.largest_garden
       link_to largest_garden.name, garden_path(largest_garden.id)
     else
       "No gardens have been created yet."
