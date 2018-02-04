@@ -5,11 +5,16 @@
 <% end %>
 
 <ul>
-  <% @gardens.each do |garden| %>
-    <% if @user %>
-        <li> <%= link_to garden.name, user_garden_path(@user.id, garden.id) %> </li>
-    <% else %>
-      <li> <%= link_to garden.name, garden_path(garden.id) %> - By <%= link_to garden.user.name, user_gardens_path(garden.user.id) %> </li>
+  <% if @gardens.any?  %>
+      <% @gardens.each do |garden| %>
+        <% if @user %>
+            <li> <%= link_to garden.name, user_garden_path(@user.id, garden.id) %> </li>
+        <% else %>
+          <li> <%= link_to garden.name, garden_path(garden.id) %> - By <%= link_to garden.user.name, user_gardens_path(garden.user.id) %> </li>
+        <% end %>
+       <% end  %>
+   <% else %>
+      <li> There are no gardens created yet. </li>
     <% end %>
-   <% end  %>
+      
 </ul>

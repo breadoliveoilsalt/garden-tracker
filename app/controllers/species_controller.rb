@@ -52,7 +52,7 @@ class SpeciesController < ApplicationController
 
   def check_permission
     if !@species || @species.user.id != current_user.id
-      flash[:message] = "Sorry, request denied."
+      flash[:message] = "Sorry, that species belongs to another user."
       redirect_to user_path(current_user.id)
     end
   end
