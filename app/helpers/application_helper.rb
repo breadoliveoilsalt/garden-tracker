@@ -6,23 +6,24 @@ module ApplicationHelper
     end
   end
 
-  def link_to_largest_garden
-    if Garden.any?
-      largest_garden = Garden.largest_garden
-      link_to largest_garden.name, garden_path(largest_garden.id)
-    else
-      "No gardens have been created yet."
-    end
-  end
-
-  def link_to_garden_with_most_plantings
-    if Garden.any?
-      garden = Garden.garden_with_most_plantings
-      link_to garden.name, garden_path(garden.id)
-    else
-      "No gardens have been created yet."
-    end
-  end
+    # Do not need these any more but keeping as possible precedents:
+  # def link_to_largest_garden
+  #   if Garden.any?
+  #     largest_garden = Garden.largest_garden
+  #     link_to largest_garden.name, garden_path(largest_garden.id)
+  #   else
+  #     "No gardens have been created yet."
+  #   end
+  # end
+  #
+  # def link_to_garden_with_most_plantings
+  #   if Garden.any?
+  #     garden = Garden.garden_with_most_plantings
+  #     link_to garden.name, garden_path(garden.id)
+  #   else
+  #     "No gardens have been created yet."
+  #   end
+  # end
 
   def display_any_errors(object)
     render partial: 'layouts/errors', locals: {errors: object.errors} if object.errors.any?
