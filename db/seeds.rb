@@ -16,7 +16,7 @@ Garden.create(name: "Backyard", description: "Pretty shady back there", square_f
 
 Garden.create(name: "Front Yard", description: "Sunny but small", square_feet: 20, user_id: 1) #garden_id: 2
 
-Garden.create(name: "Raised Beds", description: "Sunny, good drainage", square_feet: 8, user_id: 2)
+Garden.create(name: "Raised Beds", description: "Sunny, good drainage", square_feet: 8, user_id: 2) #garden_id: 3
 
 #####
 

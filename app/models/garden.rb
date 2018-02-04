@@ -33,10 +33,10 @@ class Garden < ActiveRecord::Base
   def plantings_attributes=(plantings_attributes_hash)
 
       # When creating a new garden and mass assignment jumps to this method,
-      # the garden (parent of planting/self) has to be saved first or else there
+      # the garden (parent of planting) has to be saved first or else there
       # will be an error when trying to create the associated planting in this method.
-      # In other words, even though this is triggered by Garden.create, the garden
-      # instance is not saved yet with an id at this point in the middle of .create,
+      # In other words, even though custom writer is triggered by Garden.create, the garden
+      # instance is not saved yet with an id at this point in the middle of Garden.create,
       # and so we need to save it here to create the child (planting):
     if self.save
 
@@ -52,7 +52,6 @@ class Garden < ActiveRecord::Base
           if planting.save # Need to check if savable in case, say, there were no species created yet.
             planting.garden.species << planting.species # Need this to make sure SpeciesGarden join table is populated
           end
-
         end
       end
     end
@@ -66,7 +65,7 @@ class Garden < ActiveRecord::Base
     self.square_feet = garden_params[:square_feet]
     if self.save
       garden_params[:plantings_attributes].values.each do | planting_attributes |
-        planting = self.plantings.find_by(id: planting_attributes[:id]) # Consider cleaning up without the self
+        planting = self.plantings.find_by(id: planting_attributes[:id])
         planting.species_id = planting_attributes[:species_id]
         planting.quantity = planting_attributes[:quantity]
         planting.save
