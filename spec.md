@@ -24,6 +24,8 @@ Specs:
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
     - The Garden model has class level methods for showing the Garden with the largest square footage and
         the Garden with the most plantings.
+    - There are two links on the user/show page to take advantage of these class level method. They take the user
+        to gardens/largest_garden and gardens/garden_with_most_plantings, respectively.
 
 - [x] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item)
     - When a user creates a garden (gardens/new view), the user can chose to add an initial Planting within
