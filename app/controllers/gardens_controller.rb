@@ -83,13 +83,20 @@ class GardensController < ApplicationController
      end
    end
 
-
   def destroy
     destroy_associated_plantings(@garden)
     destroy_associated_SpeciesGarden_entries
     @garden.destroy
     flash[:message] = "#{@garden.name} was deleted from your list of gardens."
     redirect_to user_path(current_user.id)
+  end
+
+  def largest
+    raise "Largest".inspect
+  end
+
+  def most_plantings
+    raise "Most Plantings".inspect
   end
 
   private
