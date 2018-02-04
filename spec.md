@@ -12,7 +12,7 @@ Specs:
 
 
 - [x] Include at least one has_many through relationship (x has_many y through z e.g. Recipe has_many Items through Ingredients)
-      - A Garden has_many Species, and Species has_many Gardens, through a SpeciesGarden join table/
+      - A Garden has_many Species, and Species has_many Gardens, through a SpeciesGarden join table.
 
 - [x] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity)
       - As examples: for a Garden, a user is able to input the name and square_feet; for a Species, a user
@@ -26,12 +26,10 @@ Specs:
         the Garden with the most plantings.
 
 - [x] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item)
-    - When a user creates a garden (gardens/new view), the user can chose to add an initial Planting.
-        This depends on a custom writer ("planting_attributes=") in the Garden model.
+    - When a user creates a garden (gardens/new view), the user can chose to add an initial Planting within
+      a nested form. This depends on a custom writer ("planting_attributes=") in the Garden model.
     - If the user has added Plantings to a Garden, the user has the ability to edit the plantings
-        in the gardens/edit view.  This depends on a custom updater ("custom_updater_for_nested_params")
-        in the Garden model.
-
+        in the gardens/edit view within a nested form.  This depends on a custom updater ("custom_updater_for_nested_params") in the Garden model.
 
 - [x] Include signup (how e.g. Devise)
     - Handled without Devise using the has_secure_password macro and the UsersController.
@@ -44,7 +42,7 @@ Specs:
 
 - [x] Include third party signup/login (how e.g. Devise/OmniAuth)
     - Users can sign in through GitHub.  This relies on OmniAuth.  See User model's User.create_user_from_github
-      and SessionsController #create_from_github.
+      and SessionsController#create_from_github.
 
 - [x] Include nested resource show or index (URL e.g. users/2/recipes)
     - The routes allow for routes such as users/1/gardens and users/1/species/1.
