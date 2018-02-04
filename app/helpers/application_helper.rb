@@ -6,7 +6,8 @@ module ApplicationHelper
     end
   end
 
-    # Do not need these any more but keeping as possible precedents:
+    # Do not need these any more, but keeping as possible precedents. I previously
+    # used these as helper methods in users/show view.
   # def link_to_largest_garden
   #   if Garden.any?
   #     largest_garden = Garden.largest_garden
