@@ -92,7 +92,14 @@ class GardensController < ApplicationController
   end
 
   def largest
-    raise "Largest".inspect
+    @garden = Garden.largest_garden
+    if @garden == nil
+      flash[:message] = "Sorry, no gardens have been created yet."
+      redirect_to redirect_to user_path(current_user.id)
+    else
+      flash[:message] = "This is currently the largest garden:"
+      redirect_to garden_path(@garden.id)
+    end
   end
 
   def most_plantings
