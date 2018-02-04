@@ -103,7 +103,14 @@ class GardensController < ApplicationController
   end
 
   def most_plantings
-    raise "Most Plantings".inspect
+    @garden = Garden.garden_with_most_plantings
+    if @garden == nil
+      flash[:message] = "Sorry, no gardens have been created yet."
+      redirect_to redirect_to user_path(current_user.id)
+    else
+      flash[:message] = "This is currently the garden with the most plantings:"
+      redirect_to garden_path(@garden.id)
+    end
   end
 
   private
