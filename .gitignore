@@ -24,4 +24,5 @@
 
 scraps*
 
-.env
+# I am removing only so tester can download from github and test github log in.
+#.env
