@@ -1,7 +1,8 @@
 class PlantingsController < ApplicationController
 
+  before_action :check_if_signed_in
   before_action :set_planting, only: [:update, :destroy]
-  before_action :check_permission, only: [:update, :destroy] 
+  before_action :check_permission, only: [:update, :destroy]
 
   def new
     set_garden

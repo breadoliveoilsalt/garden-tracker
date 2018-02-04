@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  before_action :check_if_signed_in, only: [:show]
   before_action :set_user, only: [:show]
 
   def new

@@ -24,4 +24,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_if_signed_in
+    if !signed_in?
+      flash[:message] = "Please sign in or create an account."
+      redirect_to root_path
+    end
+  end
+
 end

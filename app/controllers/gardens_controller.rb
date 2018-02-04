@@ -1,5 +1,6 @@
 class GardensController < ApplicationController
 
+  before_action :check_if_signed_in
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
   before_action :check_permission, only: [:edit, :update, :destroy]
 
