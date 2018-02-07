@@ -4,11 +4,14 @@ Garden Tracker is a simple way to keep track of gardens that you and other users
 
 To use this app:
 
-1. Clone it.
+1. Fork and clone it.
+
+2. In your terminal, run `bundle install`.
 
 2. In your terminal, `cd` into the parent directory for Garden Tracker.  
 
 3. In your terminal run: `rake db:migrate`
+  - If you want to have some fake data to play with, then after, run: `rake db:seed`.
 
 4. Also in your terminal, run: `rails s`.
 
