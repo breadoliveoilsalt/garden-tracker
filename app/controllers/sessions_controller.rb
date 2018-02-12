@@ -21,6 +21,8 @@ class SessionsController < ApplicationController
   def create_from_github
    auth = request.env["omniauth.auth"]
    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_user_from_github(auth)
+    # TN: Maybe could check for errors here and if no errors, assign session.
+    # OR maybe could combine the line above into a custom method...find or create by (auth)
    session[:user_id] = user.id
    flash[:message] = "Successfully signed in with GitHub"
    redirect_to user_path(user.id)

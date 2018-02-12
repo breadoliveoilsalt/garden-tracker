@@ -6,20 +6,29 @@
 
   <%= render partial: "gardens/form", locals: { f: f } %>
 
-  <div>
-    Add your first planting by filling in a quantity below (optional):
+  <% if current_user.species.any? %>
 
-    <div>
+      <div>
+        Add your first planting by filling in a quantity below (optional):
 
-      <%= f.fields_for :plantings, @garden.plantings.build do | planting_attrib | %>
-          <%= planting_attrib.hidden_field :user_id, :value => current_user.id %>
+        <div>
 
-          <%= render partial: 'plantings/form', locals: {planting_attrib: planting_attrib} %>
+          <%= f.fields_for :plantings, @garden.plantings.build do | planting_attrib | %>
+              <%= planting_attrib.hidden_field :user_id, :value => current_user.id %>
 
+              <%= render partial: 'plantings/form', locals: {planting_attrib: planting_attrib} %>
+
+        <% end %>
+
+        </div>
+      </div>
+
+    <% else %>
+      <div>
+        To add species to your garden, please create a species <%= link_to "here", new_user_species_path(current_user.id) %>
+      </div>
     <% end %>
 
-    </div>
-  </div>
 
   <div>
     <%= f.submit "Submit" %>
