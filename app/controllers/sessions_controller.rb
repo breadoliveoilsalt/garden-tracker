@@ -36,8 +36,9 @@ class SessionsController < ApplicationController
 
   private
 
-  def auth_hash
-    request.env['omniauth.auth']
-  end
+  # Looks like not needed 
+  # def auth_hash
+  #   request.env['omniauth.auth']
+  # end
 
 end
