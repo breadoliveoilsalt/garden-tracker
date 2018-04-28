@@ -37,6 +37,8 @@ gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'active_model_serializers'
 
+gem 'jquery-rails'
+
 #gem 'dotenv-rails' - had to move this up above
 
 # Use Capistrano for deployment
