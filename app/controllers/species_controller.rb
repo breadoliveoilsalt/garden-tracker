@@ -33,7 +33,7 @@ class SpeciesController < ApplicationController
   def show
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @post }
+      format.json { render json: @species }
     end
   end
 
