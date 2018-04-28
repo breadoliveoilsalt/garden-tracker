@@ -35,6 +35,8 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'omniauth'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 
+gem 'active_model_serializers'
+
 #gem 'dotenv-rails' - had to move this up above
 
 # Use Capistrano for deployment
