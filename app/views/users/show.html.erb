@@ -24,12 +24,12 @@
         <% current_user.species.all.each do |species| %>
           <li> <%= species.name %> --
 
-               <%= link_to "Show", "#", class: "species_show_link", data: {"species-id": species.id} %> --
+               <%= link_to "Show", "#", class: "species_show_link", data: {"species_id": species.id, "user_id": @user.id} %> --
 
                <%= link_to "Edit/Destroy", user_species_path(current_user.id, species.id)  %>
             </li>
 
-            <div id="species-display"></div>
+            <div id=<%="species_display_id_#{species.id.to_s}" %>  ></div>
         <% end %>
       <% else %>
         <li> No species have been created yet. </li>
