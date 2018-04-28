@@ -22,7 +22,13 @@
     <ul>
       <% if current_user.species.any? %>
         <% current_user.species.all.each do |species| %>
-          <li> <%= link_to species.name, user_species_path(current_user.id, species.id)  %></li>
+          <li> <%= species.name %> --
+
+               <%= link_to "Show", "#", id: "species-show-link" %> --
+
+               <%= link_to "Edit/Destroy", user_species_path(current_user.id, species.id)  %>
+            </li>
+            <div id="species-display"></div>
         <% end %>
       <% else %>
         <li> No species have been created yet. </li>
