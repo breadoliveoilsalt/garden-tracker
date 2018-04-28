@@ -1,6 +1,14 @@
 $(function () {
-    alert("doc ready!")
+  attachListeners()
 })
+
+
+function attachListeners() {
+  $(".species_show_link").on("click", function() {
+      alert("show link clicked!")
+  })
+}
+
 
 
 // Add event listener to each of the links with the class
