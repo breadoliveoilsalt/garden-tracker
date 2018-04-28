@@ -24,7 +24,7 @@
         <% current_user.species.all.each do |species| %>
           <li> <%= species.name %> --
 
-               <%= link_to "Show", "#", id: "species-show-link" %> --
+               <%= link_to "Show", "#", class: "species-show-link", data: {"id": species.id} %> --
 
                <%= link_to "Edit/Destroy", user_species_path(current_user.id, species.id)  %>
             </li>
