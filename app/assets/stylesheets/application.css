@@ -33,3 +33,8 @@ div {
   color: red;
   border: 2px solid black;
 }
+
+a.indented {
+  display: inline-block;
+  text-indent: 40px;
+}

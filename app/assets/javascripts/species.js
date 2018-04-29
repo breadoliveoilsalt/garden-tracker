@@ -32,15 +32,29 @@ class Species {
   }
 
   renderShow() {
+    let gardens = $(this.gardens)
     return `
-
       Product: ${this.product} <br>
       Sunlight: ${this.sunlight} <br>
-
+      Your Gardens Where This Appears: <br> ${this.renderGardens(gardens)}
       `
+  }
+
+  renderGardens(gardens) {
+      // Note that gardens here is jQuery object
+    let text = ""
+
+    gardens.each(function(index, garden) {
+      text += `<a class="indented" href="/users/${garden['user_id']}/gardens/${garden['id']}"> ${garden['name']} </a> <br>`
+    })
+
+    return text
+      // `<a href="/users/${garden['user_id']}/gardens/${garden['id']}"> garden['name'] </a> <br>`
+
   }
 }
 
+// garden => console.log(garden.name)
 // Gardens where this species appears: ${this.displayGardens()}
 // Produces: vegetables
 // Sun Level: full-sun
