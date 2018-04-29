@@ -10,15 +10,16 @@ function attachListeners() {
 
       let user_id = $(this).data().userId
       let species_id = $(this).data().speciesId
+      let displayBox = $("#species_display_id_" + species_id)
 
       $.ajax({
         url: `/users/${user_id}/species/${species_id}.json`,
         method: "GET"
       }).done(function(data){
         let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
-        let displayBox = $("#species_display_id_" + species_id)
-        console.log(speciesObject)
         displayBox.append(speciesObject.renderShow())
+      }).fail(function() {
+        displayBox.append("Sorry, there was an error.")
       })
   })
 }
