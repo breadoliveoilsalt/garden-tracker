@@ -15,10 +15,32 @@ function attachListeners() {
         url: `/users/${user_id}/species/${species_id}.json`,
         method: "GET"
       }).done(function(data){
-        console.log(data)
+        let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
+        let $displayBox = $("#species_display_id_" + species_id)
+        console.log(speciesObject)
+        $displayBox.append(speciesObject.product)
       })
   })
 }
+
+class Species {
+  constructor(name, product, sunlight, gardens) {
+    this.name = name
+    this.product = product
+    this.sunlight = sunlight
+    this.gardens = gardens
+  }
+
+  renderShow() {
+    return
+
+  }
+}
+
+// Produces: vegetables
+// Sun Level: full-sun
+// Gardens where this species appears:
+// Backyard
 
 //
 //
