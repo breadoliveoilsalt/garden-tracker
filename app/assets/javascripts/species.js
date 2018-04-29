@@ -16,9 +16,9 @@ function attachListeners() {
         method: "GET"
       }).done(function(data){
         let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
-        let $displayBox = $("#species_display_id_" + species_id)
+        let displayBox = $("#species_display_id_" + species_id)
         console.log(speciesObject)
-        $displayBox.append(speciesObject.product)
+        displayBox.append(speciesObject.renderShow())
       })
   })
 }
@@ -32,11 +32,16 @@ class Species {
   }
 
   renderShow() {
-    return
+    return `
 
+      Product: ${this.product} <br>
+      Sunlight: ${this.sunlight} <br>
+
+      `
   }
 }
 
+// Gardens where this species appears: ${this.displayGardens()}
 // Produces: vegetables
 // Sun Level: full-sun
 // Gardens where this species appears:
