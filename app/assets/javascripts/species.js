@@ -1,9 +1,9 @@
 $(function () {
-  attachListeners()
+  attachSpeciesListeners()
 })
 
 
-function attachListeners() {
+function attachSpeciesListeners() {
   $(".species_show_link").on("click", function(e) {
 
       e.preventDefault()
@@ -12,16 +12,22 @@ function attachListeners() {
       let species_id = $(this).data().speciesId
       let displayBox = $("#species_display_id_" + species_id)
 
-      $.ajax({
-        url: `/users/${user_id}/species/${species_id}.json`,
-        method: "GET"
-      }).done(function(data){
-        let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
-        displayBox.append(speciesObject.renderShow())
-      }).fail(function() {
-        displayBox.append("Sorry, there was an error.")
-      })
-  })
+
+        // To prevent duplication of data insert in event user clicks on link twice.
+        // displayBox.empty() works but looks awkward when the request is made
+
+      if (displayBox.text() === "") {
+        $.ajax({
+          url: `/users/${user_id}/species/${species_id}.json`,
+          method: "GET"
+        }).done(function(data){
+          let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
+          displayBox.append(speciesObject.renderShow())
+        }).fail(function() {
+          displayBox.append("Sorry, there was an error.")
+        })
+      }
+   }) // end of .on("click")
 }
 
 class Species {
