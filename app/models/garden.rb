@@ -11,6 +11,10 @@ class Garden < ActiveRecord::Base
 
   accepts_nested_attributes_for :plantings
 
+  def self.get_garden_ids_by_user_id(user_id)
+    Garden.select(:id).where("user_id = ?", user_id)
+  end
+
   def self.largest_garden
     self.order("square_feet DESC").first
   end

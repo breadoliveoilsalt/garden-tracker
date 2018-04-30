@@ -8,8 +8,11 @@ function attachGardenListeners() {
 
       let user_id = $(this).data().userId
       let garden_id = $(this).data().gardenId
-      debugger
-      // let displayBox = $("#species_display_id_" + species_id)
+
+      let displayBox = $("#garden_display_id_" + species_id)
+
+      // I could get all of the gardens and then cycle through them one at a time
+      // I could make a ajax request to a new route...which would return all of the ids of the gardens.  Then make a second ajax request for the garden.
 
       //
       //   // To prevent duplication of data insert in event user clicks on link twice.
