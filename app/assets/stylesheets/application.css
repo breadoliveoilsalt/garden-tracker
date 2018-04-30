@@ -38,3 +38,7 @@ a.indented {
   display: inline-block;
   text-indent: 40px;
 }
+
+.next_garden_button {
+  background-color: pink;
+}

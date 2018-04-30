@@ -1,7 +1,7 @@
 
 <%= flash_message %>
 
-<h1><%= @garden.name %>   <%= button_tag "Next Garden", class: "next-garden-button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
+<h1><%= @garden.name %>   <%= button_tag "Next Garden", class: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
 
   <% if @garden.user == current_user  %>
 
