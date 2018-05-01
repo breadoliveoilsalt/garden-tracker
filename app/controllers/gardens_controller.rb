@@ -124,6 +124,11 @@ class GardensController < ApplicationController
     end
   end
 
+  def get_garden_ids
+    garden_ids = Garden.get_garden_ids_by_user_id(params[:id])
+    render json: garden_ids.to_json
+  end
+
   private
 
   def garden_params
