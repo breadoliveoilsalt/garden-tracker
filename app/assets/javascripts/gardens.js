@@ -2,15 +2,59 @@ $(function() {
   attachGardenListeners()
 })
 
+  // A user's gardens will necessarily have ids in numerical order (e.g., a user's
+  // gardens might be ids 2, 5, 7, 15).  So the first step in rendering a ajax request
+  // is, on the first request, get all of the ids of the users gardens, to be an array
+  // of user_garden_ids.  Then, on the subsequent ajax requests, the request will cycle
+  // through this array to pull up the user's next garden.
+
+let userGardenIds
+let userGardenIdsLength
+let indexOfCurrentGarden
+let counter = 0
+
 function attachGardenListeners() {
   $(".next_garden_button").on("click", function(e) {
+
+        // not sure if i need this:
       e.preventDefault()
 
-      let user_id = $(this).data().userId
-      let garden_id = $(this).data().gardenId
+      let userId = $(this).data().userId
+      let gardenId = $(this).data().gardenId
 
-      let displayBox = $("#garden_display_id_" + species_id)
+      let displayBox = $("#garden_display_id_" + gardenId)
 
+      if (!userGardenIds) {
+        getUserGardensIds(userId)
+      }
+            // let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
+        //     displayBox.append(speciesObject.renderShow())
+        //   }).fail(function() {
+        //     displayBox.append("Sorry, there was an error.")
+        //   })
+
+
+
+    })
+  }
+
+function getUserGardensIds(userId) {
+  $.ajax({
+      url: `/users/${userId}/get_garden_ids`,
+      method: "GET"
+    }).done(function(data){
+      userGardenIds = makeIdArray(data)
+      userGardenIdsLength = userGardenIds.length
+    })
+  }
+
+function makeIdArray(data) {
+  let arr = []
+  $(data).each(function (index, element){
+    arr.push(element["id"])
+  })
+  return arr
+}
       // I could get all of the gardens and then cycle through them one at a time
       // I could make a ajax request to a new route...which would return all of the ids of the gardens.  Then make a second ajax request for the garden.
 
@@ -29,8 +73,8 @@ function attachGardenListeners() {
       //     displayBox.append("Sorry, there was an error.")
       //   })
       // }
-   }) // end of .on("click")
-}
+//    }) // end of .on("click")
+// }
 
 // class Species {
 //   constructor(name, product, sunlight, gardens) {
