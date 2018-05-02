@@ -13,6 +13,12 @@ let userGardenIdsLength
 let indexOfCurrentGarden
 let counter = 0
 
+// This is getting too complicated.
+// Everytime: fetch the ids of the user's garden
+// Then see where we are in the list
+// Then advance to the next element in the list
+// Then bring that up
+
 function attachGardenListeners() {
   $(".next_garden_button").on("click", function(e) {
 
@@ -22,11 +28,26 @@ function attachGardenListeners() {
       let userId = $(this).data().userId
       let gardenId = $(this).data().gardenId
 
+
       let displayBox = $("#garden_display_id_" + gardenId)
 
+
       if (!userGardenIds) {
-        getUserGardensIds(userId)
+        userGardenIds = getUserGardensIds(userId)
+        userGardenIdsLength = userGardenIds.length
+        debugger
+
+        // The execution is getting here, but not running the function until it gets passed it.
       }
+
+      // if (!userGardenIds) {
+      //   debugger
+      //   getUserGardensIds(userId)
+      //   // The execution is getting here, but not running the function until it gets passed it.
+      // }
+      // debugger
+
+
             // let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
         //     displayBox.append(speciesObject.renderShow())
         //   }).fail(function() {
@@ -38,15 +59,18 @@ function attachGardenListeners() {
     })
   }
 
+
 function getUserGardensIds(userId) {
   $.ajax({
       url: `/users/${userId}/get_garden_ids`,
       method: "GET"
     }).done(function(data){
-      userGardenIds = makeIdArray(data)
-      userGardenIdsLength = userGardenIds.length
+      return makeIdArray(data)
+
+      // indexOfCurrentGarden = getIndex(gardenId)
+
     })
-  }
+}
 
 function makeIdArray(data) {
   let arr = []
@@ -54,6 +78,16 @@ function makeIdArray(data) {
     arr.push(element["id"])
   })
   return arr
+}
+
+function getIndex(gardenId) {
+  debugger
+  $(userGardenIds).each( function (i, e) {
+    if (e === gardenId) {
+      return i
+    }
+  })
+
 }
       // I could get all of the gardens and then cycle through them one at a time
       // I could make a ajax request to a new route...which would return all of the ids of the gardens.  Then make a second ajax request for the garden.
