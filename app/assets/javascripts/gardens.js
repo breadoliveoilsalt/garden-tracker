@@ -27,18 +27,61 @@ function attachGardenListeners() {
 
       let userId = $(this).data().userId
       let gardenId = $(this).data().gardenId
-
-
       let displayBox = $("#garden_display_id_" + gardenId)
 
+      $.ajax({
+            // Get the json representing the ids of a user's gardens
+          url: `/users/${userId}/get_garden_ids`,
+          method: "GET"
+        })
 
-      if (!userGardenIds) {
-        userGardenIds = getUserGardensIds(userId)
-        userGardenIdsLength = userGardenIds.length
-        debugger
+            // Turn the json response into an array of the gardens ids
+        .then(function(data){
+          let arr = []
+          $(data).each(function (index, element){
+            arr.push(element["id"])
+          })
+          userGardenIds = arr
+          return arr
+        })
 
-        // The execution is getting here, but not running the function until it gets passed it.
-      }
+        .then(function(arr) {
+          // make a function to test if current gardenId is the last element
+          // in the array. If so, then modify button to go back to beginning
+          // and add html.  If no, then modify the data of the button and
+          // add the html
+        })
+       })}
+          // return makeIdArray(data)
+
+          // indexOfCurrentGarden = getIndex(gardenId)
+
+
+      // fetch(`/users/${userId}/get_garden_ids`)
+      //   .then(function(data) {
+      //     console.log(data)
+      //     debugger
+      //   }
+
+          // function(data) {
+          // return data.json()
+        // )
+        // .then(function(jsonResp){
+        //   console.log(jsonResp)
+        // })
+//
+//   })
+// }
+
+      //
+      //
+      // if (!userGardenIds) {
+      //   userGardenIds = getUserGardensIds(userId)
+      //   userGardenIdsLength = userGardenIds.length
+      //   debugger
+      //
+      //   // The execution is getting here, but not running the function until it gets passed it.
+      // }
 
       // if (!userGardenIds) {
       //   debugger
@@ -56,29 +99,19 @@ function attachGardenListeners() {
 
 
 
-    })
-  }
 
 
 function getUserGardensIds(userId) {
-  $.ajax({
-      url: `/users/${userId}/get_garden_ids`,
-      method: "GET"
-    }).done(function(data){
-      return makeIdArray(data)
 
-      // indexOfCurrentGarden = getIndex(gardenId)
-
-    })
 }
 
-function makeIdArray(data) {
-  let arr = []
-  $(data).each(function (index, element){
-    arr.push(element["id"])
-  })
-  return arr
-}
+// function makeIdArray(data) {
+//   let arr = []
+//   $(data).each(function (index, element){
+//     arr.push(element["id"])
+//   })
+//   return arr
+// }
 
 function getIndex(gardenId) {
   debugger
