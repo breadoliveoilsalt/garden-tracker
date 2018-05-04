@@ -2,21 +2,24 @@
 let userId
 let userGardenIds
 let userGardenIdsLength
+
+let currentGardenId
 let indexOfCurrentGarden
+
 let counter = 0
 
+// up to, make a function to set userGardenIds
 
 $(function() {
+  getCurrentGardenId()
   getUserGardensIds()
   // attachGardenListeners()
 })
 
 
 function getUserGardensIds() {
-  // userId = $(".next_garden_button").data().userId
-  userId = parseInt(window.location.pathname.split('/')[2])
-
-  debugger
+  userId = $("#next_garden_button").data().userId
+  // userId = parseInt(window.location.pathname.split('/')[2])
 
   $.ajax({
         // Get the json representing the ids of a user's gardens
@@ -26,18 +29,46 @@ function getUserGardensIds() {
 
         // Turn the json response into an array of the gardens ids
     .then(function(data){
+        // I can clean this up...make arr be userGardenIds
       let arr = []
       $(data).each(function (index, element){
         arr.push(element["id"])
       })
+        // Store the user's gardens' ids into memory as userGardenIds...
       userGardenIds = arr
-      return arr
+      return userGardenIds
     })
-    .then(function(arr) {
-      userGardenIds = arr
+    .then(function() {
+      indexOfCurrentGarden = getIndex(currentGardenId)
       debugger
     })
+    .then(function(userGardenIds) {
+      debugger
 
+        // ... attach a listener to the "next" button...
+      attachGardenListeners()
+        // ...and make the button visible
+      $("#next_garden_button").attr("class", "visible garden_button")
+    })
+
+}
+
+function attachGardenListeners() {
+  alert(userGardenIds)
+}
+
+function getCurrentGardenId() {
+  currentGardenId = $("#next_garden_button").data().gardenId
+}
+
+function getIndex(currentGardenId) {
+  let index
+  $(userGardenIds).each( function (i, e) {
+    if (e === currentGardenId) {
+      index = i
+    }
+  })
+  return index
 }
   // A user's gardens will necessarily have ids in numerical order (e.g., a user's
   // gardens might be ids 2, 5, 7, 15).  So the first step in rendering a ajax request
@@ -135,15 +166,7 @@ function getUserGardensIds() {
 //   return arr
 // }
 
-function getIndex(gardenId) {
-  debugger
-  $(userGardenIds).each( function (i, e) {
-    if (e === gardenId) {
-      return i
-    }
-  })
 
-}
       // I could get all of the gardens and then cycle through them one at a time
       // I could make a ajax request to a new route...which would return all of the ids of the gardens.  Then make a second ajax request for the garden.
 
