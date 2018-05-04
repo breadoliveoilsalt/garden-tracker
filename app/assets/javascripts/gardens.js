@@ -13,7 +13,10 @@ $(function() {
 
 
 function getUserGardensIds() {
-  userId = $(".next_garden_button").data().userId
+  // userId = $(".next_garden_button").data().userId
+  userId = parseInt(window.location.pathname.split('/')[2])
+
+  debugger
 
   $.ajax({
         // Get the json representing the ids of a user's gardens
