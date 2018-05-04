@@ -42,3 +42,11 @@ a.indented {
 .next_garden_button {
   background-color: pink;
 }
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
