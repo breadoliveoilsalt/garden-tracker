@@ -1,14 +1,14 @@
 
 let userId
-let userGardenIds
+let userGardenIds // an array
+let indexOfCurrentGarden
+let indexOfNextGarden
 // let userGardenIdsLength
 
 let currentGardenId
-let indexOfCurrentGarden
-let indexOfNextGarden
 let nextGardenId
 
-let counter = 0
+// let counter = 0
 
 $(function() {
   getCurrentGardenId()
@@ -49,6 +49,8 @@ function getUserGardensIds() {
       attachGardenListeners()
         // ...and make the button visible
       $("#next_garden_button").attr("class", "visible garden_button")
+        // This would probably be where I'd add a previous button if
+        // the garden loaded initially was not the first garden
     })
 
 }
