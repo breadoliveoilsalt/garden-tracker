@@ -59,7 +59,7 @@ function attachGardenListeners() {
 
     indexOfNextGarden = getIndexOfNextGarden()
     nextGardenId = userGardenIds[indexOfNextGarden]
-    debugger
+
 
     $.ajax({
           // Get the json representing the ids of a user's gardens
@@ -67,6 +67,7 @@ function attachGardenListeners() {
         method: "GET"
       })
       .then(function(data) {
+        let gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
         debugger
       })
   })
@@ -94,6 +95,28 @@ function getIndexOfNextGarden() {
     return indexOfCurrentGarden + 1
   }
 }
+
+class Garden {
+  constructor(id, name, description, square_feet, user_id, user, species, plantings) {
+    this.id = id
+    this.name = name
+    this.description = description
+    this.square_feet = square_feet
+    this.user_id = user_id
+    this.user = user
+    this.species = species
+    this.plantings = plantings
+  }
+
+}
+
+// class Species {
+//   constructor(name, product, sunlight, gardens) {
+//     this.name = name
+//     this.product = product
+//     this.sunlight = sunlight
+//     this.gardens = gardens
+//   }
   // A user's gardens will necessarily have ids in numerical order (e.g., a user's
   // gardens might be ids 2, 5, 7, 15).  So the first step in rendering a ajax request
   // is, on the first request, get all of the ids of the users gardens, to be an array
