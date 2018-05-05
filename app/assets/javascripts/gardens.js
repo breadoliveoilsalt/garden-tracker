@@ -1,14 +1,14 @@
 
 let userId
 let userGardenIds
-let userGardenIdsLength
+// let userGardenIdsLength
 
 let currentGardenId
 let indexOfCurrentGarden
+let indexOfNextGarden
+let nextGardenId
 
 let counter = 0
-
-// up to, make a function to set userGardenIds
 
 $(function() {
   getCurrentGardenId()
@@ -40,10 +40,10 @@ function getUserGardensIds() {
     })
     .then(function() {
       indexOfCurrentGarden = getIndex(currentGardenId)
-      debugger
+      // debugger
     })
     .then(function(userGardenIds) {
-      debugger
+      // debugger
 
         // ... attach a listener to the "next" button...
       attachGardenListeners()
@@ -54,7 +54,22 @@ function getUserGardensIds() {
 }
 
 function attachGardenListeners() {
-  alert(userGardenIds)
+  $("#next_garden_button").on("click", function(e) {
+    e.preventDefault()
+
+    indexOfNextGarden = getIndexOfNextGarden()
+    nextGardenId = userGardenIds[indexOfNextGarden]
+    debugger
+
+    $.ajax({
+          // Get the json representing the ids of a user's gardens
+        url: `/users/${userId}/gardens/${nextGardenId}.json`,
+        method: "GET"
+      })
+      .then(function(data) {
+        debugger
+      })
+  })
 }
 
 function getCurrentGardenId() {
@@ -69,6 +84,15 @@ function getIndex(currentGardenId) {
     }
   })
   return index
+}
+
+function getIndexOfNextGarden() {
+  if (indexOfCurrentGarden === userGardenIds.length - 1) {
+    return userGardenIds[0]
+  }
+  else {
+    return indexOfCurrentGarden + 1
+  }
 }
   // A user's gardens will necessarily have ids in numerical order (e.g., a user's
   // gardens might be ids 2, 5, 7, 15).  So the first step in rendering a ajax request
