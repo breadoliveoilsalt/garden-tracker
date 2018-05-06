@@ -59,6 +59,14 @@ function attachGardenListeners() {
   $("#next_garden_button").on("click", function(e) {
     e.preventDefault()
 
+    let gardenObject
+    let gardenDisplay
+
+      // These two next lines together get the id of the next gardens
+      // in the userGardenIds, or if the current garden is the user's last garden,
+      // they go back to the user's first garden.
+
+      // I can probably refactor these two into one method
     indexOfNextGarden = getIndexOfNextGarden()
     nextGardenId = userGardenIds[indexOfNextGarden]
 
@@ -68,9 +76,25 @@ function attachGardenListeners() {
         url: `/users/${userId}/gardens/${nextGardenId}.json`,
         method: "GET"
       })
+          // Create an "instance" of the gardenObject
       .then(function(data) {
-        let gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
+        gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
+      })
+        // Clear the current garden information
+      .then(function () {
+        gardenDisplay = $(`#garden_display_id_${currentGardenId}`)
         debugger
+        gardenDisplay.html("")
+      })
+      .then(function() {
+        // Insert the template for the new garden obtained through the axaj request
+        let insert = gardenObject.renderGarden()
+        debugger
+        gardenDisplay.html(insert)
+        gardenDisplay.attr("id", `garden_display_id_${gardenObject.id}`)
+
+        // console.log("Do I have access to gardenObject?")
+        // console.log(gardenObject)
       })
   })
 }
@@ -108,6 +132,61 @@ class Garden {
     this.user = user
     this.species = species
     this.plantings = plantings
+  }
+
+  renderGarden() {
+
+    let htmlToInsert = `
+            <h1>${this.name} </h1>
+
+                  <h2>
+                    <a href="/gardens/${this.id}/plantings/new">Add a Planting</a> |
+                    <a href="/gardens/${this.id}/edit">Edit Garden</a> |
+                    <a data-confirm="Are you sure you want to delete this garden?" rel="nofollow" data-method="delete" href="/gardens/${this.id}">Delete Garden</a>
+                </h2>
+
+
+            <h2> Creater: <a href="/users/${this.user_id}/gardens">${this.user.name}</a></h2>
+
+            <h2> Description: ${this.description} </h2>
+
+            <h2> Square Feet: ${this.square_feet}</h2>
+
+        `
+
+      htmlToInsert += this.renderPlantings()
+      debugger
+      return htmlToInsert
+
+  }
+
+  renderPlantings() {
+    let htmlToInsert = `
+        <h3> Plantings: </h3>
+
+          <ul>
+      `
+
+    for (var x of this.species) {
+      htmlToInsert += `
+        <li> <a href="/users/${userId}/species/${x.id}">${x.name}</a> </li>
+          <ul>
+            <li> Quantity: TBD </li>
+          </ul>
+        `
+    }
+      debugger
+            //
+            //
+            // <li> <a href="/users/1/species/4">Basil</a> </li>
+            //   <ul>
+            //     <li> Quantity: 10</li>
+            //   </ul>
+
+      htmlToInsert += "</ul>"
+
+      return htmlToInsert
+
   }
 
 }

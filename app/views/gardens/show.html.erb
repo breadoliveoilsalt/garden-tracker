@@ -5,8 +5,8 @@
   <%= button_tag "Next Garden", class: "hidden garden_button", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
 </div>
 
-<div class=<%="garden_display_id_#{@garden.id}"%> >
-    <h1><%= @garden.name %>
+<div id=<%="garden_display_id_#{@garden.id}"%> >
+    <h1><%= @garden.name %> </h1>
 
       <% if @garden.user == current_user  %>
 
