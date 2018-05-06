@@ -167,15 +167,16 @@ class Garden {
           <ul>
       `
 
-    for (var x of this.species) {
+    for (var x of this.plantings) {
       htmlToInsert += `
         <li> <a href="/users/${userId}/species/${x.id}">${x.name}</a> </li>
           <ul>
-            <li> Quantity: TBD </li>
+            <li> Quantity: ${x.quantity} </li>
           </ul>
         `
+
     }
-      debugger
+
             //
             //
             // <li> <a href="/users/1/species/4">Basil</a> </li>
