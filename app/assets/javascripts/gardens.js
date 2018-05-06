@@ -32,6 +32,7 @@ function getUserGardensIds() {
       })
         // Store the user's gardens' ids into memory as userGardenIds...
       userGardenIds = arr
+      debugger
       return userGardenIds
     })
     .then(function() {
@@ -109,9 +110,11 @@ function getIndex(currentGardenId) {
 
 function getIndexOfNextGarden() {
   if (indexOfCurrentGarden === userGardenIds.length - 1) {
-    return userGardenIds[0]
+    debugger
+    return 0
   }
   else {
+    debugger
     return indexOfCurrentGarden + 1
   }
 }
