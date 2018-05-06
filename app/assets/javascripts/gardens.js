@@ -85,7 +85,7 @@ function attachGardenListeners() {
         gardenDisplay.attr("id", `garden_display_id_${gardenObject.id}`)
         // Finally, reset all the global variables
         // and amend the "Next Garden" button so that it calls the
-        // next garden.
+        // next garden. //
       }).then(function() {
         $("#next_garden_button").attr("data-garden-id", nextGardenId)
         currentGardenId = nextGardenId
