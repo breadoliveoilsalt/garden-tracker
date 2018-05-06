@@ -3,17 +3,13 @@ let userId
 let userGardenIds // an array
 let indexOfCurrentGarden
 let indexOfNextGarden
-// let userGardenIdsLength
 
 let currentGardenId
 let nextGardenId
 
-// let counter = 0
-
-$(function() {
+$(document).ready(function() {
   getCurrentGardenId()
   getUserGardensIds()
-  // attachGardenListeners()
 })
 
 
@@ -40,11 +36,8 @@ function getUserGardensIds() {
     })
     .then(function() {
       indexOfCurrentGarden = getIndex(currentGardenId)
-      // debugger
     })
     .then(function(userGardenIds) {
-      // debugger
-
         // ... attach a listener to the "next" button...
       attachGardenListeners()
         // ...and make the button visible
@@ -52,7 +45,6 @@ function getUserGardensIds() {
         // This would probably be where I'd add a previous button if
         // the garden loaded initially was not the first garden
     })
-
 }
 
 function attachGardenListeners() {
@@ -83,18 +75,20 @@ function attachGardenListeners() {
         // Clear the current garden information
       .then(function () {
         gardenDisplay = $(`#garden_display_id_${currentGardenId}`)
-        debugger
         gardenDisplay.html("")
       })
-      .then(function() {
         // Insert the template for the new garden obtained through the axaj request
+      .then(function() {
         let insert = gardenObject.renderGarden()
-        debugger
         gardenDisplay.html(insert)
         gardenDisplay.attr("id", `garden_display_id_${gardenObject.id}`)
-
-        // console.log("Do I have access to gardenObject?")
-        // console.log(gardenObject)
+        // Finally, reset all the global variables
+        // and amend the "Next Garden" button so that it calls the
+        // next garden.
+      }).then(function() {
+        $("#next_garden_button").attr("data-garden-id", nextGardenId)
+        currentGardenId = nextGardenId
+        indexOfCurrentGarden = getIndex(currentGardenId)
       })
   })
 }
@@ -155,7 +149,6 @@ class Garden {
         `
 
       htmlToInsert += this.renderPlantings()
-      debugger
       return htmlToInsert
 
   }
@@ -177,13 +170,6 @@ class Garden {
 
     }
 
-            //
-            //
-            // <li> <a href="/users/1/species/4">Basil</a> </li>
-            //   <ul>
-            //     <li> Quantity: 10</li>
-            //   </ul>
-
       htmlToInsert += "</ul>"
 
       return htmlToInsert
@@ -191,163 +177,3 @@ class Garden {
   }
 
 }
-
-// class Species {
-//   constructor(name, product, sunlight, gardens) {
-//     this.name = name
-//     this.product = product
-//     this.sunlight = sunlight
-//     this.gardens = gardens
-//   }
-  // A user's gardens will necessarily have ids in numerical order (e.g., a user's
-  // gardens might be ids 2, 5, 7, 15).  So the first step in rendering a ajax request
-  // is, on the first request, get all of the ids of the users gardens, to be an array
-  // of user_garden_ids.  Then, on the subsequent ajax requests, the request will cycle
-  // through this array to pull up the user's next garden.
-
-  // NO: this is actually how to do it:  when the document loads, get the array of garden_ids;
-  // once it is there, then you can add the button!  That way I have it once, and the ajax request
-  // can still happen
-
-
-
-// This is getting too complicated.
-// Everytime: fetch the ids of the user's garden
-// Then see where we are in the list
-// Then advance to the next element in the list
-// Then bring that up
-
-// function attachGardenListeners() {
-//   $(".next_garden_button").on("click", function(e) {
-//
-//         // not sure if i need this:
-//       e.preventDefault()
-//
-//       let userId = $(this).data().userId
-//       let gardenId = $(this).data().gardenId
-//       let displayBox = $("#garden_display_id_" + gardenId)
-//
-//
-//
-//         .then(function(arr) {
-//           // make a function to test if current gardenId is the last element
-//           // in the array. If so, then modify button to go back to beginning
-//           // and add html.  If no, then modify the data of the button and
-//           // add the html
-//         })
-//        })}
-//           // return makeIdArray(data)
-//
-//           // indexOfCurrentGarden = getIndex(gardenId)
-
-
-      // fetch(`/users/${userId}/get_garden_ids`)
-      //   .then(function(data) {
-      //     console.log(data)
-      //     debugger
-      //   }
-
-          // function(data) {
-          // return data.json()
-        // )
-        // .then(function(jsonResp){
-        //   console.log(jsonResp)
-        // })
-//
-//   })
-// }
-
-      //
-      //
-      // if (!userGardenIds) {
-      //   userGardenIds = getUserGardensIds(userId)
-      //   userGardenIdsLength = userGardenIds.length
-      //   debugger
-      //
-      //   // The execution is getting here, but not running the function until it gets passed it.
-      // }
-
-      // if (!userGardenIds) {
-      //   debugger
-      //   getUserGardensIds(userId)
-      //   // The execution is getting here, but not running the function until it gets passed it.
-      // }
-      // debugger
-
-
-            // let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
-        //     displayBox.append(speciesObject.renderShow())
-        //   }).fail(function() {
-        //     displayBox.append("Sorry, there was an error.")
-        //   })
-
-
-
-
-
-
-
-// function makeIdArray(data) {
-//   let arr = []
-//   $(data).each(function (index, element){
-//     arr.push(element["id"])
-//   })
-//   return arr
-// }
-
-
-      // I could get all of the gardens and then cycle through them one at a time
-      // I could make a ajax request to a new route...which would return all of the ids of the gardens.  Then make a second ajax request for the garden.
-
-      //
-      //   // To prevent duplication of data insert in event user clicks on link twice.
-      //   // displayBox.empty() works but looks awkward when the request is made
-      //
-      // if (displayBox.text() === "") {
-      //   $.ajax({
-      //     url: `/users/${user_id}/species/${species_id}.json`,
-      //     method: "GET"
-      //   }).done(function(data){
-      //     let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
-      //     displayBox.append(speciesObject.renderShow())
-      //   }).fail(function() {
-      //     displayBox.append("Sorry, there was an error.")
-      //   })
-      // }
-//    }) // end of .on("click")
-// }
-
-// class Species {
-//   constructor(name, product, sunlight, gardens) {
-//     this.name = name
-//     this.product = product
-//     this.sunlight = sunlight
-//     this.gardens = gardens
-//   }
-//
-//   renderShow() {
-//     let gardens = $(this.gardens)
-//     return `
-//       Product: ${this.product} <br>
-//       Sunlight: ${this.sunlight} <br>
-//       Your Gardens Where This Appears: <br> ${this.renderGardens(gardens)}
-//       `
-//   }
-//
-//   renderGardens(gardens) {
-//       // Note that gardens here is jQuery object
-//     let text = ""
-//
-//     gardens.each(function(index, garden) {
-//       text += `<a class="indented" href="/users/${garden['user_id']}/gardens/${garden['id']}"> ${garden['name']} </a> <br>`
-//     })
-//
-//     return text
-//       // `<a href="/users/${garden['user_id']}/gardens/${garden['id']}"> garden['name'] </a> <br>`
-//
-//   }
-// }
-//
-
-// make sure to note that data on garden will change
-// I'll need to find next garden
