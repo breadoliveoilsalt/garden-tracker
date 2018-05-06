@@ -7,9 +7,10 @@ let indexOfNextGarden
 let currentGardenId
 let nextGardenId
 
-$(document).ready(function() {
+$(window).load(function() { // $(document).ready()
   getCurrentGardenId()
   getUserGardensIds()
+  attachPlantingListener()
 })
 
 
@@ -32,7 +33,6 @@ function getUserGardensIds() {
       })
         // Store the user's gardens' ids into memory as userGardenIds...
       userGardenIds = arr
-      debugger
       return userGardenIds
     })
     .then(function() {
@@ -110,11 +110,9 @@ function getIndex(currentGardenId) {
 
 function getIndexOfNextGarden() {
   if (indexOfCurrentGarden === userGardenIds.length - 1) {
-    debugger
     return 0
   }
   else {
-    debugger
     return indexOfCurrentGarden + 1
   }
 }
@@ -179,4 +177,13 @@ class Garden {
 
   }
 
+}
+
+///// Code dealing with Add Planting form ////
+
+function attachPlantingListener() {
+  $(".add_planting_link").on("click", function(e) {
+    e.preventDefault()
+    alert("you clicked add a planting!")
+  })
 }
