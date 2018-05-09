@@ -6,6 +6,10 @@ class GardensController < ApplicationController
 
   def new
     @garden = Garden.new
+    # respond_to do |format|
+    #   format.html { render :show }
+    #   format.json { render json: @garden }
+    # end
   end
 
   def create

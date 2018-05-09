@@ -10,7 +10,7 @@ let nextGardenId
 $(window).load(function() { // $(document).ready()
   getCurrentGardenId()
   getUserGardensIds()
-  attachPlantingListener()
+  // attachPlantingListener()
 })
 
 
@@ -181,9 +181,19 @@ class Garden {
 
 ///// Code dealing with Add Planting form ////
 
-function attachPlantingListener() {
-  $(".add_planting_link").on("click", function(e) {
-    e.preventDefault()
-    alert("you clicked add a planting!")
-  })
-}
+// function attachPlantingListener() {
+//   $(".add_planting_link").on("click", function(e) {
+//     e.preventDefault()
+//
+//     $.ajax({
+//       url: `/gardens/${currentGardenId}/plantings/new`,
+//       method: "GET"
+//     }).then(function(data) {
+//       debugger
+//     }
+//
+//     )
+//
+//
+//   })
+// }
