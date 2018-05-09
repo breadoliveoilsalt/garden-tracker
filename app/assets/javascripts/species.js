@@ -68,6 +68,20 @@ class Species {
 function attachSpeciesNewFormListener() {
   $("#species_new_form_link").on("click", function(e) {
     e.preventDefault()
-    alert("Get new form")
+
+    let user_id = $(this).data().userId
+
+    $.ajax({
+      url: `/users/${user_id}/species/new`,
+      method: "GET"
+    }).then( function (data) {
+      // let baseHTML = $.parseHTML(data)
+      // debugger
+      let baseHTML = $(data).filter("form#new_species")
+      let formHTML = '<div id="form_container">' + baseHTML[0].outerHTML + '</div>'
+      // .outerHTML()
+      debugger
+    })
+
   })
 }

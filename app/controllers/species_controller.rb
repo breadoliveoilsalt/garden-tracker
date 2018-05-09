@@ -6,6 +6,17 @@ class SpeciesController < ApplicationController
 
   def new
     @species = Species.new
+
+    # respond_to do |format|
+    #   format.html { render :new }
+    #   format.json { render :new.to_json }
+    # end
+
+
+    # respond_to do |format|
+    #   format.html { render :show }
+    #   format.json { render json: @garden }
+    # end
   end
 
   def create

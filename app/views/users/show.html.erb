@@ -17,7 +17,11 @@
 
   </ul>
 
-<h2> <%= link_to "Add a Species", new_user_species_path(current_user.id), id: "species_new_form_link" %> or View/Edit an Existing Species:</h2>
+<h2 id="species_header"> 
+
+  <%= link_to "Add a Species", new_user_species_path(current_user.id), id: "species_new_form_link", data: {"user_id": @user.id} %> or View/Edit an Existing Species:
+
+</h2>
 
     <ul>
       <% if current_user.species.any? %>
