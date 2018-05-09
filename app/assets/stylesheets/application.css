@@ -50,3 +50,7 @@ a.indented {
 .visible {
   visibility: visible;
 }
+
+#species_form_container {
+  border: 10px solid black;
+}

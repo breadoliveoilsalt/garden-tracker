@@ -74,13 +74,24 @@ function attachSpeciesNewFormListener() {
     $.ajax({
       url: `/users/${user_id}/species/new`,
       method: "GET"
-    }).then( function (data) {
+    })
+
+    .then( function (data) {
       // let baseHTML = $.parseHTML(data)
       // debugger
       let baseHTML = $(data).filter("form#new_species")
-      let formHTML = '<div id="form_container">' + baseHTML[0].outerHTML + '</div>'
+      let formHTML = '<div id="species_form_container">' + baseHTML[0].outerHTML + '</div>'
       // .outerHTML()
-      debugger
+      return formHTML
+    })
+
+    .then(function(formHTML) {
+      let speciesHeader = $("#species_header")[0]
+      $(formHTML).insertAfter($(speciesHeader))
+      // debugger // formHTML.insertAfter("#species_header")
+    })
+    .then(function () {
+      attachSpeciesSubmitListener()
     })
 
   })
