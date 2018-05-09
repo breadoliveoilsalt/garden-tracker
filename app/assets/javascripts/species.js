@@ -1,9 +1,9 @@
 $(function () {
-  attachSpeciesListeners()
+  attachSpeciesShowListener()
 })
 
 
-function attachSpeciesListeners() {
+function attachSpeciesShowListener() {
   $(".species_show_link").on("click", function(e) {
 
       e.preventDefault()
