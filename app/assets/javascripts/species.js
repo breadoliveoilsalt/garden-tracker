@@ -1,5 +1,6 @@
 $(function () {
   attachSpeciesShowListener()
+  attachSpeciesNewFormListener()
 })
 
 
@@ -61,30 +62,12 @@ class Species {
   }
 }
 
-// garden => console.log(garden.name)
-// Gardens where this species appears: ${this.displayGardens()}
-// Produces: vegetables
-// Sun Level: full-sun
-// Gardens where this species appears:
-// Backyard
 
-//
-//
-// $("#previous").on("click", function() {
-//       // To clear any previous buttons to make sure prior buttons are not re-loaded per test:
-//     $("#games").empty()
-//
-//     $.ajax({
-//       url: "/games",
-//       method: "GET"
-//     }).done(function(data) {
-//       data["data"].forEach( function (hash) {
-//         $("#games").append("<button id='game-" + hash["id"] + "' onclick='loadGame(this)' data-id='" + hash["id"] + "'>Game" + hash["id"] + "</button>")
-//         })
-//     })
-//   })
+///// CODE RELATED TO SPECIES NEW FORM /////
 
-// Add event listener to each of the links with the class
-// species-show.  Grab the data (which will be the species id)
-// and then make the ajax request.  Don't forget to prevent
-//default
+function attachSpeciesNewFormListener() {
+  $("#species_new_form_link").on("click", function(e) {
+    e.preventDefault()
+    alert("Get new form")
+  })
+}
