@@ -96,3 +96,10 @@ function attachSpeciesNewFormListener() {
 
   })
 }
+
+function attachSpeciesSubmitListener() {
+  $("#species_submit").on("click", function(e) {
+    e.preventDefault()
+    alert("Species submitted!")
+  })
+}
