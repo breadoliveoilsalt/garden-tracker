@@ -105,7 +105,20 @@ function attachSpeciesNewFormListener() {
 function attachSpeciesSubmitListener() {
   $("form#new_species").submit(function(e) {
     e.preventDefault()
-    alert("submitted!")
+    // debugger
+    // alert("submitted!")
+
+    let formValues = $(this).serialize()
+    debugger
+    $.ajax( {
+        // debugger
+        url: $(this)[0].action,
+        method: $(this)[0].method.toUpperCase(),
+        data: formValues
+      })
+    .then(function(data) {
+      debugger
+    })
   })
 }
   //   let formValues = $(this).serialize()
