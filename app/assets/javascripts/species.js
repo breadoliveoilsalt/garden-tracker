@@ -24,7 +24,7 @@ function attachSpeciesShowListener() {
           url: `/users/${user_id}/species/${species_id}.json`,
           method: "GET"
         }).done(function(data){
-          let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"])
+          let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
           displayBox.append(speciesObject.renderShow())
         }).fail(function() {
           displayBox.append("Sorry, there was an error.")
@@ -34,12 +34,13 @@ function attachSpeciesShowListener() {
 }
 
 class Species {
-  constructor(id, name, product, sunlight, gardens) {
+  constructor(id, name, product, sunlight, gardens, user) {
     this.id = id
     this.name = name
     this.product = product
     this.sunlight = sunlight
     this.gardens = gardens
+    this.user = user
   }
 
   renderShow() {
@@ -65,7 +66,15 @@ class Species {
   }
 
   renderAbbreviatedShow() {
-    return `<li> ${this.name} </li>`
+    debugger
+    return `<li> ${this.name} --
+
+          <a class="species_show_link" data-species-id="${this.id}" data-user-id="${this.user.id}" href="#">Show Info</a> --
+
+          <a href="/users/${this.user.id}/species/${this.id}">Edit/Destroy Page</a>
+
+          <div id="species_display_id_${this.id}"></div>
+        </li>`
 
   }
 }
@@ -125,30 +134,13 @@ function attachSpeciesSubmitListener() {
 
     // Got to find way to handle error
     .then(function(data) {
-      let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
+      let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
+
+      debugger
+
       $("#species_list").append(speciesObject.renderAbbreviatedShow())
 
     })
     // I also have to erase the form and attach listener for new link
   })
 }
-  //   let formValues = $(this).serialize()
-  //   debugger
-  //
-  //   $.ajax( {
-  //     // debugger
-  //     url: `users/${user_id}/species/new`,
-  //     method: "POST",
-  //     data: formValues
-  //   })
-  //   .then(function(response) {
-  //       debugger
-  //   })
-  //
-  // })
-// }
-  // $("#species_submit").on("click", function(e) {
-  //   e.preventDefault()
-  //   alert("Species submitted!")
-  // })
-// }

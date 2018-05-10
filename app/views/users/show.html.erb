@@ -31,9 +31,11 @@
                <%= link_to "Show Info", "#", class: "species_show_link", data: {"species_id": species.id, "user_id": @user.id} %> --
 
                <%= link_to "Edit/Destroy Page", user_species_path(current_user.id, species.id)  %>
+
+              <div id=<%="species_display_id_#{species.id.to_s}" %>  ></div>
             </li>
 
-            <div id=<%="species_display_id_#{species.id.to_s}" %>  ></div>
+
         <% end %>
       <% else %>
         <li> No species have been created yet. </li>
