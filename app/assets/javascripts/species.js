@@ -1,12 +1,12 @@
 let user_id
 
 $(function () {
-  attachSpeciesShowListener()
+  attachSpeciesShowListeners()
   attachSpeciesNewFormListener()
 })
 
 
-function attachSpeciesShowListener() {
+function attachSpeciesShowListeners() {
   $(".species_show_link").on("click", function(e) {
 
       e.preventDefault()
@@ -61,12 +61,9 @@ class Species {
     })
 
     return text
-      // `<a href="/users/${garden['user_id']}/gardens/${garden['id']}"> garden['name'] </a> <br>`
-
   }
 
   renderAbbreviatedShow() {
-    debugger
     return `<li> ${this.name} --
 
           <a class="species_show_link" data-species-id="${this.id}" data-user-id="${this.user.id}" href="#">Show Info</a> --
@@ -136,11 +133,21 @@ function attachSpeciesSubmitListener() {
     .then(function(data) {
       let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
 
-      debugger
-
       $("#species_list").append(speciesObject.renderAbbreviatedShow())
 
     })
-    // I also have to erase the form and attach listener for new link
+
+    .then(function() {
+        // remove the form submitted
+      $("#species_form_container").remove()
+        // remove all prior event handlers to show info for the species,
+        // otherwise there is a doubling bug.
+      $(".species_show_link").off()
+    })
+    .then(function() {
+      // Then reattach all listeners to the species show links, including the
+      // newly created link
+      attachSpeciesShowListeners()
+    })
   })
 }
