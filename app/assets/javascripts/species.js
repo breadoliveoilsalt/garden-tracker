@@ -1,3 +1,5 @@
+let user_id
+
 $(function () {
   attachSpeciesShowListener()
   attachSpeciesNewFormListener()
@@ -9,7 +11,7 @@ function attachSpeciesShowListener() {
 
       e.preventDefault()
 
-      let user_id = $(this).data().userId
+      user_id = $(this).data().userId
       let species_id = $(this).data().speciesId
       let displayBox = $("#species_display_id_" + species_id)
 
@@ -69,9 +71,11 @@ function attachSpeciesNewFormListener() {
   $("#species_new_form_link").on("click", function(e) {
     e.preventDefault()
 
-    let user_id = $(this).data().userId
-
+    // debugger
+    user_id = $(this).data().userId
+    // debugger
     $.ajax({
+      // debugger
       url: `/users/${user_id}/species/new`,
       method: "GET"
     })
@@ -90,6 +94,7 @@ function attachSpeciesNewFormListener() {
       $(formHTML).insertAfter($(speciesHeader))
       // debugger // formHTML.insertAfter("#species_header")
     })
+
     .then(function () {
       attachSpeciesSubmitListener()
     })
@@ -98,8 +103,28 @@ function attachSpeciesNewFormListener() {
 }
 
 function attachSpeciesSubmitListener() {
-  $("#species_submit").on("click", function(e) {
+  $("form#new_species").submit(function(e) {
     e.preventDefault()
-    alert("Species submitted!")
+    alert("submitted!")
   })
 }
+  //   let formValues = $(this).serialize()
+  //   debugger
+  //
+  //   $.ajax( {
+  //     // debugger
+  //     url: `users/${user_id}/species/new`,
+  //     method: "POST",
+  //     data: formValues
+  //   })
+  //   .then(function(response) {
+  //       debugger
+  //   })
+  //
+  // })
+// }
+  // $("#species_submit").on("click", function(e) {
+  //   e.preventDefault()
+  //   alert("Species submitted!")
+  // })
+// }
