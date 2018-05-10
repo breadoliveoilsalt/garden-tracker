@@ -109,7 +109,7 @@ function attachSpeciesSubmitListener() {
     // alert("submitted!")
 
     let formValues = $(this).serialize()
-    debugger
+    // debugger
     $.ajax( {
         // debugger
         url: $(this)[0].action,
