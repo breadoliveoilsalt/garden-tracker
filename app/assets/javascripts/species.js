@@ -24,7 +24,7 @@ function attachSpeciesShowListener() {
           url: `/users/${user_id}/species/${species_id}.json`,
           method: "GET"
         }).done(function(data){
-          let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
+          let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"])
           displayBox.append(speciesObject.renderShow())
         }).fail(function() {
           displayBox.append("Sorry, there was an error.")
@@ -34,7 +34,8 @@ function attachSpeciesShowListener() {
 }
 
 class Species {
-  constructor(name, product, sunlight, gardens) {
+  constructor(id, name, product, sunlight, gardens) {
+    this.id = id
     this.name = name
     this.product = product
     this.sunlight = sunlight
@@ -60,6 +61,11 @@ class Species {
 
     return text
       // `<a href="/users/${garden['user_id']}/gardens/${garden['id']}"> garden['name'] </a> <br>`
+
+  }
+
+  renderAbbreviatedShow() {
+    return `<li> ${this.name} </li>`
 
   }
 }
@@ -116,9 +122,14 @@ function attachSpeciesSubmitListener() {
         method: $(this)[0].method.toUpperCase(),
         data: formValues
       })
+
+    // Got to find way to handle error
     .then(function(data) {
-      debugger
+      let speciesObject = new Species(data["name"], data["product"], data["sunlight"], data["gardens"])
+      $("#species_list").append(speciesObject.renderAbbreviatedShow())
+
     })
+    // I also have to erase the form and attach listener for new link
   })
 }
   //   let formValues = $(this).serialize()

@@ -23,7 +23,7 @@
 
 </h2>
 
-    <ul>
+    <ul id="species_list">
       <% if current_user.species.any? %>
         <% current_user.species.all.each do |species| %>
           <li> <%= species.name %> --
