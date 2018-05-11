@@ -148,6 +148,9 @@ function attachSpeciesSubmitListener() {
       // Then reattach all listeners to the species show links, including the
       // newly created link
       attachSpeciesShowListeners()
+    }).fail(function() {
+      alert("Sorry, error creating the species.")
+      // up to here
     })
-  })
-}
+  }) // end of submit call
+} // end of function
