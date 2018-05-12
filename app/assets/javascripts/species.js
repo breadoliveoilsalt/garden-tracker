@@ -151,18 +151,21 @@ function attachSpeciesSubmitListener() {
       // Then reattach all listeners to the species show links, including the
       // newly created link
       attachSpeciesShowListeners()
+
+      // This hits if the ajax request doesn't work or if a 400 code is returned
     }).fail(function(data) {
       // let response = JSON.parse(data.responseText)
       // let errorCollection = data.responseJSON.errors
       let errorCollection = data.responseJSON.errors
-      let message
+      let message = ""
+      // debugger
       $(errorCollection).each(function(i, el) {
         message += el + ". "
       })
-      debugger
-      alert("Sorry, the following errors occurred:" + message)
+      // debugger
+      alert("Sorry, the following errors occurred: " + message)
       // $("#species_form_container").remove()
-      attachSpeciesSubmitListener()
+      // attachSpeciesSubmitListener()
       // REMOVE DISABLED FROM SUBMIT
       // up to here
     })
