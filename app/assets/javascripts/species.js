@@ -131,6 +131,9 @@ function attachSpeciesSubmitListener() {
 
     // Got to find way to handle error
     .then(function(data) {
+      // debugger -- THE STATUS CODE OF 400-SOMETHING MAKES THE EXECUTION PATH JUMP
+      // STRAIGH TO FAILURE
+
       let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
 
       $("#species_list").append(speciesObject.renderAbbreviatedShow())
@@ -148,8 +151,19 @@ function attachSpeciesSubmitListener() {
       // Then reattach all listeners to the species show links, including the
       // newly created link
       attachSpeciesShowListeners()
-    }).fail(function() {
-      alert("Sorry, error creating the species.")
+    }).fail(function(data) {
+      // let response = JSON.parse(data.responseText)
+      // let errorCollection = data.responseJSON.errors
+      let errorCollection = data.responseJSON.errors
+      let message
+      $(errorCollection).each(function(i, el) {
+        message += el + ". "
+      })
+      debugger
+      alert("Sorry, the following errors occurred:" + message)
+      // $("#species_form_container").remove()
+      attachSpeciesSubmitListener()
+      // REMOVE DISABLED FROM SUBMIT
       // up to here
     })
   }) // end of submit call
