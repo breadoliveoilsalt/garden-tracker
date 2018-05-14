@@ -10,7 +10,6 @@ let nextGardenId
 $(window).load(function() { // $(document).ready()
   getCurrentGardenId()
   getUserGardensIds()
-  // attachPlantingListener()
 })
 
 
@@ -27,15 +26,17 @@ function getUserGardensIds() {
         // Turn the json response into an array of the gardens ids
     .then(function(data){
         // I can clean this up...make arr be userGardenIds
-      let arr = []
+      userGardenIds = []
       $(data).each(function (index, element){
-        arr.push(element["id"])
+        userGardenIds.push(element["id"])
       })
-        // Store the user's gardens' ids into memory as userGardenIds...
-      userGardenIds = arr
+        // Store the user's gardens' ids into memory as userGardenIds.
       return userGardenIds
     })
     .then(function() {
+        // Get the index of the current garden of userGardenIds so
+        // the script can cycle through to the first garden after
+        // it reaches the last and the next button is clicked.
       indexOfCurrentGarden = getIndex(currentGardenId)
     })
     .then(function(userGardenIds) {
