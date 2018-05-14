@@ -34,11 +34,4 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  private
-
-  # Looks like not needed 
-  # def auth_hash
-  #   request.env['omniauth.auth']
-  # end
-
 end
