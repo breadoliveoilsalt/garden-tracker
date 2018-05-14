@@ -2,7 +2,6 @@ class Garden < ActiveRecord::Base
 
   validates :name, presence: true
   validates :square_feet, numericality: {only_integer: true, message: "must be a whole number"}
-  # , allow_nil: true
   validates :user_id, presence: true, numericality: {only_integer: true}
 
   belongs_to :user
