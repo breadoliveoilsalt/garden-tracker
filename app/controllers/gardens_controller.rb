@@ -6,10 +6,6 @@ class GardensController < ApplicationController
 
   def new
     @garden = Garden.new
-    # respond_to do |format|
-    #   format.html { render :show }
-    #   format.json { render json: @garden }
-    # end
   end
 
   def create
@@ -68,8 +64,9 @@ class GardensController < ApplicationController
         # Check if the route is a nested url, such as users/1/gardens/1
     if params[:user_id]
 
-        # Check if the user id in the url is valid and if the garden specified (and set by #set_garden)
-        # belongs to the user specified in the url. If yes to all, render the show page:
+        # Check if the user id in the url is valid and if the garden specified
+        #(and set by set_garden) belongs to the user specified in the url.
+        # If yes to all, render the show page:
       @user = User.find_by(id: params[:user_id])
       if @user && @user.gardens.include?(@garden)
         respond_to do |format|
@@ -77,7 +74,6 @@ class GardensController < ApplicationController
           format.json { render json: @garden }
         end
 
-       # render :show
       else
        flash[:message] = "Sorry, user or garden does not exist."
        redirect_to user_path(current_user.id)
@@ -91,7 +87,6 @@ class GardensController < ApplicationController
         format.json { render json: @garden }
       end
 
-      # render :show
     else
        flash[:message] = "Sorry, garden does not exist."
        redirect_to user_path(current_user.id)
