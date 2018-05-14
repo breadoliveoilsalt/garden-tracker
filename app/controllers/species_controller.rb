@@ -6,32 +6,10 @@ class SpeciesController < ApplicationController
 
   def new
     @species = Species.new
-
-    # respond_to do |format|
-    #   format.html { render :new }
-    #   format.json { render :new.to_json }
-    # end
-
-
-    # respond_to do |format|
-    #   format.html { render :show }
-    #   format.json { render json: @garden }
-    # end
   end
 
   def create
     @species = current_user.species.build(species_params)
-
-    #This worked in that when the built in form was submitted, the
-    # show page was rendered.  I just couldn't get json back.
-    # if @species.save
-    #   respond_to do |format|
-    #     format.html {
-    #       flash[:message] = "#{@species.name} was added to your list of species."
-    #       redirect_to user_species_path(current_user.id, @species.id)
-    #       }
-    #     format.json { render json: @species }
-    #   end
 
     if @species.save
       render json: @species, status: 201
