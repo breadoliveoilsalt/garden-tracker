@@ -42,9 +42,9 @@ function getUserGardensIds() {
     .then(function(userGardenIds) {
         // ... attach a listener to the "next" button...
       attachGardenListeners()
-        // ...and make the button visible
+        // ...and make the button visible.
       $("#next_garden_button").attr("class", "visible garden_button")
-        // This would probably be where I'd add a previous button if
+        // This would probably be where I'd add a "get previous" button if
         // the garden loaded initially was not the first garden
     })
 }
@@ -60,7 +60,6 @@ function attachGardenListeners() {
       // in the userGardenIds, or if the current garden is the user's last garden,
       // they go back to the user's first garden.
 
-      // I can probably refactor these two into one method
     indexOfNextGarden = getIndexOfNextGarden()
     nextGardenId = userGardenIds[indexOfNextGarden]
 
@@ -169,7 +168,6 @@ class Garden {
             <li> Quantity: ${x.quantity} </li>
           </ul>
         `
-
     }
 
       htmlToInsert += "</ul>"
@@ -179,22 +177,3 @@ class Garden {
   }
 
 }
-
-///// Code dealing with Add Planting form ////
-
-// function attachPlantingListener() {
-//   $(".add_planting_link").on("click", function(e) {
-//     e.preventDefault()
-//
-//     $.ajax({
-//       url: `/gardens/${currentGardenId}/plantings/new`,
-//       method: "GET"
-//     }).then(function(data) {
-//       debugger
-//     }
-//
-//     )
-//
-//
-//   })
-// }

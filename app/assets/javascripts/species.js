@@ -83,28 +83,22 @@ function attachSpeciesNewFormListener() {
   $("#species_new_form_link").on("click", function(e) {
     e.preventDefault()
 
-    // debugger
     user_id = $(this).data().userId
-    // debugger
+
     $.ajax({
-      // debugger
       url: `/users/${user_id}/species/new`,
       method: "GET"
     })
 
     .then( function (data) {
-      // let baseHTML = $.parseHTML(data)
-      // debugger
       let baseHTML = $(data).filter("form#new_species")
       let formHTML = '<div id="species_form_container">' + baseHTML[0].outerHTML + '</div>'
-      // .outerHTML()
       return formHTML
     })
 
     .then(function(formHTML) {
       let speciesHeader = $("#species_header")[0]
       $(formHTML).insertAfter($(speciesHeader))
-      // debugger // formHTML.insertAfter("#species_header")
     })
 
     .then(function () {
@@ -117,57 +111,49 @@ function attachSpeciesNewFormListener() {
 function attachSpeciesSubmitListener() {
   $("form#new_species").submit(function(e) {
     e.preventDefault()
-    // debugger
-    // alert("submitted!")
 
     let formValues = $(this).serialize()
-    // debugger
+
     $.ajax( {
-        // debugger
         url: $(this)[0].action,
         method: $(this)[0].method.toUpperCase(),
         data: formValues
       })
 
-    // Got to find way to handle error
-    .then(function(data) {
-      // debugger -- THE STATUS CODE OF 400-SOMETHING MAKES THE EXECUTION PATH JUMP
-      // STRAIGH TO FAILURE
+      // Note: in the SpeciesController under #create, if the object fails to save
+      // to the database, the errors are returned as well as a status code in the 400s.
+      // It is that "failure" status code that makes the ajax promise here skip over
+      // all the .then(s) and go straight to .failure().
 
+    .then(function(data) {
       let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
 
       $("#species_list").append(speciesObject.renderAbbreviatedShow())
-
     })
 
     .then(function() {
-        // remove the form submitted
+        // Remove the form submitted
       $("#species_form_container").remove()
-        // remove all prior event handlers to show info for the species,
-        // otherwise there is a doubling bug.
+        // Remove all prior event handlers to show info for the species,
+        // otherwise there is a doubling bug where the show species link will
+        // show the species info twice.
       $(".species_show_link").off()
     })
     .then(function() {
       // Then reattach all listeners to the species show links, including the
-      // newly created link
+      // newly created link.
       attachSpeciesShowListeners()
 
-      // This hits if the ajax request doesn't work or if a 400 code is returned
+      // This hits if the ajax request doesn't work or if a 400 code is returned:
+      // an alert pop up letting the user know what errors have occurred.
     }).fail(function(data) {
-      // let response = JSON.parse(data.responseText)
-      // let errorCollection = data.responseJSON.errors
       let errorCollection = data.responseJSON.errors
       let message = ""
-      // debugger
       $(errorCollection).each(function(i, el) {
         message += el + ". "
       })
-      // debugger
       alert("Sorry, the following errors occurred: " + message)
-      // $("#species_form_container").remove()
-      // attachSpeciesSubmitListener()
-      // REMOVE DISABLED FROM SUBMIT
-      // up to here
+
     })
   }) // end of submit call
 } // end of function
