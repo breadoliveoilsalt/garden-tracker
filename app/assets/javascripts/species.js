@@ -1,8 +1,13 @@
 let user_id
 
-// $(document).on('turbolinks:load', function() {
-// $(function () {
-$(document).on('page:load', function() {
+
+  // Note that the following would not work in this file
+  // for some reason.  See also notes in gardens.js:
+    // $(document).on('turbolinks:load', function() {
+    // $(document).ready(function () {
+    // $(document).on('page:load', function() {
+
+$(window).load(function() {
   attachSpeciesShowListeners()
   attachSpeciesNewFormListener()
 })
@@ -10,6 +15,7 @@ $(document).on('page:load', function() {
 
 function attachSpeciesShowListeners() {
   $(".species_show_link").on("click", function(e) {
+
 
       e.preventDefault()
 
