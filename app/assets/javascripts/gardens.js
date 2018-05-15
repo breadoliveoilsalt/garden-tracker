@@ -7,7 +7,12 @@ let indexOfNextGarden
 let currentGardenId
 let nextGardenId
 
-$(window).load(function() { // $(document).ready()
+// Note that these two:
+  // - $(window).load(function() { //
+  // $(document).ready()
+    // ... would not work due to turbolinks v5 issue
+
+$(document).on('turbolinks:load', function() {
   getCurrentGardenId()
   getUserGardensIds()
 })

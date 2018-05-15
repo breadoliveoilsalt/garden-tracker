@@ -1,5 +1,6 @@
 let user_id
 
+// $(document).on('turbolinks:load', function() {
 $(function () {
   attachSpeciesShowListeners()
   attachSpeciesNewFormListener()
