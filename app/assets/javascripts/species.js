@@ -150,6 +150,9 @@ function attachSpeciesSubmitListener() {
     .then(function() {
       // Then reattach all listeners to the species show links, including the
       // newly created link.
+
+      // Note: in future revisions you can probably rely on event delegation
+      // aka bubbling.  See: https://learn.jquery.com/events/event-delegation/
       attachSpeciesShowListeners()
 
       // This hits if the ajax request doesn't work or if a 400 code is returned:
