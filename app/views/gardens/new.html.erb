@@ -25,7 +25,7 @@
 
     <% else %>
       <div>
-        To add species to your garden, please create a species <%= link_to "here", new_user_species_path(current_user.id) %>
+        To add species to your garden, please create a species <%= link_to "here", user_path(current_user.id, anchor: "species_header") %>.
       </div>
     <% end %>
 
