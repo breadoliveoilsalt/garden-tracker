@@ -1,12 +1,14 @@
 
 <%= flash_message %>
 
-<div class="button_display">
-  <%= button_tag "Next Garden", class: "hidden garden_button", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
-</div>
+<% if @garden.user == current_user  %>
+    <div class="button_display">
+      <%= button_tag "Next Garden", class: "hidden garden_button", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
+    </div>
+<% end %>
 
 <div id=<%="garden_display_id_#{@garden.id}"%> >
-    <h1><%= @garden.name %> </h1>
+    <h1> <%= @garden.name %> </h1>
 
       <% if @garden.user == current_user  %>
 
