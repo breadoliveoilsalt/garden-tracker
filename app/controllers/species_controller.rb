@@ -11,11 +11,19 @@ class SpeciesController < ApplicationController
   def create
     @species = current_user.species.build(species_params)
 
-    if @species.save
-      render json: @species, status: 201
-    else
-      render :json => {:errors => @species.errors.full_messages}, status: 422
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render_species_json(@species) }
     end
+
+    # Proior language that worked:
+
+    # @species = current_user.species.build(species_params)
+    # if @species.save
+    #   render json: @species, status: 201
+    # else
+    #   render :json => {:errors => @species.errors.full_messages}, status: 422
+    # end
 
   end
 
@@ -65,6 +73,14 @@ class SpeciesController < ApplicationController
 
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(species_id: @species.id).destroy_all
+  end
+
+  def render_species_json(obj)
+    if obj.save
+      render json: obj, status: 201
+    else
+      render :json => {:errors => obj.errors.full_messages}, status: 422
+    end
   end
 
 end
