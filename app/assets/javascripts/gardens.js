@@ -16,8 +16,26 @@ let nextGardenId
       // $(document).on('turbolinks:load', function() {
 
 $(function () {
-  getCurrentGardenId()
-  getUserGardensIds()
+  //getCurrentGardenId()
+  //getUserGardensIds()
+
+  // basically the way cernan would wire this is the following:
+  // - just call attachGardenListeners
+  //    - in that function, the ajax request is made to a route called /next
+  //      (following params that have user id and garden id...he made this a nested route
+//          within a nested route)
+        //- #next is in the GardensController, and it uses .where clause to pull the
+        // an array of the following gardens and then picks the first one.
+        // The route then returns the json for that garden.
+        // If you are on the last garden, then the controller function just returns
+        // the user's first garden
+  // see what he did on
+    // - routes file line 16
+    // - the Gardens controller #next, which Cernan added 
+    // - And don't forget that in the garden show page, we made the button visible rather than hidden and
+    //  he also moved it so the button is not within a if...else clause)
+    //
+  attachGardenListeners()
 })
 
 
@@ -33,7 +51,6 @@ function getUserGardensIds() {
 
         // Turn the json response into an array of the gardens ids
     .then(function(data){
-        // I can clean this up...make arr be userGardenIds
       userGardenIds = []
       $(data).each(function (index, element){
         userGardenIds.push(element["id"])
@@ -59,6 +76,8 @@ function getUserGardensIds() {
 
 function attachGardenListeners() {
   $("#next_garden_button").on("click", function(e) {
+    const userId = $("#next_garden_button").data().userId
+    const id = $("#next_garden_button").data().gardenId
     e.preventDefault()
 
     let gardenObject
@@ -68,22 +87,23 @@ function attachGardenListeners() {
       // in the userGardenIds, or if the current garden is the user's last garden,
       // they go back to the user's first garden.
 
-    indexOfNextGarden = getIndexOfNextGarden()
-    nextGardenId = userGardenIds[indexOfNextGarden]
+  //  indexOfNextGarden = getIndexOfNextGarden()
+    //nextGardenId = userGardenIds[indexOfNextGarden]
 
 
     $.ajax({
           // Get the json representing the ids of a user's gardens
-        url: `/users/${userId}/gardens/${nextGardenId}.json`,
+        url: `/users/${userId}/gardens/${id}/next.json`,
         method: "GET"
       })
           // Create an "instance" of the gardenObject
       .then(function(data) {
+        console.log(data)
         gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
       })
         // Clear the current garden information
       .then(function () {
-        gardenDisplay = $(`#garden_display_id_${currentGardenId}`)
+        gardenDisplay = $(`#garden_display_id_${id}`)
         gardenDisplay.html("")
       })
         // Insert the template for the new garden obtained through the axaj request
