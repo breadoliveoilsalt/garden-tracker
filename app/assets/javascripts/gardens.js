@@ -13,7 +13,7 @@ let nextGardenId
     // ... would not work due to turbolinks v5 issue
     // When turbolinks was active, this would work in garden.js, button
     // not species.js:
-      // $(document).on('turbolinks:load', function() {
+      // $(document).on('turbolinks:load', function() {} etc.
 
 $(function () {
   getCurrentGardenId()
