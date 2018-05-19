@@ -25,23 +25,6 @@ class GardensController < ApplicationController
     end
   end
 
-# From Cernan:
-  def next
-    @user = User.find_by(id: params[:user_id])
-    #binding.pry
-    @garden = @user.gardens.where("id > ?", params[:garden_id]).first
-
-    if @garden
-      render json: @garden
-    else
-      render json: @user.gardens.first
-    end
-
-    # Also: you would have a previous button, and that would use .last rather
-    # than .first (and the where clause above would probably us > instead of
-    # < .  )
-  end
-
   def edit
   end
 
