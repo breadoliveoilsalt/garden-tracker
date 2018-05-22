@@ -42,24 +42,13 @@ class GardensController < ApplicationController
 
   def index
 
-       # Check if the url is a nested url, such as users/1/gardens:
-    if params[:user_id]
-
-        # See if user id params is valid, and if so, define @gardens:
-      if @user = User.find_by(id: params[:user_id])
-        @gardens = @user.gardens
-        render :index
-      else
-        flash[:message] = "Sorry, user does not exist."
-        redirect_to user_path(current_user.id)
-      end
-
-        # If the url is not a nested url, show all the gardens:
-    else
-      @gardens = Garden.all
-      render :index
+    respond_to do |format|
+      format.html { render_gardens_html }
+      # format.json { render json: @garden }
     end
+
   end
+
 
   def show
 
@@ -158,6 +147,26 @@ class GardensController < ApplicationController
       flash[:message] = "#{@garden.name} was updated."
       redirect_to garden_path(@garden.id)
     end
+  end
+
+  def render_gardens_html
+        # Check if the url is a nested url, such as users/1/gardens:
+     if params[:user_id]
+
+         # See if user id params is valid, and if so, define @gardens:
+       if @user = User.find_by(id: params[:user_id])
+         @gardens = @user.gardens
+         render :index
+       else
+         flash[:message] = "Sorry, user does not exist."
+         redirect_to user_path(current_user.id)
+       end
+
+         # If the url is not a nested url, show all the gardens:
+     else
+       @gardens = Garden.all
+       render :index
+     end
   end
 
 end
