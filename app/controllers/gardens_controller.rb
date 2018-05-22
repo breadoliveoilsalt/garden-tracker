@@ -41,12 +41,10 @@ class GardensController < ApplicationController
   end
 
   def index
-
     respond_to do |format|
       format.html { render_gardens_html }
-      # format.json { render json: @garden }
+      format.json { render_gardens_json }
     end
-
   end
 
 
@@ -167,6 +165,15 @@ class GardensController < ApplicationController
        @gardens = Garden.all
        render :index
      end
+  end
+
+  def render_gardens_json
+
+    if params[:user_id].to_i == current_user.id
+      user = User.find_by(id: params[:user_id])
+      @gardens = user.gardens
+      render json: @gardens
+    end
   end
 
 end
