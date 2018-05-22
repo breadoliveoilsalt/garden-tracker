@@ -88,7 +88,7 @@ function attachGardenListeners() {
       })
         // Insert the template for the new garden obtained through the axaj request
       .then(function() {
-        let insert = gardenObject.renderGarden()
+        let insert = gardenObject.renderGardenShow()
         gardenDisplay.html(insert)
         gardenDisplay.attr("id", `garden_display_id_${gardenObject.id}`)
         // Finally, reset all the global variables
@@ -137,7 +137,7 @@ class Garden {
     this.plantings = plantings
   }
 
-  renderGarden() {
+  renderGardenShow() {
 
     let htmlToInsert = `
             <h1>${this.name} </h1>
@@ -185,3 +185,5 @@ class Garden {
   }
 
 }
+
+export default class Garden

@@ -10,6 +10,8 @@
 //   attachGardensLinkListener()
 // })
 
+import Garden from './'
+
 $(window).load(function() {
   attachGardensLinkListener()
 })
@@ -18,7 +20,17 @@ function attachGardensLinkListener() {
 
   $('#view_gardens_link').on('click', function(e) {
     e.preventDefault()
-    alert("yo!")
+
+    user_id = $(this).data().userId
+
+    $.ajax({
+      url: `${user_id}/gardens.json`,
+      method: `GET`
+    })
+    .then(function (data) {
+      debugger
+
+    })
   })
 
 }

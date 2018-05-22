@@ -5,7 +5,7 @@
 
 <div id="gardens_container">
 
-  <h2> <%= link_to "View Your Gardens", user_gardens_path(current_user.id), id: "view_gardens_link" %> </h2>
+  <h2> <%= link_to "View Your Gardens", user_gardens_path(current_user.id), id: "view_gardens_link", data: {"user_id": @user.id} %> </h2>
 
   <h2> <%= link_to "Add a Garden", new_garden_path %> or View/Edit an Existing Garden:</h2>
 
