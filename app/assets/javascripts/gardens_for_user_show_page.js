@@ -10,7 +10,7 @@
 //   attachGardensLinkListener()
 // })
 
-import Garden from './'
+// import {Garden} from './gardens_for_gardens_show_page'
 
 $(window).load(function() {
   attachGardensLinkListener()
@@ -27,8 +27,20 @@ function attachGardensLinkListener() {
       url: `${user_id}/gardens.json`,
       method: `GET`
     })
-    .then(function (data) {
-      debugger
+    .then(function (response) {
+
+        // No need to import Garden class from other file
+        // b/c all the files are loaded together
+
+      let htmlToInsert
+
+      for (var data of response) {
+
+          gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
+
+          debugger
+
+      }
 
     })
   })

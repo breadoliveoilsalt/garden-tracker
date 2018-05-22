@@ -185,5 +185,3 @@ class Garden {
   }
 
 }
-
-export default class Garden
