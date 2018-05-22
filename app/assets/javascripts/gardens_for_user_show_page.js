@@ -32,15 +32,26 @@ function attachGardensLinkListener() {
         // No need to import Garden class from other file
         // b/c all the files are loaded together
 
-      let htmlToInsert
+      let htmlToInsert = `
+
+        <h2> Your Gardens: </h2>
+        <ul>
+      `
 
       for (var data of response) {
 
-          gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
+          let gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
 
-          debugger
+          htmlToInsert += "<li>" + gardenObject.renderGardenListItem() + "</li>"
+
 
       }
+
+      htmlToInsert += `
+        </ul>
+      `
+
+      $("#gardens_container")[0].innerHTML = htmlToInsert
 
     })
   })

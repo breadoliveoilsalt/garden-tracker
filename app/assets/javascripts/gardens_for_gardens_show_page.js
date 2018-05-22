@@ -184,4 +184,14 @@ class Garden {
 
   }
 
+  renderGardenListItem() {
+    return `
+      ${this.name} |
+      <a href="${this.user_id}/gardens/${this.id}">Garden Details</a> |
+      <a href="/gardens/${this.id}/plantings/new">Add a Planting</a> |
+      <a href="/gardens/${this.id}/edit">Edit Garden</a> |
+      <a data-confirm="Are you sure you want to delete this garden?" rel="nofollow" data-method="delete" href="/gardens/${this.id}">Delete Garden</a>
+    `
+  }
+
 }
