@@ -7,20 +7,6 @@
 
   <h2> <%= link_to "Add a Garden", new_garden_path %> or <%= link_to "View Your Gardens", user_gardens_path(current_user.id), id: "view_gardens_link", data: {"user_id": @user.id} %> </h2>
 
-  <h2> <%= link_to "Add a Garden", new_garden_path %> or View/Edit an Existing Garden:</h2>
-
-    <ul>
-
-      <% if current_user.gardens.any? %>
-        <% current_user.gardens.all.each do |garden| %>
-          <li> <%= link_to garden.name, user_garden_path(@user.id, garden.id)  %></li>
-        <% end %>
-      <% else %>
-        <li> No gardens have been created yet. </li>
-      <% end %>
-
-    </ul>
-
 </div>
 
 <div id="species_container">

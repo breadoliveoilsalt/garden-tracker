@@ -49,6 +49,8 @@ function attachGardensLinkListener() {
 
       htmlToInsert += `
         </ul>
+
+        <h2> <a href="/gardens/new">Add a Garden</a> </h2>
       `
 
       $("#gardens_container")[0].innerHTML = htmlToInsert
