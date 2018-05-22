@@ -48,6 +48,7 @@ class GardensController < ApplicationController
         # See if user id params is valid, and if so, define @gardens:
       if @user = User.find_by(id: params[:user_id])
         @gardens = @user.gardens
+        render :index
       else
         flash[:message] = "Sorry, user does not exist."
         redirect_to user_path(current_user.id)
@@ -56,6 +57,7 @@ class GardensController < ApplicationController
         # If the url is not a nested url, show all the gardens:
     else
       @gardens = Garden.all
+      render :index
     end
   end
 
