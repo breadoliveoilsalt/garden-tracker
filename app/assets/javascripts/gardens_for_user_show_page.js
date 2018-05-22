@@ -17,7 +17,7 @@ function attachGardensLinkListener() {
     .then(function (response) {
 
         // No need to import Garden class from other file
-        // b/c all the files are loaded together
+        // b/c all the files are loaded together //
 
       let htmlToInsert = `
 
