@@ -1,5 +1,11 @@
 
-let userId
+// let userId
+  // aGain watch global variables!
+  // Refactor global variables -- main problem is that they are
+  // available in the console -- so can give away a lot of information.
+  // Keeping the variables within the scope of functions prevents this.
+  // I'll have to check all the js files.
+  // And don't forget to change the application.js stuff to add the js
 let userGardenIds // an array
 let indexOfCurrentGarden
 let indexOfNextGarden
@@ -22,7 +28,7 @@ $(function () {
 
 
 function getUserGardensIds() {
-  userId = $("#next_garden_button").data().userId
+  let userId = $("#next_garden_button").data().userId
   // An alternate: userId = parseInt(window.location.pathname.split('/')[2])
 
   $.ajax({
@@ -126,12 +132,13 @@ function getIndexOfNextGarden() {
 }
 
 class Garden {
-  constructor(id, name, description, square_feet, user_id, user, species, plantings) {
+  constructor(id, name, description, squareFeet, userId, user, species, plantings) {
+      // Watch for camel case vs snake case
     this.id = id
     this.name = name
     this.description = description
-    this.square_feet = square_feet
-    this.user_id = user_id
+    this.squareFeet = squareFeet
+    this.userId = userId
     this.user = user
     this.species = species
     this.plantings = plantings
@@ -149,11 +156,11 @@ class Garden {
                 </h2>
 
 
-            <h2> Creater: <a href="/users/${this.user_id}/gardens">${this.user.name}</a></h2>
+            <h2> Creater: <a href="/users/${this.userId}/gardens">${this.user.name}</a></h2>
 
             <h2> Description: ${this.description} </h2>
 
-            <h2> Square Feet: ${this.square_feet}</h2>
+            <h2> Square Feet: ${this.squareFeet}</h2>
 
         `
 
@@ -187,7 +194,7 @@ class Garden {
   renderGardenListItem() {
     return `
       ${this.name} |
-      <a href="${this.user_id}/gardens/${this.id}">Garden Details</a> |
+      <a href="${this.userId}/gardens/${this.id}">Garden Details</a> |
       <a href="/gardens/${this.id}/plantings/new">Add a Planting</a> |
       <a href="/gardens/${this.id}/edit">Edit Garden</a> |
       <a data-confirm="Are you sure you want to delete this garden?" rel="nofollow" data-method="delete" href="/gardens/${this.id}">Delete Garden</a>

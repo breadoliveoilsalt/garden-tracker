@@ -1,5 +1,6 @@
-let user_id
+// let user_id
 
+// Watch -- avoid global variables b/c other methods could muck with
 
   // Note that the following would not work in this file
   // for some reason.  See also notes in gardens.js:
@@ -19,9 +20,9 @@ function attachSpeciesShowListeners() {
 
       e.preventDefault()
 
-      user_id = $(this).data().userId
-      let species_id = $(this).data().speciesId
-      let displayBox = $("#species_display_id_" + species_id)
+      let userId = $(this).data().userId
+      let speciesId = $(this).data().speciesId
+      let displayBox = $("#species_display_id_" + speciesId)
 
 
         // To prevent duplication of data insert in event user clicks on link twice.
@@ -29,7 +30,7 @@ function attachSpeciesShowListeners() {
 
       if (displayBox.text() === "") {
         $.ajax({
-          url: `/users/${user_id}/species/${species_id}.json`,
+          url: `/users/${userId}/species/${speciesId}.json`,
           method: "GET"
         }).done(function(data){
           let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
@@ -65,7 +66,7 @@ class Species {
     let text = ""
 
     gardens.each(function(index, garden) {
-      text += `<a class="indented" href="/users/${garden['user_id']}/gardens/${garden['id']}"> ${garden['name']} </a> <br>`
+      text += `<a class="indented" href="/users/${garden['userId']}/gardens/${garden['id']}"> ${garden['name']} </a> <br>`
     })
 
     return text
@@ -91,10 +92,10 @@ function attachSpeciesNewFormListener() {
   $("#species_new_form_link").on("click", function(e) {
     e.preventDefault()
 
-    user_id = $(this).data().userId
+    let userId = $(this).data().userId
 
     $.ajax({
-      url: `/users/${user_id}/species/new`,
+      url: `/users/${userId}/species/new`,
       method: "GET"
     })
 
