@@ -11,6 +11,12 @@
   // And watch all snake case
   // And have to get the garden show page button working again Where
   // user_id was changed to userID
+  // remember that her suggestion was to have users/2.json and have that
+  // list all the gardens through serializer, and then you could have access to
+  // this list and just cycle through it
+    // If I do that, then I could start of with an if statement  -- if There
+    // is not master list of gardens here...then make the request...otherwise,
+    // show stuff for the next request
 let userGardenIds // an array
 let indexOfCurrentGarden
 let indexOfNextGarden
