@@ -6,6 +6,11 @@
   // Keeping the variables within the scope of functions prevents this.
   // I'll have to check all the js files.
   // And don't forget to change the application.js stuff to add the js
+
+
+  // And watch all snake case
+  // And have to get the garden show page button working again Where
+  // user_id was changed to userID
 let userGardenIds // an array
 let indexOfCurrentGarden
 let indexOfNextGarden
