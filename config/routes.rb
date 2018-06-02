@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create_from_github'
 
   resources :users, only: [:new, :create, :show] do
-    resources :gardens, only: [:index, :show]
+    resources :gardens, only: [:index, :show] do
+      get "/next", to: "gardens#next"
+    end
     resources :species, except: :index
   end
 

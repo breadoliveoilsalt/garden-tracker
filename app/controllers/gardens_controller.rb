@@ -47,7 +47,6 @@ class GardensController < ApplicationController
     end
   end
 
-
   def show
 
         # Check if the route is a nested url, such as users/1/gardens/1
@@ -88,6 +87,10 @@ class GardensController < ApplicationController
     @garden.destroy
     flash[:message] = "#{@garden.name} was deleted from your list of gardens."
     redirect_to user_path(current_user.id)
+  end
+
+  def next
+    raise "You got to next".inspect
   end
 
   def largest
