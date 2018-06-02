@@ -1,12 +1,4 @@
 
-// let userId
-  // aGain watch global variables!
-  // Refactor global variables -- main problem is that they are
-  // available in the console -- so can give away a lot of information.
-  // Keeping the variables within the scope of functions prevents this.
-  // I'll have to check all the js files.
-  // And don't forget to change the application.js stuff to add the js
-
 
   // And watch all snake case
   // And have to get the garden show page button working again Where
@@ -33,11 +25,12 @@ let nextGardenId
       // $(document).on('turbolinks:load', function() {} etc.
 
 $(function () {
-  getCurrentGardenId()
+  // getCurrentGardenId()
   getUserGardensIds()
 })
 
 
+// I de-activated this above -- probably can remove all. 
 function getUserGardensIds() {
   let userId = $("#next_garden_button").data().userId
   // An alternate: userId = parseInt(window.location.pathname.split('/')[2])

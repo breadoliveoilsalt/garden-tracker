@@ -3,7 +3,7 @@
 
 <% if @garden.user == current_user  %>
     <div class="button_display">
-      <%= button_tag "Next Garden", class: "hidden garden_button", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
+      <%= button_tag "Next Garden", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
     </div>
 <% end %>
 
