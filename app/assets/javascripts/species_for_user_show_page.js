@@ -1,6 +1,3 @@
-// let user_id
-
-// Watch -- avoid global variables b/c other methods could muck with
 
   // Note that the following would not work in this file
   // for some reason.  See also notes in gardens.js:
@@ -13,17 +10,14 @@ $(window).load(function() {
   attachSpeciesNewFormListener()
 })
 
-
 function attachSpeciesShowListeners() {
   $(".species_show_link").on("click", function(e) {
-
 
       e.preventDefault()
 
       let userId = $(this).data().userId
       let speciesId = $(this).data().speciesId
       let displayBox = $("#species_display_id_" + speciesId)
-
 
         // To prevent duplication of data insert in event user clicks on link twice.
         // displayBox.empty() works but looks awkward when the request is made
@@ -84,7 +78,6 @@ class Species {
 
   }
 }
-
 
 ///// CODE RELATED TO SPECIES NEW FORM /////
 
