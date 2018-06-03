@@ -1,22 +1,4 @@
 
-
-  // And watch all snake case
-  // And have to get the garden show page button working again Where
-  // user_id was changed to userID
-  // remember that her suggestion was to have users/2.json and have that
-  // list all the gardens through serializer, and then you could have access to
-  // this list and just cycle through it
-    // If I do that, then I could start of with an if statement  -- if There
-    // is not master list of gardens here...then make the request...otherwise,
-    // show stuff for the next request
-
-// let userGardenIds // an array
-// let indexOfCurrentGarden
-// let indexOfNextGarden
-//
-// let currentGardenId
-// let nextGardenId
-
 // Note that these two:
   // $(window).load(function() { //
   // $(document).ready()
@@ -26,54 +8,10 @@
       // $(document).on('turbolinks:load', function() {} etc.
 
 $(function () {
-  // getCurrentGardenId()
-  // getUserGardensIds()
   attachGardenListeners()
 })
 
-
-// I de-activated this above -- probably can remove all.
-// function getUserGardensIds() {
-//   let userId = $("#next_garden_button").data().userId
-//   // An alternate: userId = parseInt(window.location.pathname.split('/')[2])
-//
-//   $.ajax({
-//         // Get the json representing the ids of a user's gardens
-//       url: `/users/${userId}/get_garden_ids`,
-//       method: "GET"
-//     })
-//
-//         // Turn the json response into an array of the gardens ids
-//     .then(function(data){
-//         // I can clean this up...make arr be userGardenIds
-//       userGardenIds = []
-//       $(data).each(function (index, element){
-//         userGardenIds.push(element["id"])
-//       })
-//         // Store the user's gardens' ids into memory as userGardenIds.
-//       return userGardenIds
-//     })
-//     .then(function() {
-//         // Get the index of the current garden of userGardenIds so
-//         // the script can cycle through to the first garden after
-//         // it reaches the last and the next button is clicked.
-//       indexOfCurrentGarden = getIndex(currentGardenId)
-//     })
-//     .then(function(userGardenIds) {
-//         // ... attach a listener to the "next" button...
-//       attachGardenListeners()
-//         // ...and make the button visible.
-//       $("#next_garden_button").attr("class", "visible garden_button")
-//         // This would probably be where I'd add a "get previous" button if
-//         // the garden loaded initially was not the first garden
-//     })
-// }
-
 function attachGardenListeners() {
-
-  // let gardenObject
-  // let userId
-  // let gardenId
 
   $("#next_garden_button").on("click", function(e) {
     e.preventDefault()
@@ -88,16 +26,6 @@ function attachGardenListeners() {
     const userId = e.target.dataset.userId
     const gardenId = e.target.dataset.gardenId
 
-
-      // These two next lines together get the id of the next gardens
-      // in the userGardenIds, or if the current garden is the user's last garden,
-      // they go back to the user's first garden.
-
-    // indexOfNextGarden = getIndexOfNextGarden()
-    // nextGardenId = userGardenIds[indexOfNextGarden]
-
-
-
     $.ajax({
           // Get the json representing the ids of a user's gardens
         url: `/users/${userId}/gardens/${gardenId}/next`,
@@ -108,59 +36,25 @@ function attachGardenListeners() {
 
         const gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
 
+          // Replace button's data of garden id with gardenObject's id, so that
+          // next time the button is pressed, the next garden is retreived.
+
         $("#next_garden_button").attr("data-garden-id", gardenObject.id)
 
+          // Render information for gardenObject as "insert"
         const insert = gardenObject.renderGardenShow()
 
         return insert
       })
-        // Clear the current garden information
+        // Insert the "insert" into the DOM at the garden_display container
       .then(function(insert) {
         $(`#garden_display`).html(insert)
       })
-        // Insert the template for the new garden obtained through the axaj request
-      // .then(function() {
-      //   // const insert = gardenObject.renderGardenShow()
-      //   // debugger
-      //   // gardenDisplay.html(insert)
-      //   // gardenDisplay.attr("id", `garden_display_id_${gardenObject.id}`)
-      //   // // Finally, reset all the global variables
-      //   // and amend the "Next Garden" button so that it calls the
-      //   // next garden. //
-      // }).then(function() {
-      //
-      //   // currentGardenId = nextGardenId
-      //   // indexOfCurrentGarden = getIndex(currentGardenId)
-      // })
   })
 }
 
-// function getCurrentGardenId() {
-//   currentGardenId = $("#next_garden_button").data().gardenId
-// }
-//
-// function getIndex(currentGardenId) {
-//   let index
-//   $(userGardenIds).each( function (i, e) {
-//     if (e === currentGardenId) {
-//       index = i
-//     }
-//   })
-//   return index
-// }
-//
-// function getIndexOfNextGarden() {
-//   if (indexOfCurrentGarden === userGardenIds.length - 1) {
-//     return 0
-//   }
-//   else {
-//     return indexOfCurrentGarden + 1
-//   }
-// }
-
 class Garden {
   constructor(id, name, description, squareFeet, userId, user, species, plantings) {
-      // Watch for camel case vs snake case
     this.id = id
     this.name = name
     this.description = description
