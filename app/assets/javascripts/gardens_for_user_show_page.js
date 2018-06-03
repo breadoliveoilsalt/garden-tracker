@@ -8,7 +8,7 @@ function attachGardensLinkListener() {
   $('#view_gardens_link').on('click', function(e) {
     e.preventDefault()
 
-    userId = $(this).data().userId
+    let userId = $(this).data().userId
 
     $.ajax({
       url: `${userId}/gardens.json`,
