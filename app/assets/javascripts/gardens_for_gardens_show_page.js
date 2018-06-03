@@ -26,11 +26,12 @@ let nextGardenId
 
 $(function () {
   // getCurrentGardenId()
-  getUserGardensIds()
+  // getUserGardensIds()
+  attachGardenListeners()
 })
 
 
-// I de-activated this above -- probably can remove all. 
+// I de-activated this above -- probably can remove all.
 function getUserGardensIds() {
   let userId = $("#next_garden_button").data().userId
   // An alternate: userId = parseInt(window.location.pathname.split('/')[2])
@@ -73,6 +74,7 @@ function attachGardenListeners() {
 
     let gardenObject
     let gardenDisplay
+    let baseURL = window.location.pathname
 
       // These two next lines together get the id of the next gardens
       // in the userGardenIds, or if the current garden is the user's last garden,
@@ -84,11 +86,12 @@ function attachGardenListeners() {
 
     $.ajax({
           // Get the json representing the ids of a user's gardens
-        url: `/users/${userId}/gardens/${nextGardenId}.json`,
+        url: baseURL + "/next",
         method: "GET"
       })
           // Create an "instance" of the gardenObject
       .then(function(data) {
+        debugger
         gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
       })
         // Clear the current garden information

@@ -90,7 +90,13 @@ class GardensController < ApplicationController
   end
 
   def next
-    raise "You got to next".inspect
+    user = User.find_by(id: params[:user_id])
+    garden = user.gardens.where("id > ?", params[:garden_id]).first
+    if garden
+      render json: garden
+    else
+      render json: user.gardens.first
+    end
   end
 
   def largest
