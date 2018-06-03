@@ -20,6 +20,9 @@ function attachGardenListeners() {
     // the .then methods.  But I could access userId and gardenId
     // within the ajax request (but not the .then() methods)
 
+    // See also species_for_species_show_page -- there the variable
+    // scope seems to work, eg, displayBox
+
     // let gardenObject
     // let gardenDisplay
 
@@ -96,9 +99,9 @@ class Garden {
 
           <ul>
       `
-      debugger
+
     for (var x of this.plantings) {
-      debugger
+
       htmlToInsert += `
         <li> <a href="/users/${x.user_Id}/species/${x.species_id}">${x.name}</a> </li>
           <ul>
