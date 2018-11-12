@@ -20,7 +20,7 @@ function attachGardenListeners() {
     // the .then methods.  But I could access userId and gardenId
     // within the ajax request (but not the .then() methods)
 
-    // See also species_for_species_show_page -- there the variable
+    // See also species_for_user_show_page -- there the variable
     // scope seems to work, eg, displayBox
 
     // let gardenObject
