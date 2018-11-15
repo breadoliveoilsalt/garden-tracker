@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 
-//= require semantic-ui
+//= require semantic_ui/semantic_ui
 
 //= require_tree .
 

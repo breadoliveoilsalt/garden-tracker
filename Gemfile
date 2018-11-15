@@ -42,9 +42,13 @@ gem 'active_model_serializers'
 
 gem 'jquery-rails'
 
-gem 'semantic-ui-rails'
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-
+# gems for semantic-UI-Rails-LESS
+# gem 'less-rails'
+gem 'less-rails-semantic_ui'
+gem 'autoprefixer-rails'
+gem 'therubyracer'
+# gem 'mini_racer'
+# gem 'mini_racer', platforms: :ruby
 #gem 'dotenv-rails' - had to move this up above
 
 # Use Capistrano for deployment
