@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 
+//= require semantic_ui/semantic_ui
+
 //= require_tree .
 
 // require gardens_for_gardens_show_page
