@@ -28,7 +28,7 @@ Rails.application.configure do
   # config.assets.uglifier = { harmony: true }
 
     # ...Trying this instead:
-    config.assets.js_compressor = Uglifier.new(harmony: true)
+  config.assets.js_compressor = Uglifier.new(harmony: true)
   # config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
