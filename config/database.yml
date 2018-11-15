@@ -22,4 +22,10 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  database: db/production
+
+
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
