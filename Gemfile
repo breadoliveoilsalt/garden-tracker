@@ -42,6 +42,8 @@ gem 'active_model_serializers'
 
 gem 'jquery-rails'
 
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+
 #gem 'dotenv-rails' - had to move this up above
 
 # Use Capistrano for deployment
