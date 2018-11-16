@@ -1,11 +1,19 @@
-<h1> Sign in to Garden Tracker </h1>
 
-<%= flash_message %>
+<!-- <div class="ui middle aligned center aligned grid">
+  <div class="column"> -->
 
-<%= form_for @user, url: sessions_create_path, method: :post do |f| %>
+<div class="ui raised very padded container segment text center aligned" style="margin-top: 10em;">
 
-  <%= render partial: "users/form", locals: { f: f } %>
+    <%= flash_message %>
 
-<% end %>
+    <h1> Sign in to Garden Tracker </h1>
 
-<h3> Or <%= link_to "create an Account", new_user_path %> </h3>
+
+    <%= form_for @user, url: sessions_create_path, method: :post do |f| %>
+
+      <%= render partial: "users/form", locals: { f: f } %>
+
+    <% end %>
+
+    <h3> Or <%= link_to "create an Account", new_user_path %> </h3>
+</div>
