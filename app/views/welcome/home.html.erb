@@ -1,17 +1,24 @@
 
-<%= flash_message %>
 
-<h1>Welcome to Garden Tracker</h1>
+<!-- <div class="ui middle aligned center aligned grid"> -->
+  <div class="ui raised very padded container segment text center aligned" style="margin-top: 10em;">
+
+      <%= flash_message %>
+
+      <h1>Welcome to Garden Tracker!</h1>
 
 
-<% if signed_in? %>
-  <h3> <%= link_to "Visit your home page", user_path(current_user.id) %> </h3>
+      <% if signed_in? %>
+        <h3> <%= link_to "Visit your home page", user_path(current_user.id) %> </h3>
 
-<% else %>
+      <% else %>
 
-  <h2><%= link_to "Sign In", signin_path %> or <%= link_to "Log in with GitHub", "/auth/github" %></h2>
-  <h2><%= link_to "Create an Account", new_user_path %></h2>
+        <div class="ui divider"></div>
+        <h2><%= link_to "Sign In", signin_path %> or <%= link_to "Log in with GitHub", "/auth/github" %></h2>
+        <div class="ui divider"></div>
+        <h2>Don't have an account? <%= link_to "Create one", new_user_path %>.</h2>
 
-  <button class="ui button">Does this work </button>
+      <% end %>
 
-<% end %>
+  </div>
+</div>
