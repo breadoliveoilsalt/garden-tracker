@@ -1,11 +1,13 @@
 
 <div class="error-messages">
 
-  <h3> Sorry, the following error(s) occurred: </h3>
-    <ul>
-      <%  errors.full_messages.each do |msg| %>
-        <li> <%= msg %></li>
-      <% end %>
-    </ul>
+  <div>
+    <h3> Sorry, there were some problems with your input: </h3>
+      <ul>
+        <%  errors.full_messages.each do |msg| %>
+          <li style="list-style:none;"> <%= msg %></li>
+        <% end %>
+      </ul>
+  </div>
 
 </div>

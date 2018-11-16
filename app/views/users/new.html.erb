@@ -1,11 +1,14 @@
-<h1> Create an Account for Garden Tracker </h1>
 
-<%= display_any_errors(@user) %>
+<div class="ui raised very padded container segment text center aligned" style="margin-top: 10em;">
+  <h1> Create an Account for Garden Tracker </h1>
 
-<%= form_for @user do |f| %>
+  <%= display_any_errors(@user) %>
 
-  <%= render partial: "users/form", locals: { f: f } %>
+  <%= form_for @user do |f| %>
 
-<% end %>
+    <%= render partial: "users/form", locals: { f: f } %>
 
-<h3> Or <%= link_to "sign in", signin_path %> or <%= link_to "log in with GitHub", "/auth/github" %></h3>
+  <% end %>
+
+  <h3> Or <%= link_to "sign in", signin_path %> or <%= link_to "log in with GitHub", "/auth/github" %></h3>
+</div>

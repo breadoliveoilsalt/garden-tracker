@@ -10,10 +10,10 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     elsif !@user
-      flash[:message] = "Error: Could not find your name."
+      flash[:message] = "Sorry, we could not find your name."
       redirect_to signin_path
     elsif !@user.authenticate(params[:user][:password])
-      flash[:message] = "Error: Password invalid."
+      flash[:message] = "Sorry, your password is invalid."
       redirect_to signin_path
     end
   end

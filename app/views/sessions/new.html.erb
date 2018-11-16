@@ -4,10 +4,9 @@
 
 <div class="ui raised very padded container segment text center aligned" style="margin-top: 10em;">
 
-    <%= flash_message %>
-
     <h1> Sign in to Garden Tracker </h1>
 
+    <%= flash_message %>
 
     <%= form_for @user, url: sessions_create_path, method: :post do |f| %>
 
