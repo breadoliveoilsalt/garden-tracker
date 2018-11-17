@@ -10,12 +10,23 @@
 
   <body>
     <!-- navbar -->
-    
+
       <% if signed_in? && !visiting_initial_pages %>
+
         <div class="ui container">
 
-          <h1 class="ui header center aligned" style="margin:2em">Garden Tracker</h1>
-          <%= link_to "Sign Out", signout_path, method: :delete %>
+          <h1 class="ui header center aligned" style="margin-top:2em">Garden Tracker</h1>
+
+          <p class="ui text container center aligned"> Welcome back, <%= @user.name %>.  When you're ready, <%= link_to "sign out here", signout_path, method: :delete %>.</p>
+
+          <div class="ui three item menu">
+              <a class="item" href="/users/<%=@user.id%>">Home</a>
+              <a class="item" href="/users/<%=@user.id%>/gardens">Gardens</a>
+              <a class="item" >Species</a>
+          </div>
+
+
+
 
         </div>
       <% end %>
