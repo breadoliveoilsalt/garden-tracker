@@ -4,6 +4,12 @@ class SpeciesController < ApplicationController
   before_action :set_species, only: [:show, :edit, :update, :destroy]
   before_action :check_permission, only: [:show, :edit, :update, :destroy]
 
+
+  def index
+    @user = current_user
+    @species = current_user.species
+  end
+
   def new
     @species = Species.new
   end

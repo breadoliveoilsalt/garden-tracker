@@ -1,0 +1,13 @@
+
+<h1> <%= @user.name %>'s Species </h1>
+
+<ul>
+  <% if @species.any?  %>
+      <% @species.each do |s| %>
+            <li> <%= link_to s.name, user_species_path(@user.id, s.id) %> </li>
+       <% end  %>
+   <% else %>
+      <li> There are no species created yet. </li>
+    <% end %>
+
+</ul>

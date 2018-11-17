@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :gardens, only: [:index, :show] do
       get "/next", to: "gardens#next"
     end
-    resources :species, except: :index
+    resources :species
   end
 
   get 'users/:id/get_garden_ids', to: 'gardens#get_garden_ids'
