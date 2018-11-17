@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GardenTracker</title>
+    <title>Garden Tracker</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all'%>
@@ -11,11 +11,16 @@
   <body>
     <!-- navbar -->
 
-    <% if signed_in? %>
-      <h2><%= link_to "Home (#{current_user.name})", user_path(current_user.id) %> | <%= link_to "Sign Out", signout_path, method: :delete %></h2>
-      <h2> ------------------------------------------------- </h2>
-    <% end %>
+      <div class="ui container">
 
+        <h1 class="ui header center aligned" style="margin:2em">Garden Tracker</h1>
+
+      <% if signed_in? && params[:action] != "home"%>
+        <h2><%= link_to "Home (#{current_user.name})", user_path(current_user.id) %> | <%= link_to "Sign Out", signout_path, method: :delete %></h2>
+        <h2> ------------------------------------------------- </h2>
+      <% end %>
+
+      </div>
     <!-- navbar end -->
 
     <%= yield %>
