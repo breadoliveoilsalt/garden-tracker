@@ -5,14 +5,13 @@
 
       <%= flash_message %>
 
-      <h1>Welcome to Garden Tracker!</h1>
-
-
       <% if signed_in? %>
-        <h3> <%= link_to "Visit your home page", user_path(current_user.id) %> </h3>
+
+          <%= render partial: 'welcome/signed_in' %>
 
       <% else %>
 
+        <h1>Welcome to Garden Tracker!</h1>
         <div class="ui divider"></div>
         <h2><%= link_to "Sign In", signin_path %> or <%= link_to "Log in with GitHub", "/auth/github" %></h2>
         <div class="ui divider"></div>

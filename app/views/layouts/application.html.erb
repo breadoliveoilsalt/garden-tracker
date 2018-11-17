@@ -10,17 +10,15 @@
 
   <body>
     <!-- navbar -->
+    
+      <% if signed_in? && !visiting_initial_pages %>
+        <div class="ui container">
 
-      <div class="ui container">
+          <h1 class="ui header center aligned" style="margin:2em">Garden Tracker</h1>
+          <%= link_to "Sign Out", signout_path, method: :delete %>
 
-        <h1 class="ui header center aligned" style="margin:2em">Garden Tracker</h1>
-
-      <% if signed_in? && params[:action] != "home"%>
-        <h2><%= link_to "Home (#{current_user.name})", user_path(current_user.id) %> | <%= link_to "Sign Out", signout_path, method: :delete %></h2>
-        <h2> ------------------------------------------------- </h2>
+        </div>
       <% end %>
-
-      </div>
     <!-- navbar end -->
 
     <%= yield %>

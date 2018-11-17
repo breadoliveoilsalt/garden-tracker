@@ -30,4 +30,8 @@ module ApplicationHelper
     render partial: 'layouts/errors', locals: {errors: object.errors} if object.errors.any?
   end
 
+  def visiting_initial_pages
+    params[:action] == "home"
+  end
+
 end
