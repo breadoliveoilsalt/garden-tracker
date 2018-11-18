@@ -80,4 +80,9 @@ class Garden < ActiveRecord::Base
     end
   end
 
+
+  def self.get_active_gardens(user_id)
+    Garden.where("user_id = ? AND active = ?", user_id, true)
+  end
+
 end
