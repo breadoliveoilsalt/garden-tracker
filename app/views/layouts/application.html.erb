@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <!-- navbar -->
+
 
       <% if signed_in? && !visiting_initial_pages %>
 
@@ -19,18 +19,19 @@
 
           <p class="ui text container center aligned"> Welcome back, <%= @user.name %>.  When you're ready, <%= link_to "sign out here", signout_path, method: :delete %>.</p>
 
+        <!-- navbar -->
           <div class="ui three item menu stackable">
               <a class="ui item active top_menu" href="/users/<%=@user.id%>">Home</a>
               <a class="ui item top_menu" href="/users/<%=@user.id%>/gardens">Gardens</a>
               <a class="ui item top_menu" href="/users/<%=@user.id%>/species" >Species</a>
           </div>
 
-
+          <!-- navbar end -->
 
 
         </div>
       <% end %>
-    <!-- navbar end -->
+
 
     <%= yield %>
   </body>
