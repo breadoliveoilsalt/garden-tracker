@@ -8,62 +8,25 @@
 
   <h1 class="ui header center aligned">Summary of Active Gardens</h1>
 
+  <div></div>
 
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>Garden Name</th>
+        <th>Upcoming Maturities</th>
+      </tr>
+    </thead>
+    <tbody>
 
-</div>
+      <% @gardens.each do |garden| %>
+        <tr>
+          <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id) %> </td>
+          <td> <%= garden.plantings %> </td>
+        </tr>
+      <% end %>
 
+    </tbody>
+  </table>
 
-<div id="gardens_container">
-
-  <h2> <%= link_to "Add a Garden", new_garden_path %> or <%= link_to "View Your Gardens", user_gardens_path(current_user.id), id: "view_gardens_link", data: {"user_id": @user.id} %> </h2>
-
-</div>
-
-<div id="species_container">
-  <h2 id="species_header">
-
-    <%= link_to "Add a Species", new_user_species_path(current_user.id), id: "species_new_form_link", data: {"user_id": @user.id} %> or View/Edit an Existing Species:
-
-  </h2>
-
-      <ul id="species_list">
-        <% if current_user.species.any? %>
-          <% current_user.species.all.each do |species| %>
-            <li> <%= species.name %> --
-
-                 <%= link_to "Show Info", "#", class: "species_show_link", data: {"species_id": species.id, "user_id": @user.id} %> --
-
-                 <%= link_to "Edit/Destroy Page", user_species_path(current_user.id, species.id)  %>
-
-                <div id=<%="species_display_id_#{species.id.to_s}" %>  ></div>
-              </li>
-
-
-          <% end %>
-
-        <% end %>
-      </ul>
-
-</div>
-
-<div id="other_users_container">
-  <h2> View Gardens of Other Users: </h2>
-
-      <ul>
-        <% if @other_users.any? %>
-          <% @other_users.each do |user| %>
-            <li> <%= link_to user.name, user_gardens_path(user.id) %> </li>
-          <% end %>
-        <% else %>
-          <li> There are no other users at this time. </li>
-        <% end %>
-
-      </ul>
-
-</div>
-
-<div id="other_info_container">
-  <h2> See the <%= link_to "largest garden", gardens_largest_path %> by square feet. </h2>
-
-  <h2> See the garden with the <%= link_to "most plantings", gardens_most_plantings_path %>. </h2>
 </div>

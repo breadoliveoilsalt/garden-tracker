@@ -82,7 +82,7 @@ class Garden < ActiveRecord::Base
 
 
   def self.get_active_gardens(user_id)
-    Garden.where("user_id = ? AND active = ?", user_id, true)
+    Garden.where("user_id = ? AND active = ?", user_id, true).order(:name)
   end
 
 end
