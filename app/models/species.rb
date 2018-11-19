@@ -1,6 +1,6 @@
 class Species < ActiveRecord::Base
 
-  PRODUCT_TYPES = [
+  CATEGORIES = [
     "vegetables",
     "fruits",
     "herbs",
@@ -18,7 +18,7 @@ class Species < ActiveRecord::Base
   ]
 
   validates :name, presence: true, uniqueness: {scope: :user_id, case_sensitive: false }
-  validates :product, presence: true, inclusion: { in: Species::PRODUCT_TYPES }
+  validates :product, presence: true, inclusion: { in: Species::CATEGORIES }
   validates :sunlight, presence: true, inclusion: { in: Species::SUN_LEVELS }
   validates :user_id, presence: true, numericality: {only_integer: true}
 
