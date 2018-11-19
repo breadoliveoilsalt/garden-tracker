@@ -10,18 +10,18 @@
 
   <div></div>
 
-  <table class="ui celled table">
+  <table class="ui celled table center aligned">
     <thead>
       <tr>
-        <th>Garden Name</th>
-        <th>Upcoming Maturities</th>
+        <th class="eight wide">Garden Name</th>
+        <th class="eight wide">Upcoming Maturities</th>
       </tr>
     </thead>
     <tbody>
 
       <% @gardens.each do |garden| %>
         <tr>
-          <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id) %> </td>
+          <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id)%> </td>
           <td> <%= garden.plantings %> </td>
         </tr>
       <% end %>
