@@ -20,7 +20,7 @@ Garden.create(name: "Raised Beds", description: "Sunny, good drainage", square_f
 
 #####
 
-Species.create(name: "Tomato", category: "vegetables", sunlight: "full-sun", user_id: 1)
+Species.create(name: "Tomato", category: "vegetables", sunlight: "full-sun", user_id: 1, days_to_maturity: 90)
 
 SpeciesGarden.create(garden_id: 1, species_id: 1) # Tommy's Backyard has tomatoes
 
@@ -32,7 +32,7 @@ Species.create(name: "Hosta", category: "non-edible", sunlight: "shade", user_id
 
 SpeciesGarden.create(garden_id: 1, species_id: 3) # Tommy's Backyard has hostas
 
-Species.create(name: "Basil", category: "herbs", sunlight: "full-sun", user_id: 1)
+Species.create(name: "Basil", category: "herbs", sunlight: "full-sun", user_id: 1, days_to_maturity: 30)
 
 SpeciesGarden.create(garden_id: 2, species_id: 4) # Tommy's Front yard has grapes
 

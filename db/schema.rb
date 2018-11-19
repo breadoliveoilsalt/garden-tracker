@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20181119002456) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "days_to_maturity"
+    t.integer "days_to_maturity", default: 60
   end
 
   create_table "species_gardens", force: :cascade do |t|

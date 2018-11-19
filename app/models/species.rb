@@ -21,7 +21,7 @@ class Species < ActiveRecord::Base
   validates :category, presence: true, inclusion: { in: Species::CATEGORIES }
   validates :sunlight, presence: true, inclusion: { in: Species::SUN_LEVELS }
   validates :user_id, presence: true, numericality: {only_integer: true}
-  validates :days_to_maturity, numericality: {only_integer: true}
+  validates :days_to_maturity, numericality: {only_integer: true}, allow_nil: true
 
   belongs_to :user
   has_many :species_garden
