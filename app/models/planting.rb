@@ -34,6 +34,10 @@ class Planting < ActiveRecord::Base
   end
 
   def expected_maturity
-    self.date_planted + self.species.days_to_maturity
+    if self.species.days_to_maturity
+      self.date_planted + self.species.days_to_maturity
+    else
+      nil
+    end
   end
 end
