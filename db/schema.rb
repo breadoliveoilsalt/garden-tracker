@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(version: 20181119191416) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date_planted", default: "2018-11-20"
+    t.date "date_planted", default: "2018-11-21"
     t.date "date_harvested"
+    t.date "expected_maturity_date"
   end
 
   create_table "species", force: :cascade do |t|

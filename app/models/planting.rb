@@ -12,7 +12,7 @@ class Planting < ActiveRecord::Base
   belongs_to :species
 
   before_save :set_expected_maturity_date
-  before_update :set_expected_maturity_date
+  # before_update :set_expected_maturity_date
 
   def valid_date_planted?
     begin
@@ -45,7 +45,8 @@ class Planting < ActiveRecord::Base
   end
 
   def set_expected_maturity_date
-    if self.species.days_to_maturity
+    binding.pry
+    if self.species.days_to_maturity && self.date_planted
       self.expected_maturity_date = self.date_planted + self.species.days_to_maturity
     end
   end
