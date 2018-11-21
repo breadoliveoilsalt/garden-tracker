@@ -32,4 +32,8 @@ class Planting < ActiveRecord::Base
   def name
     self.species.name
   end
+
+  def expected_maturity
+    self.date_planted + self.species.days_to_maturity
+  end
 end
