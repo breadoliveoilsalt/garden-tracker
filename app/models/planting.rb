@@ -11,6 +11,9 @@ class Planting < ActiveRecord::Base
   belongs_to :garden
   belongs_to :species
 
+  before_save :set_expected_maturity_date
+  before_update :set_expected_maturity_date
+
   def valid_date_planted?
     begin
       Date.parse(self.date_planted_before_type_cast)
@@ -40,4 +43,15 @@ class Planting < ActiveRecord::Base
       nil
     end
   end
+
+  def set_expected_maturity_date
+    if self.species.days_to_maturity
+      self.expected_maturity_date = self.date_planted + self.species.days_to_maturity
+    end
+  end
+
+  # def self.get_upcoming_maturities(user_id)
+  #   Planting.where("user_id = ?", user_id).select { }
+  # end
+
 end
