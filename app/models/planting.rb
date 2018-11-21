@@ -12,14 +12,20 @@ class Planting < ActiveRecord::Base
   belongs_to :species
 
   def valid_date_planted?
-    if date_planted.present? && !Date.valid_date?(date_planted.year, date_planted.month, date_planted.day)
-      errors.add(:date_planted, "is not a valid date")
+    begin
+      Date.parse(self.date_planted_before_type_cast)
+    rescue
+      self.errors.add(:date_planted, "is not a valid date")
     end
   end
 
   def valid_date_harvested?
-    if date_harvested.present? && !Date.valid_date?(date_harvested.year, date_harvested.month, date_harvested.day)
-      errors.add(:date_harvested, "is not a valid date")
+    if self.date_harvested_before_type_cast
+      begin
+        Date.parse(self.date_harvested_before_type_cast)
+      rescue
+        self.errors.add(:date_harvested, "is not a valid date")
+      end
     end
   end
 
