@@ -44,6 +44,9 @@ class Planting < ActiveRecord::Base
   #   end
   # end
 
+    # Given the #before_save callback above, this method will check for relevant
+    # info and then set the expected_maturity_date column every time #save,
+    # #update, or #create is called.
   def set_expected_maturity_date
     if self.species.days_to_maturity && self.date_planted
       self.expected_maturity_date = self.date_planted + self.species.days_to_maturity

@@ -6,7 +6,7 @@
 
   <div></div>
 
-  <h1 class="ui header center aligned">Summary of Gardens with Upcoming Maturities</h1>
+  <h1 class="ui header center aligned">Summary of Active Gardens</h1>
 
   <div></div>
 
@@ -19,10 +19,24 @@
     </thead>
     <tbody>
 
-      <% @gardens.each do |garden| %>
+      <% @active_gardens.each do |garden| %>
         <tr>
           <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id)%> </td>
-          <td> <%= garden.plantings %> </td>
+          <td>
+              <% if garden.get_upcoming_maturities  %>
+
+                <div class="ui list">
+                  <% garden.get_upcoming_maturities.each do | planting |  %>
+                    <div class="item"> <%= planting.name %> -- <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %></div>
+                  <% end %>
+                </div>
+
+              <% else  %>
+
+                No upcoming maturities based on data available.
+
+              <% end %>
+          </td>
         </tr>
       <% end %>
 
