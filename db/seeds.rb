@@ -38,10 +38,12 @@ SpeciesGarden.create(garden_id: 2, species_id: 4) # Tommy's Front yard has grape
 
 ######
 
-Planting.create(quantity: 4, garden_id: 1, species_id: 1, user_id: 1, date_harvested: "2018-11-20") # 4 tomatoes in Tommy's Backyard
+Planting.create(quantity: 4, garden_id: 1, species_id: 1, user_id: 1, date_planted: "2018-11-20") # 4 tomatoes in Tommy's Backyard
 
 Planting.create(quantity: 2, garden_id: 2, species_id: 2, user_id: 1) # 2 grapes in Tommy's Front Yard
 
 Planting.create(quantity: 6, garden_id: 1, species_id: 3, user_id: 1) # 6 hostas in Tommy's Backyard
 
 Planting.create(quantity: 10, garden_id: 2, species_id: 4, user_id: 1, date_planted: "2018-07-01", date_harvested: "2018-08-30") # 10 basil plants in Tommy's Front Yard
+
+Planting.create(quantity: 15, garden_id: 1, species_id: 4, user_id: 1, date_planted: "2018-12-20")

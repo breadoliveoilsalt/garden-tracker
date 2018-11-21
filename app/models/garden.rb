@@ -85,12 +85,18 @@ class Garden < ActiveRecord::Base
     Garden.where("user_id = ? AND active = ?", user_id, true).order(:name)
   end
 
-  def has_upcoming_maturities?
-    self.plantings.any? { |planting| planting.expected_maturity > Date.current }
-  end
+  # def has_upcoming_maturities?
+  #   self.plantings.any? { |planting| planting.expected_maturity > Date.current }
+  # end
 
-  def self.get_gardens_with_upcoming_maturities(user_id)
-    Garden.get_active_gardens(user_id).select { |garden| garden.has_upcoming_maturities? }
+  def get_upcoming_maturities
+    upcoming_maturities = self.plantings.select { |planting| !planting.date_harvested && planting.expected_maturity_date && planting.expected_maturity_date > Date.current }
+    if upcoming_maturities.empty?
+      nil
+    else
+      upcoming_maturities
+    end
+    # Garden.get_active_gardens(user_id).select { |garden| garden.has_upcoming_maturities? }
   end
 
 end
