@@ -2,7 +2,15 @@ class GardensController < ApplicationController
 
   before_action :check_if_signed_in
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
-  before_action :check_permission, only: [:edit, :update, :destroy]
+  before_action :check_permission, only: [:index, :show, :edit, :update, :destroy]
+
+
+  def index
+    binding.pry
+    # UP TO HERE - HAVE TO COMPLETE CHECK PERMISSION WITH IF STATEMENT
+    @active_gardens = Garden.get_active_gardens(user)
+  end
+
 
   def new
     @garden = Garden.new
@@ -40,12 +48,12 @@ class GardensController < ApplicationController
     end
   end
 
-  def index
-    respond_to do |format|
-      format.html { render_gardens_html }
-      format.json { render_gardens_json }
-    end
-  end
+  # def index
+  #   respond_to do |format|
+  #     format.html { render_gardens_html }
+  #     format.json { render_gardens_json }
+  #   end
+  # end
 
   def show
 
@@ -137,8 +145,9 @@ class GardensController < ApplicationController
   end
 
   def check_permission
-    if @garden.user.id != current_user.id
-      flash[:message] = "Sorry, request denied. That garden belongs to another user."
+      # Not sure if need the "or" below...that would only come into play if there is simply a /gardens/:garden_id path
+    if params[:user_id] != current_user.id || @garden.user.id != current_user.id
+      flash[:message] = "Sorry, the page you are looking for belongs to another user."
       redirect_to user_path(current_user.id)
     end
   end
