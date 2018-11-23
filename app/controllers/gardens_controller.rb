@@ -6,9 +6,11 @@ class GardensController < ApplicationController
 
 
   def index
-    binding.pry
     # UP TO HERE - HAVE TO COMPLETE CHECK PERMISSION WITH IF STATEMENT
-    @active_gardens = Garden.get_active_gardens(user)
+    @user = User.find_by(id: params[:user_id])
+    @active_gardens = Garden.get_active_gardens(@user.id)
+    @inactive_gardens = Garden.get_inactive_gardens(@user.id)
+    binding.pry
   end
 
 
@@ -56,7 +58,7 @@ class GardensController < ApplicationController
   # end
 
   def show
-
+    raise params.inspect
         # Check if the route is a nested url, such as users/1/gardens/1
     if params[:user_id]
 
