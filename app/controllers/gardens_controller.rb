@@ -1,5 +1,6 @@
 class GardensController < ApplicationController
 
+  before_action :set_user
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
   before_action :check_if_signed_in
   before_action :check_permission
@@ -7,7 +8,7 @@ class GardensController < ApplicationController
 
 
   def index
-    @user = User.find_by(id: params[:user_id])
+    # @user = User.find_by(id: params[:user_id])
     @active_gardens = Garden.get_active_gardens(@user.id)
     @inactive_gardens = Garden.get_inactive_gardens(@user.id)
   end
@@ -57,20 +58,21 @@ class GardensController < ApplicationController
   # end
 
   def show
-        # Check if the user id in the url is valid and if the garden specified
-        #(and set by set_garden) belongs to the user specified in the url.
-        # If yes to all, render the show page:
-      @user = User.find_by(id: params[:user_id])
-      if @user && @user.gardens.include?(@garden)
-        respond_to do |format|
-          format.html { render :show }
-          format.json { render json: @garden }
-        end
 
-      else
-       flash[:message] = "Sorry, user or garden does not exist."
-       redirect_to user_path(current_user.id)
-      end
+      #   # Check if the user id in the url is valid and if the garden specified
+      #   #(and set by set_garden) belongs to the user specified in the url.
+      #   # If yes to all, render the show page:
+      # @user = User.find_by(id: params[:user_id])
+      # if @user && @user.gardens.include?(@garden)
+      #   respond_to do |format|
+      #     format.html { render :show }
+      #     format.json { render json: @garden }
+      #   end
+      #
+      # else
+      #  flash[:message] = "Sorry, user or garden does not exist."
+      #  redirect_to user_path(current_user.id)
+      # end
 
         # ON REVAMP -- PRETTY SURE I DON'T NEED THIS ANYMORE:
         # If not a nested route, check that #set_garden has identified an existing
@@ -85,7 +87,7 @@ class GardensController < ApplicationController
     #    flash[:message] = "Sorry, garden does not exist."
     #    redirect_to user_path(current_user.id)
     #  end
-   end
+ end
 
   def destroy
     destroy_associated_plantings(@garden)
@@ -141,6 +143,10 @@ class GardensController < ApplicationController
   def set_garden
     @garden = Garden.find_by(id: params[:id])
   end
+
+  # def set_user
+  #   @user = current_user
+  # end
 
   def check_permission
       # For handling gardens index page, where there is params[:user_id]:

@@ -18,4 +18,19 @@
 
   </div>  <!-- end conatiner for active gardens -->
 
+  <div class="ui divider divider-spacer"></div>
+
+  <div> <!-- conatiner for inactive gardens -->
+
+    <h2 class="ui header center aligned underlined"> Inactive Gardens </h2>
+
+    <% @inactive_gardens.each do |garden| %>
+
+      <%= render partial: "gardens/garden_table_short", locals: { garden: garden } %>
+
+    <% end %>
+
+  </div>  <!-- end conatiner for inactive gardens -->
+
+
 </div>
