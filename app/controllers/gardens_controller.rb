@@ -1,7 +1,7 @@
 class GardensController < ApplicationController
 
-  before_action :check_if_signed_in
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
+  before_action :check_if_signed_in
   before_action :check_permission
   # , only: [:index, :show, :edit, :update, :destroy]
 
@@ -57,10 +57,6 @@ class GardensController < ApplicationController
   # end
 
   def show
-    raise params.inspect
-        # Check if the route is a nested url, such as users/1/gardens/1
-    if params[:user_id]
-
         # Check if the user id in the url is valid and if the garden specified
         #(and set by set_garden) belongs to the user specified in the url.
         # If yes to all, render the show page:
@@ -76,18 +72,19 @@ class GardensController < ApplicationController
        redirect_to user_path(current_user.id)
       end
 
+        # ON REVAMP -- PRETTY SURE I DON'T NEED THIS ANYMORE:
         # If not a nested route, check that #set_garden has identified an existing
         # garden and show that garden if so:
-    elsif @garden
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @garden }
-      end
+    # elsif @garden
+    #   respond_to do |format|
+    #     format.html { render :show }
+    #     format.json { render json: @garden }
+    #   end
 
-    else
-       flash[:message] = "Sorry, garden does not exist."
-       redirect_to user_path(current_user.id)
-     end
+    # else
+    #    flash[:message] = "Sorry, garden does not exist."
+    #    redirect_to user_path(current_user.id)
+    #  end
    end
 
   def destroy
@@ -153,9 +150,10 @@ class GardensController < ApplicationController
     end
       # For handling garden CRUD pages (other than index), where there are params[:user_id] and then params[:id]
     if params[:id]
-       @garden.user.id != current_user.id
+      if @garden.user.id != current_user.id
        flash[:message] = "Sorry, the page you are looking for belongs to another user."
        redirect_to user_path(current_user.id)
+     end
     end
   end
 

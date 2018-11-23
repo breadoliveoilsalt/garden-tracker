@@ -25,19 +25,8 @@
         <tr>
           <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id)%> </td>
           <td>
-              <% if garden.get_upcoming_maturities  %>
+              <%= render partial: "gardens/upcoming_maturities_short_list", locals: { garden: garden } %>
 
-                <div class="ui list">
-                  <% garden.get_upcoming_maturities.each do | planting |  %>
-                    <div class="item"> <%= planting.name %> -- <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %></div>
-                  <% end %>
-                </div>
-
-              <% else  %>
-
-                No upcoming maturities based on data available.
-
-              <% end %>
           </td>
         </tr>
       <% end %>

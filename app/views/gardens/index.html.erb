@@ -1,24 +1,35 @@
 <div class="ui container">
 
-
   <div></div>
 
-  <h1 class="ui header center aligned"><%= @user.name %>'s Gardens</h1>
+  <h1 class="ui header center aligned"> <%= @user.name %>'s Gardens </h1>
 
   <div class="ui divider divider-spacer"></div>
 
   <div> <!-- conatiner for active gardens -->
+    <h2 class="ui header center aligned underlined"> Active Gardens </h2>
 
-    <h2 class="ui header center aligned underlined"> Active Gardens</h2>
+    <% @active_gardens.each do |garden| %>
 
-    <table class="ui celled table center aligned">
-      <thead>
-        <tr>
-          <th class="eight wide">Garden Name</th>
-          <th class="eight wide">Upcoming Maturities</th>
-        </tr>
-      </thead>
-      <tbody>
+
+      <table class="ui celled table center aligned">
+        <thead>
+          <tr>
+            <th colspan="3">
+              <h3> <%= garden.name %></h3>
+              <p class="garden-sub-menu-item"> <%= link_to "All Details", user_garden_path(@user.id, garden.id)%> </p>
+              <p class="garden-sub-menu-item"> <%= link_to "Edit/Update", user_garden_path(@user.id, garden.id)%> </p>
+              <p class="garden-sub-menu-item"> <%= link_to "Delete", user_garden_path(@user.id, garden.id)%> </p>
+            </th>
+          </tr>
+          <tr>
+            <th> Description </th>
+            <th> Square Feet </th>
+            <th> Summary of Upcoming Maturities </th>
+          </tr>
+        </thead>
+
+    <% end %>
 
         <% @active_gardens.each do |garden| %>
           <tr>
@@ -27,7 +38,7 @@
                 <% if garden.get_upcoming_maturities  %>
 
                   <div class="ui list">
-                    <% garden.get_upcoming_maturities.each do | planting |  %>
+                    <% garden.get_upcoming_maturities[0..2].each do | planting |  %>
                       <div class="item"> <%= planting.name %> -- <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %></div>
                     <% end %>
                   </div>
