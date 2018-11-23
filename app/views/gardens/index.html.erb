@@ -7,95 +7,15 @@
   <div class="ui divider divider-spacer"></div>
 
   <div> <!-- conatiner for active gardens -->
+
     <h2 class="ui header center aligned underlined"> Active Gardens </h2>
 
     <% @active_gardens.each do |garden| %>
 
-
-      <table class="ui celled table center aligned">
-        <thead>
-          <tr>
-            <th colspan="3">
-              <h3> <%= garden.name %></h3>
-              <p class="garden-sub-menu-item"> <%= link_to "All Details", user_garden_path(@user.id, garden.id)%> </p>
-              <p class="garden-sub-menu-item"> <%= link_to "Edit/Update", user_garden_path(@user.id, garden.id)%> </p>
-              <p class="garden-sub-menu-item"> <%= link_to "Delete", user_garden_path(@user.id, garden.id)%> </p>
-            </th>
-          </tr>
-          <tr>
-            <th> Description </th>
-            <th> Square Feet </th>
-            <th> Summary of Upcoming Maturities </th>
-          </tr>
-        </thead>
+      <%= render partial: "gardens/garden_table_short", locals: { garden: garden } %>
 
     <% end %>
 
-        <% @active_gardens.each do |garden| %>
-          <tr>
-            <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id)%> </td>
-            <td>
-                <% if garden.get_upcoming_maturities  %>
-
-                  <div class="ui list">
-                    <% garden.get_upcoming_maturities[0..2].each do | planting |  %>
-                      <div class="item"> <%= planting.name %> -- <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %></div>
-                    <% end %>
-                  </div>
-
-                <% else  %>
-
-                  No upcoming maturities based on data available.
-
-                <% end %>
-            </td>
-          </tr>
-        <% end %>
-
-      </tbody>
-    </table>
-
   </div>  <!-- end conatiner for active gardens -->
-
-  <div class="ui divider divider-spacer"></div>
-
-  <div> <!-- conatiner for inactive gardens -->
-
-    <h2 class="ui header center aligned underlined"> Inactive Gardens</h2>
-
-    <table class="ui celled table center aligned">
-      <thead>
-        <tr>
-          <th class="eight wide">Garden Name</th>
-          <th class="eight wide">Upcoming Maturities</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <% @inactive_gardens.each do |garden| %>
-          <tr>
-            <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id)%> </td>
-            <td>
-                <% if garden.get_upcoming_maturities  %>
-
-                  <div class="ui list">
-                    <% garden.get_upcoming_maturities.each do | planting |  %>
-                      <div class="item"> <%= planting.name %> -- <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %></div>
-                    <% end %>
-                  </div>
-
-                <% else  %>
-
-                  No upcoming maturities based on data available.
-
-                <% end %>
-            </td>
-          </tr>
-        <% end %>
-
-      </tbody>
-    </table>
-
-  </div> <!-- end conatiner for inactive gardens -->
 
 </div>
