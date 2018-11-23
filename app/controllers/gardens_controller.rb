@@ -2,15 +2,14 @@ class GardensController < ApplicationController
 
   before_action :check_if_signed_in
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
-  before_action :check_permission, only: [:index, :show, :edit, :update, :destroy]
+  before_action :check_permission
+  # , only: [:index, :show, :edit, :update, :destroy]
 
 
   def index
-    # UP TO HERE - HAVE TO COMPLETE CHECK PERMISSION WITH IF STATEMENT
     @user = User.find_by(id: params[:user_id])
     @active_gardens = Garden.get_active_gardens(@user.id)
     @inactive_gardens = Garden.get_inactive_gardens(@user.id)
-    binding.pry
   end
 
 
@@ -147,10 +146,16 @@ class GardensController < ApplicationController
   end
 
   def check_permission
-      # Not sure if need the "or" below...that would only come into play if there is simply a /gardens/:garden_id path
-    if params[:user_id] != current_user.id || @garden.user.id != current_user.id
+      # For handling gardens index page, where there is params[:user_id]:
+    if params[:user_id].to_i != current_user.id
       flash[:message] = "Sorry, the page you are looking for belongs to another user."
       redirect_to user_path(current_user.id)
+    end
+      # For handling garden CRUD pages (other than index), where there are params[:user_id] and then params[:id]
+    if params[:id]
+       @garden.user.id != current_user.id
+       flash[:message] = "Sorry, the page you are looking for belongs to another user."
+       redirect_to user_path(current_user.id)
     end
   end
 
