@@ -2,30 +2,82 @@
   <%= flash_message %>
 </div>
 
-<div class="button_display">
-  <%= button_tag "Next Garden", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id} %></h1>
-</div>
+<div class="ui container center aligned">
 
-    <h1> <%= @garden.name %> </h1>
+    <div>
 
-    <h2> Description: <%= @garden.description %> </h2>
+        <h1 class="underlined"> <%= @garden.name %> </h1>
+          <p class="garden-sub-menu-item bold"> <%= link_to "Edit/Update", user_garden_path(@user.id, @garden.id)%> </p>
+          <p class="garden-sub-menu-item bold"> <%= link_to "Delete", user_garden_path(@user.id, @garden.id)%> </p>
 
-    <h2> Square Feet: <%= @garden.square_feet %> </h2>
+          <div class="button_display">
+            <%= button_tag "Jump to Prior Garden Created", id: "prior_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id}, class: "ui button tiny wide-spacing" %>
 
-    <h3> Plantings: </h3>
+            <%= button_tag "Jump to Next Garden Created", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id}, class: "ui button tiny wide-spacing" %>
+          </div>
 
-      <ul>
 
-        <% if @garden.plantings.any? %>
-          <% @garden.plantings.each do |planting| %>
-            <li> <%= link_to planting.name, user_species_path(current_user.id, planting.species.id) %> </li>
-              <ul>
-                <li> Quantity: <%= planting.quantity %></li>
-              </ul>
-          <% end %>
-        <% else %>
-            <li> There are no plantings yet. </li>
-        <% end %>
-      </ul>
+        <div class="ui divider divider-spacer"></div>
+
+        <h2> Currently Active: <%= @garden.active ? "Yes" : "No" %> </h2>
+
+        <div class="ui divider divider-spacer"></div>
+
+        <h2> Square Feet: <%= @garden.square_feet %> </h2>
+
+        <div class="ui divider divider-spacer"></div>
+
+        <h2> Description: </h2>
+
+        <div class="ui container text">
+          <h3> <%= @garden.description %> </h3>
+        </div>
+
+        <div class="ui divider divider-spacer"></div>
+
+
+        <h2> Plantings: </h2>
+
+              <table class="ui celled table center aligned">
+                <thead>
+                  <tr>
+                    <th> Name </th>
+                    <th> Quantity </th>
+                    <th> Date Planted </th>
+                    <th> Harvested </th>
+                    <th> Expected Maturity Date </th>
+                  <tr>
+                </thead>
+
+              <tbody>
+
+                <% @garden.plantings.each do |planting| %>
+                  <tr>
+
+                    <td> <%= planting.name %> </td>
+                    <td> <%= planting.quantity %> </td>
+                    <td> <%= planting.date_planted.strftime("%m/%d/%Y")%></td>
+                    <td> <%= planting.date_harvested ? planting.date_planted.strftime("%m/%d/%Y") : "No" %> </td>
+                    <td> <% if planting.date_harvested %>
+                            N/A
+                          <% elsif planting.expected_maturity_date %>
+                            <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %>
+                          <% else %>
+                            Not available.
+                          <% end %>
+                        </td>
+
+
+                  </tr>
+
+                <% end %>
+
+              </tbody>
+
+              </table>
+
+
+
+    </div>
 
 </div>
