@@ -44,9 +44,9 @@ a.indented {
   text-indent: 40px;
 }
 
-.garden_button {
+/* .garden_button {
   background-color: pink;
-}
+} */
 
 .hidden {
   visibility: hidden;
@@ -70,7 +70,7 @@ a.indented {
 
 
 .divider.divider-spacer {
-    margin: 2rem 0rem;
+  margin: 2rem 0rem;
 }
 
 p.garden-sub-menu-item {

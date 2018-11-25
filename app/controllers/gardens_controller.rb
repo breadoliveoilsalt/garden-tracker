@@ -23,15 +23,14 @@ class GardensController < ApplicationController
       # that when a new garden is created, errors appear when non-valid data appears in the
       # nested form for plantings. README_gardens_controller_with_explanations walks through
       # the choices here and explains them.
-    @garden = Garden.create(garden_params)
-    if @garden.id && @garden.errors.details != {}
-      @garden.destroy
-      render :new
-    elsif @garden.errors.details != {}
-      render :new
-    else
+    @garden = current_user.gardens.build(garden_params)
+    # binding.pry
+    #@garden = Garden.create(garden_params)
+    if @garden.save
       flash[:message] = "#{@garden.name} was added to your list of gardens."
-      redirect_to garden_path(@garden.id)
+      redirect_to user_garden_path(@user.id, @garden.id)
+    else
+      render :new
     end
   end
 
@@ -137,7 +136,7 @@ class GardensController < ApplicationController
   private
 
   def garden_params
-    params.require(:garden).permit(:name, :description, :square_feet, :user_id, plantings_attributes:[:id, :species_id, :quantity, :user_id])
+    params.require(:garden).permit(:name, :active, :square_feet, :description, :user_id, plantings_attributes:[:id, :species_id, :quantity, :user_id])
   end
 
   def set_garden
