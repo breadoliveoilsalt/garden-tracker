@@ -4,6 +4,8 @@
 
   <h1 class="ui header center aligned"> <%= @user.name %>'s Gardens </h1>
 
+  <p class="garden-sub-menu-item bold"> <%= link_to "Add a New Garden", user_garden_path(@user.id, @garden.id)%> </p>
+
   <div class="ui divider divider-spacer"></div>
 
   <div> <!-- conatiner for active gardens -->
