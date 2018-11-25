@@ -1,34 +1,49 @@
-<h1> Edit Garden: <%= @garden.name %> </h1>
+<div class="ui container center aligned">
+  <%= display_any_errors(@garden) %>
+</div>
 
-<%= display_any_errors(@garden) %>
-
-<%= form_for @garden do |f| %>
-
-  <%= render partial: "gardens/form", locals: { f: f } %>
-
-  <div>
-    Edit existing plantings below or <%= link_to "add a new planting", new_garden_planting_path(@garden.id) %>:
+<div class="ui container center aligned">
 
     <div>
-      <%= f.fields_for :plantings do | planting_attrib | %>
 
-        <div>
+        <h1 class="underlined"> Edit Garden </h1>
 
-          <%= planting_attrib.hidden_field :user_id, :value => current_user.id %>
+        <div class="ui divider divider-spacer"></div>
 
-          <%= render partial: 'plantings/form', locals: {planting_attrib: planting_attrib} %>
+        <div class="ui big form center aligned">
 
-          <%= link_to "Click here to delete planting", garden_planting_path(@garden.id, planting_attrib.object.id), method: :delete, data: { confirm: 'Are you sure you want to delete this planting?' }%>
+            <%= form_for [@user, @garden] do |f| %>
+
+                <%#  Do I need this? %>
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+
+                <div class="six wide field centered-form-field">
+                  <%= f.label :name, "Garden Name: ", class: "ui center aligned" %>
+                  <%= f.text_field :name %>
+                </div>
+
+                <div class="six wide field centered-form-field">
+                  <%= f.label :active, "Active? " %>
+                  <%= f.check_box :active, {}, checked_value = 1, unchecked_value = 0 %>
+                </div>
+
+                <div class="two wide field centered-form-field" >
+                  <%= f.label :square_feet, "Square Feet: " %>
+                  <%= f.text_field :square_feet %>
+                </div>
+
+                <div class="eight wide field centered-form-field">
+                  <%= f.label :description, "Description (optional): " %>
+                  <%= f.text_area :description %>
+                </div>
+
+                <div>
+                  <%= f.submit "Submit", class: "ui button" %>
+                </div>
+
+              <% end %>
+
+            </div>
 
         </div>
-
-      <% end %>
-
-    </div>
-  </div>
-
-  <div>
-    <%= f.submit "Submit" %>
-  </div>
-
-<% end %>
+</div>

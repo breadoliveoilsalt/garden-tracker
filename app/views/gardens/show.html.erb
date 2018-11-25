@@ -6,14 +6,13 @@
 
     <div>
 
-
         <h1 class="underlined"> <%= @garden.name %></h1>
 
         <div class="ui four item menu stackable garden-show-menu" id="garden-button-display">
           <p class="garden-sub-menu-item"><%= button_tag "<< Jump to Prior Garden Created", id: "prior_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id}, class: "ui button tiny wide-spacing" %></p>
 
-          <p class="garden-sub-menu-item bold"> <%= link_to "Edit/Update", user_garden_path(@user.id, @garden.id)%> </p>
-          <p class="garden-sub-menu-item bold"> <%= link_to "Delete", user_garden_path(@user.id, @garden.id)%> </p>
+          <p class="garden-sub-menu-item bold"> <%= link_to "Edit/Update", edit_user_garden_path(@user.id, @garden.id)%> </p>
+          <p class="garden-sub-menu-item bold"> <%= link_to "Delete", user_garden_path(@user.id, @garden.id), method: :delete%> </p>
 
           <p class="garden-sub-menu-item"><%= button_tag "Jump to Next Garden Created >>", id: "next_garden_button", data: {garden_id: @garden.id, user_id: @garden.user_id}, class: "ui button tiny wide-spacing" %></p>
         </div>

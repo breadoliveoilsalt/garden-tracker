@@ -8,24 +8,16 @@ class GardensController < ApplicationController
 
 
   def index
-    # @user = User.find_by(id: params[:user_id])
     @active_gardens = Garden.get_active_gardens(@user.id)
     @inactive_gardens = Garden.get_inactive_gardens(@user.id)
   end
-
 
   def new
     @garden = Garden.new
   end
 
   def create
-      # Some of the patterning under #create is a bit non-standard.  This was done to ensure
-      # that when a new garden is created, errors appear when non-valid data appears in the
-      # nested form for plantings. README_gardens_controller_with_explanations walks through
-      # the choices here and explains them.
     @garden = current_user.gardens.build(garden_params)
-    # binding.pry
-    #@garden = Garden.create(garden_params)
     if @garden.save
       flash[:message] = "#{@garden.name} was added to your list of gardens."
       redirect_to user_garden_path(@user.id, @garden.id)
@@ -38,16 +30,25 @@ class GardensController < ApplicationController
   end
 
   def update
-      # The logic here was done to ensure that errors appear when non-valid data is submitted
-      # in a nested edit form.  See README_gardens_controller_with_explanations for explanations.
-    if !garden_params[:plantings_attributes]
-      @garden.update(garden_params)
-      test_update_and_redirect
+    if @garden.update(garden_params)
+      flash[:message] = "#{@garden.name} was updated."
+      redirect_to user_garden_path(@user.id, @garden.id)
     else
-      @garden.custom_updater_for_nested_params(garden_params)
-      test_update_and_redirect
+      render :edit
     end
   end
+
+  # def update
+  #     # The logic here was done to ensure that errors appear when non-valid data is submitted
+  #     # in a nested edit form.  See README_gardens_controller_with_explanations for explanations.
+  #   if !garden_params[:plantings_attributes]
+  #     @garden.update(garden_params)
+  #     test_update_and_redirect
+  #   else
+  #     @garden.custom_updater_for_nested_params(garden_params)
+  #     test_update_and_redirect
+  #   end
+  # end
 
   # def index
   #   respond_to do |format|
@@ -166,14 +167,14 @@ class GardensController < ApplicationController
     SpeciesGarden.where(garden_id: @garden.id).destroy_all
   end
 
-  def test_update_and_redirect
-    if @garden.errors.messages != {}
-      render :edit
-    else
-      flash[:message] = "#{@garden.name} was updated."
-      redirect_to garden_path(@garden.id)
-    end
-  end
+  # def test_update_and_redirect
+  #   if @garden.errors.messages != {}
+  #     render :edit
+  #   else
+  #     flash[:message] = "#{@garden.name} was updated."
+  #     redirect_to garden_path(@garden.id)
+  #   end
+  # end
 
   def render_gardens_html
         # Check if the url is a nested url, such as users/1/gardens:
