@@ -68,6 +68,9 @@ a.indented {
   font-weight: bold;
 }
 
+.centered {
+  text-align: center;
+}
 
 .divider.divider-spacer {
   margin: 2rem 0rem;

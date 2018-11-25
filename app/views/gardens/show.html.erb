@@ -53,33 +53,35 @@
 
               <tbody>
 
-                <% @garden.plantings.each do |planting| %>
-                  <tr>
+                <% if @garden.plantings.empty? %>
+                    <tr>
+                      <td colspan="5">None.</td>
+                    </tr>
+                <% else %>
+                    <% @garden.plantings.each do |planting| %>
+                      <tr>
 
-                    <td> <%= planting.name %> </td>
-                    <td> <%= planting.quantity %> </td>
-                    <td> <%= planting.date_planted.strftime("%m/%d/%Y")%></td>
-                    <td> <%= planting.date_harvested ? planting.date_planted.strftime("%m/%d/%Y") : "No" %> </td>
-                    <td> <% if planting.date_harvested %>
-                            N/A
-                          <% elsif planting.expected_maturity_date %>
-                            <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %>
-                          <% else %>
-                            Not available.
-                          <% end %>
-                        </td>
+                        <td> <%= planting.name %> </td>
+                        <td> <%= planting.quantity %> </td>
+                        <td> <%= planting.date_planted.strftime("%m/%d/%Y")%></td>
+                        <td> <%= planting.date_harvested ? planting.date_planted.strftime("%m/%d/%Y") : "No" %> </td>
+                        <td> <% if planting.date_harvested %>
+                                N/A
+                              <% elsif planting.expected_maturity_date %>
+                                <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %>
+                              <% else %>
+                                Not available.
+                              <% end %>
+                            </td>
 
 
-                  </tr>
+                      </tr>
 
+                    <% end %>
                 <% end %>
-
               </tbody>
 
-              </table>
-
-
-
+            </table>
     </div>
 
 </div>
