@@ -4,7 +4,7 @@
     <tr>
       <th colspan="3">
         <h3> <%= garden.name %></h3>
-        <p class="garden-sub-menu-item"> <%= link_to "All Details", user_garden_path(@user.id, garden.id)%> </p>
+        <p class="garden-sub-menu-item"> <%= link_to "See Details", user_garden_path(@user.id, garden.id)%> </p>
         <p class="garden-sub-menu-item"> <%= link_to "Edit/Update", user_garden_path(@user.id, garden.id)%> </p>
         <p class="garden-sub-menu-item"> <%= link_to "Delete", user_garden_path(@user.id, garden.id)%> </p>
       </th>

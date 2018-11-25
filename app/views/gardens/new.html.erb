@@ -17,22 +17,22 @@
                 <%#  Do I need this? %>
                 <%= f.hidden_field :user_id, :value => current_user.id %>
 
-                <div class="six wide field">
+                <div class="six wide field centered-form-field">
                   <%= f.label :name, "Garden Name: ", class: "ui center aligned" %>
                   <%= f.text_field :name %>
                 </div>
 
-                <div class="six wide field">
+                <div class="six wide field centered-form-field">
                   <%= f.label :active, "Active? " %>
-
+                  <%= f.check_box :active, {}, checked_value = 1, unchecked_value = 0 %>
                 </div>
 
-                <div class="two wide field">
+                <div class="two wide field centered-form-field" >
                   <%= f.label :square_feet, "Square Feet: " %>
                   <%= f.text_field :square_feet %>
                 </div>
 
-                <div class="eight wide field">
+                <div class="eight wide field centered-form-field">
                   <%= f.label :description, "Description (optional): " %>
                   <%= f.text_area :description %>
                 </div>

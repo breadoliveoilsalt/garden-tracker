@@ -44,6 +44,14 @@ a.indented {
   text-indent: 40px;
 }
 
+/* form div.centered-form-field {
+  margin: 0rem auto;
+}
+ */
+/* .centered-form-field {
+  display: inline-block;
+  clear: right;
+} */
 /* .garden_button {
   background-color: pink;
 } */
@@ -70,6 +78,10 @@ a.indented {
 
 .centered {
   text-align: center;
+}
+
+.ui.form .field.centered-form-field {
+  margin: 1.5rem auto;
 }
 
 .divider.divider-spacer {
