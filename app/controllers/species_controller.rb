@@ -1,12 +1,12 @@
 class SpeciesController < ApplicationController
 
+  before_action :check_if_signed_in
   before_action :set_user
   before_action :set_species, only: [:show, :edit, :update, :destroy]
-  before_action :check_if_signed_in
-  before_action :check_permission
+  # before_action :check_permission, only: [:show, :edit, :update, :destroy]
+  before_action -> { check_permission(@species)} , only: [:show, :edit, :update, :destroy]
 
   def index
-    @user = current_user
     @species = current_user.species
   end
 
@@ -62,18 +62,21 @@ class SpeciesController < ApplicationController
     @species = Species.find_by(id: params[:id])
   end
 
-  def check_permission
-    if params[:user_id].to_i != current_user.id
-      flash[:message] = "Sorry, the page you are looking for belongs to another user."
-      redirect_to user_path(current_user.id)
-    end
-    if params[:id]
-      if @species.user.id != current_user.id
-       flash[:message] = "Sorry, the page you are looking for belongs to another user."
-       redirect_to user_path(current_user.id)
-     end
-    end
-  end
+
+
+
+  # def check_permission
+  #   if params[:user_id].to_i != current_user.id
+  #     flash[:message] = "Sorry, the page you are looking for belongs to another user."
+  #     redirect_to user_path(current_user.id)
+  #   elsif !@species
+  #     flash[:message] = "Sorry, the page you are looking for does not appear to exist."
+  #     redirect_to user_path(current_user.id)
+  #   elsif @species.user.id != current_user.id
+  #    flash[:message] = "Sorry, the page you are looking for belongs to another user."
+  #    redirect_to user_path(current_user.id)
+  #   end
+  # end
 
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(species_id: @species.id).destroy_all

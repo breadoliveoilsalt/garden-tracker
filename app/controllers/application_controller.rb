@@ -35,4 +35,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_permission(object)
+    if params[:user_id].to_i != current_user.id
+      flash[:message] = "Sorry, the page you are looking for belongs to another user."
+      redirect_to user_path(current_user.id)
+    elsif !object
+      flash[:message] = "Sorry, the page you are looking for does not appear to exist."
+      redirect_to user_path(current_user.id)
+    elsif object.user.id != current_user.id
+     flash[:message] = "Sorry, the page you are looking for belongs to another user."
+     redirect_to user_path(current_user.id)
+    end
+  end
+
 end

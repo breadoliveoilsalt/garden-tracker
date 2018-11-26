@@ -1,15 +1,13 @@
 class GardensController < ApplicationController
 
+  before_action :check_if_signed_in
   before_action :set_user
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
-  before_action :check_if_signed_in
-  before_action :check_permission
-  # , only: [:index, :show, :edit, :update, :destroy]
-
+  before_action -> { check_permission(@garden) }, only: [:show, :edit, :update, :destroy]
 
   def index
-    @active_gardens = Garden.get_active_gardens(@user.id)
-    @inactive_gardens = Garden.get_inactive_gardens(@user.id)
+    @active_gardens = Garden.get_active_gardens(current_user.id)
+    @inactive_gardens = Garden.get_inactive_gardens(current_user.id)
   end
 
   def new
@@ -148,20 +146,20 @@ class GardensController < ApplicationController
   #   @user = current_user
   # end
 
-  def check_permission
-      # For handling gardens index page, where there is params[:user_id]:
-    if params[:user_id].to_i != current_user.id
-      flash[:message] = "Sorry, the page you are looking for belongs to another user."
-      redirect_to user_path(current_user.id)
-    end
-      # For handling garden CRUD pages (other than index), where there are params[:user_id] and then params[:id]
-    if params[:id]
-      if @garden.user.id != current_user.id
-       flash[:message] = "Sorry, the page you are looking for belongs to another user."
-       redirect_to user_path(current_user.id)
-     end
-    end
-  end
+  # def check_permission
+  #     # For handling gardens index page, where there is params[:user_id]:
+  #   if params[:user_id].to_i != current_user.id
+  #     flash[:message] = "Sorry, the page you are looking for belongs to another user."
+  #     redirect_to user_path(current_user.id)
+  #   end
+  #     # For handling garden CRUD pages (other than index), where there are params[:user_id] and then params[:id]
+  #   if params[:id]
+  #     if @garden.user.id != current_user.id
+  #      flash[:message] = "Sorry, the page you are looking for belongs to another user."
+  #      redirect_to user_path(current_user.id)
+  #    end
+  #   end
+  # end
 
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(garden_id: @garden.id).destroy_all

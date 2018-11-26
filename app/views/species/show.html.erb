@@ -17,7 +17,7 @@
 
         <div class="ui divider divider-spacer"></div>
 
-        <h2> Category: <%= @species.catgory %> </h2>
+        <h2> Category: <%= @species.category %> </h2>
 
         <div class="ui divider divider-spacer"></div>
 
@@ -25,20 +25,21 @@
 
         <div class="ui divider divider-spacer"></div>
 
-        <h2> Days to Maturity: <%= @species.days_to_maturity %> </h2>
+        <h2> Days to Maturity: <%= @species.days_to_maturity ? @species.days_to_maturity : "Not yet provided" %> </h2>
 
         <div class="ui divider divider-spacer"></div>
 
         <h2> Gardens where this species appears: </h2>
 
-            <ul>
+            <div class="ui list"
+
               <% if @species.gardens.any? %>
                 <% @species.gardens.each do |garden| %>
-                  <li> <%= link_to garden.name, garden_path(garden.id) %></li>
+                    <div class="item"> <%= link_to garden.name, user_garden_path(@user.id, garden.id) %></div>
                 <% end %>
               <% else %>
-                <li> This species has not been added to any gardens yet.</li>
+                    <div class="item"> This species has not been added to any gardens. </div>
               <% end %>
-            </ul>
+            </div>
 
         </div>
