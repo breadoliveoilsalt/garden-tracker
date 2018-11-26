@@ -1,9 +1,9 @@
 class SpeciesController < ApplicationController
 
-  before_action :check_if_signed_in
+  before_action :set_user
   before_action :set_species, only: [:show, :edit, :update, :destroy]
-  before_action :check_permission, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_if_signed_in
+  before_action :check_permission
 
   def index
     @user = current_user
@@ -38,10 +38,10 @@ class SpeciesController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html { render :show }
-      format.json { render json: @species }
-    end
+    # respond_to do |format|
+    #   format.html { render :show }
+    #   format.json { render json: @species }
+    # end
   end
 
   def destroy
@@ -63,9 +63,15 @@ class SpeciesController < ApplicationController
   end
 
   def check_permission
-    if !@species || @species.user.id != current_user.id
-      flash[:message] = "Sorry, that species belongs to another user."
+    if params[:user_id].to_i != current_user.id
+      flash[:message] = "Sorry, the page you are looking for belongs to another user."
       redirect_to user_path(current_user.id)
+    end
+    if params[:id]
+      if @species.user.id != current_user.id
+       flash[:message] = "Sorry, the page you are looking for belongs to another user."
+       redirect_to user_path(current_user.id)
+     end
     end
   end
 
