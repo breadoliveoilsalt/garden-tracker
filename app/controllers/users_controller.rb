@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action :check_if_signed_in, only: [:show]
   before_action :set_user, only: [:show]
+  before_action :check_if_signed_in, only: [:show]
+  before_action :check_permission, only: [:show]
 
   def new
     if signed_in?
@@ -61,5 +62,12 @@ class UsersController < ApplicationController
 
     def current_user_show_page
       current_user.id == params[:id].to_i
+    end
+
+    def check_permission
+      if params[:id].to_i != current_user.id
+        flash[:message] = "Sorry, the page you are looking for belongs to another user."
+        redirect_to user_path(current_user.id)
+      end
     end
 end
