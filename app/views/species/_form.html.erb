@@ -7,13 +7,18 @@
   </div>
 
   <div>
-    <%= f.label :product, "Produces: " %>
-    <%= f.select :product, Species::PRODUCT_TYPES %>
+    <%= f.label :category, "Category: " %>
+    <%= f.select :category, Species::CATEGORIES %>
   </div>
 
   <div>
     <%= f.label :sunlight, "Sun Level: " %>
     <%= f.select :sunlight, Species::SUN_LEVELS %>
+  </div>
+
+  <div>
+    <%= f.label :days_to_maturity, "Days to Maturity: " %>
+    <%= f.text_field :days_to_maturity %> 
   </div>
 
   <div>

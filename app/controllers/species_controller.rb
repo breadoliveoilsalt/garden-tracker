@@ -54,7 +54,7 @@ class SpeciesController < ApplicationController
   private
 
   def species_params
-    params.require(:species).permit(:name, :product, :sunlight)
+    params.require(:species).permit(:name, :product, :sunlight, :days_to_maturity)
   end
 
   def set_species
