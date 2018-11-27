@@ -4,9 +4,9 @@
     <tr>
       <th colspan="3">
         <h3> <%= garden.name %></h3>
-        <p class="garden-sub-menu-item"> <%= link_to "See Details", user_garden_path(@user.id, garden.id)%> </p>
-        <p class="garden-sub-menu-item"> <%= link_to "Edit/Update", user_garden_path(@user.id, garden.id)%> </p>
-        <p class="garden-sub-menu-item"> <%= link_to "Delete", user_garden_path(@user.id, garden.id)%> </p>
+        <p class="garden-sub-menu-item"> <%= link_to "See Details", user_garden_path(current_user.id, garden.id)%> </p>
+        <p class="garden-sub-menu-item bold"> <%= link_to "Edit/Update", edit_user_garden_path(current_user.id, garden.id)%> </p>
+        <p class="garden-sub-menu-item bold"> <%= link_to "Delete", user_garden_path(current_user.id, garden.id), method: :delete, data: { confirm: 'Are you sure you want to delete this garden (and all of its plantings)?' }%> </p>
       </th>
     </tr>
     <tr>
