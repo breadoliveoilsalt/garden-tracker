@@ -15,6 +15,12 @@ class SpeciesController < ApplicationController
 
   def create
     @species = current_user.species.build(species_params)
+    if @species.save
+      flash[:message] = "#{@species.name} was added to your list of species."
+      redirect_to user_species_path(current_user.id, @species.id)
+    else
+      render :new
+    end
 
     # if @species.save
     #   render json: @species, status: 201
