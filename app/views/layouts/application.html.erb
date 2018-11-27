@@ -17,13 +17,13 @@
 
           <h1 class="ui header center aligned" style="margin-top:2em">Garden Tracker</h1>
 
-          <p class="ui text container center aligned"> Welcome back, <%= @user.name %>.  When you're ready, <%= link_to "sign out here", signout_path, method: :delete %>.</p>
+          <p class="ui text container center aligned"> Welcome back, <%= current_user.name %>.  When you're ready, <%= link_to "sign out here", signout_path, method: :delete %>.</p>
 
         <!-- navbar -->
           <div class="ui three item menu stackable">
-              <a class="ui item top_menu" href="/users/<%=@user.id%>">Home</a>
-              <a class="ui item top_menu" href="/users/<%=@user.id%>/gardens">Gardens</a>
-              <a class="ui item top_menu" href="/users/<%=@user.id%>/species" >Species</a>
+              <a class="ui item top_menu" href="/users/<%=current_user.id%>">Home</a>
+              <a class="ui item top_menu" href="/users/<%=current_user.id%>/gardens">Gardens</a>
+              <a class="ui item top_menu" href="/users/<%=current_user.id%>/species" >Species</a>
           </div>
         <!-- navbar end -->
 

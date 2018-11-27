@@ -1,7 +1,6 @@
 class GardensController < ApplicationController
 
   before_action :check_if_signed_in
-  before_action :set_user
   before_action :set_garden, only: [:show, :edit, :update, :destroy]
   before_action -> { check_permission(@garden) }, only: [:show, :edit, :update, :destroy]
 
@@ -18,7 +17,7 @@ class GardensController < ApplicationController
     @garden = current_user.gardens.build(garden_params)
     if @garden.save
       flash[:message] = "#{@garden.name} was added to your list of gardens."
-      redirect_to user_garden_path(@user.id, @garden.id)
+      redirect_to user_garden_path(current_user.id, @garden.id)
     else
       render :new
     end
@@ -30,7 +29,7 @@ class GardensController < ApplicationController
   def update
     if @garden.update(garden_params)
       flash[:message] = "#{@garden.name} was updated."
-      redirect_to user_garden_path(@user.id, @garden.id)
+      redirect_to user_garden_path(current_user.id, @garden.id)
     else
       render :edit
     end
