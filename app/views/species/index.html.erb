@@ -1,13 +1,24 @@
+<div class="ui container">
 
-<h1> <%= @user.name %>'s Species </h1>
+  <div></div>
 
-<ul>
-  <% if @species.any?  %>
-      <% @species.each do |s| %>
-            <li> <%= link_to s.name, user_species_path(@user.id, s.id) %> </li>
-       <% end  %>
-   <% else %>
-      <li> There are no species created yet. </li>
+  <div class="ui container center aligned">
+      <p class="ui center aligned garden-sub-menu-item medium-font bold"> <%= link_to "Add a New Species", new_user_species_path %> </p>
+  </div>
+
+  <h1 class="ui header center aligned"> <%= current_user.name %>'s Species </h1>
+
+  <div class="ui divider divider-spacer"></div>
+
+  <div class="ui list">
+
+    <% if @species.any? %>
+      <% @species.each do |species| %>
+          <div class="ui item centered medium-font"> <%= link_to species.name, user_species_path(current_user.id, species.id) %></div>
+      <% end %>
+    <% else %>
+          <div class="item"> No species have been added yet. </div>
     <% end %>
+  </div>
 
-</ul>
+</div>

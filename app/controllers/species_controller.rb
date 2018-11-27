@@ -3,7 +3,6 @@ class SpeciesController < ApplicationController
   before_action :check_if_signed_in
   before_action :set_user
   before_action :set_species, only: [:show, :edit, :update, :destroy]
-  # before_action :check_permission, only: [:show, :edit, :update, :destroy]
   before_action -> { check_permission(@species)} , only: [:show, :edit, :update, :destroy]
 
   def index
@@ -17,11 +16,11 @@ class SpeciesController < ApplicationController
   def create
     @species = current_user.species.build(species_params)
 
-    if @species.save
-      render json: @species, status: 201
-    else
-      render :json => {:errors => @species.errors.full_messages}, status: 422
-    end
+    # if @species.save
+    #   render json: @species, status: 201
+    # else
+    #   render :json => {:errors => @species.errors.full_messages}, status: 422
+    # end
 
   end
 

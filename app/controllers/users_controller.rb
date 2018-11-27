@@ -64,10 +64,4 @@ class UsersController < ApplicationController
       current_user.id == params[:id].to_i
     end
 
-    def check_permission
-      if params[:id].to_i != current_user.id
-        flash[:message] = "Sorry, the page you are looking for belongs to another user."
-        redirect_to user_path(current_user.id)
-      end
-    end
 end
