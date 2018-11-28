@@ -6,4 +6,33 @@
 
   <%= render partial: "species/form", locals: { f: f } %>
 
+
+
+
+
+    <div>
+      <%= f.label :name, "Species Name: " %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+      <%= f.label :category, "Category: " %>
+      <%= f.select :category, Species::CATEGORIES %>
+    </div>
+
+    <div>
+      <%= f.label :sunlight, "Sun Level: " %>
+      <%= f.select :sunlight, Species::SUN_LEVELS %>
+    </div>
+
+    <div>
+      <%= f.label :days_to_maturity, "Days to Maturity: " %>
+      <%= f.text_field :days_to_maturity %>
+    </div>
+
+    <div>
+      <%= f.submit "Submit", id: "species_submit", data: { disable_with: false } %>
+    </div>
+
+
 <% end %>
