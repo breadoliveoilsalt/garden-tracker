@@ -12,35 +12,10 @@
 
         <div class="ui big form center aligned">
 
-            <%= form_for [current_user, @garden] do |f| %>
-
-                <div class="six wide field centered-form-field">
-                  <%= f.label :name, "Garden Name: " %>
-                  <%= f.text_field :name, class: "centered" %>
-                </div>
-
-                <div class="six wide field centered-form-field">
-                  <%= f.label :active, "Active? " %>
-                  <%= f.check_box :active, {}, checked_value = 1, unchecked_value = 0 %>
-                </div>
-
-                <div class="two wide field centered-form-field" >
-                  <%= f.label :square_feet, "Square Feet: " %>
-                  <%= f.text_field :square_feet, class: "centered" %>
-                </div>
-
-                <div class="eight wide field centered-form-field">
-                  <%= f.label :description, "Description (optional): " %>
-                  <%= f.text_area :description %>
-                </div>
-
-                <div>
-                  <%= f.submit "Submit", class: "ui button" %>
-                </div>
-
-              <% end %>
-
-            </div>
+            <%= render partial: "gardens/form", locals: { garden: @garden } %>
 
         </div>
+
+    </div>
+
 </div>

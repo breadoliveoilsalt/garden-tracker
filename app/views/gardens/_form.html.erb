@@ -1,18 +1,27 @@
+<%= form_for [current_user, garden] do |f| %>
 
+    <div class="six wide field centered-form-field">
+      <%= f.label :name, "Garden Name: " %>
+      <%= f.text_field :name, class: "centered" %>
+    </div>
 
-  <div>
-    <%= f.label :name, "Garden Name: " %>
-    <%= f.text_field :name %>
-  </div>
+    <div class="six wide field centered-form-field">
+      <%= f.label :active, "Active? " %>
+      <%= f.check_box :active, {}, checked_value = 1, unchecked_value = 0 %>
+    </div>
 
-  <div>
-    <%= f.label :description, "Description (optional): " %>
-    <%= f.text_area :description %>
-  </div>
+    <div class="two wide field centered-form-field" >
+      <%= f.label :square_feet, "Square Feet: " %>
+      <%= f.text_field :square_feet, class: "centered" %>
+    </div>
 
-  <div>
-    <%= f.label :square_feet, "Square Feet: " %>
-    <%= f.text_field :square_feet %>
-  </div>
+    <div class="eight wide field centered-form-field">
+      <%= f.label :description, "Description (optional): " %>
+      <%= f.text_area :description %>
+    </div>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %>
+    <div>
+      <%= f.submit "Submit", class: "ui button" %>
+    </div>
+
+  <% end %>

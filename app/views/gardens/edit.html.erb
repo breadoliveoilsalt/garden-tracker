@@ -12,37 +12,12 @@
 
         <div class="ui big form center aligned">
 
-            <%= form_for [current_user, @garden] do |f| %>
+          <%= render partial: "gardens/form", locals: { garden: @garden } %>
 
-                <div class="six wide field centered-form-field">
-                  <%= f.label :name, "Garden Name: ", class: "ui center aligned" %>
-                  <%= f.text_field :name %>
-                </div>
-
-                <div class="six wide field centered-form-field">
-                  <%= f.label :active, "Active? " %>
-                  <%= f.check_box :active, {}, checked_value = 1, unchecked_value = 0 %>
-                </div>
-
-                <div class="two wide field centered-form-field" >
-                  <%= f.label :square_feet, "Square Feet: " %>
-                  <%= f.text_field :square_feet %>
-                </div>
-
-                <div class="eight wide field centered-form-field">
-                  <%= f.label :description, "Description (optional): " %>
-                  <%= f.text_area :description %>
-                </div>
-
-                <div>
-                  <%= f.submit "Submit", class: "ui button" %>
-                </div>
-
-              <% end %>
-
-            </div>
+        </div>
 
             <p class="garden-sub-menu-item bold"> <%= link_to "Or Delete Garden", user_garden_path(current_user.id, @garden.id), method: :delete, data: { confirm: 'Are you sure you want to delete this garden (and all of its plantings)?' }%> </p>
 
-        </div>
+    </div>
+
 </div>
