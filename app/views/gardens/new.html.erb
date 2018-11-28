@@ -15,8 +15,8 @@
             <%= form_for [current_user, @garden] do |f| %>
 
                 <div class="six wide field centered-form-field">
-                  <%= f.label :name, "Garden Name: ", class: "ui center aligned" %>
-                  <%= f.text_field :name %>
+                  <%= f.label :name, "Garden Name: " %>
+                  <%= f.text_field :name, class: "centered" %>
                 </div>
 
                 <div class="six wide field centered-form-field">
@@ -26,7 +26,7 @@
 
                 <div class="two wide field centered-form-field" >
                   <%= f.label :square_feet, "Square Feet: " %>
-                  <%= f.text_field :square_feet %>
+                  <%= f.text_field :square_feet, class: "centered" %>
                 </div>
 
                 <div class="eight wide field centered-form-field">

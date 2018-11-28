@@ -1,38 +1,46 @@
-<h1> Add Species: </h1>
+<div class="ui container center aligned">
+  <%= display_any_errors(@species) %>
+</div>
 
-<%= display_any_errors(@species) %>
-
-<%= form_for @species, url: user_species_index_path(current_user.id), method: :post do |f| %>
-
-  <%= render partial: "species/form", locals: { f: f } %>
-
-
-
-
+<div class="ui container center aligned">
 
     <div>
-      <%= f.label :name, "Species Name: " %>
-      <%= f.text_field :name %>
-    </div>
 
-    <div>
-      <%= f.label :category, "Category: " %>
-      <%= f.select :category, Species::CATEGORIES %>
-    </div>
+        <h1 class="underlined"> Create a New Species </h1>
 
-    <div>
-      <%= f.label :sunlight, "Sun Level: " %>
-      <%= f.select :sunlight, Species::SUN_LEVELS %>
-    </div>
+        <div class="ui divider divider-spacer"></div>
 
-    <div>
-      <%= f.label :days_to_maturity, "Days to Maturity: " %>
-      <%= f.text_field :days_to_maturity %>
-    </div>
+        <div class="ui big form center aligned">
 
-    <div>
-      <%= f.submit "Submit", id: "species_submit", data: { disable_with: false } %>
-    </div>
+            <%= form_for [current_user, @species] do |f| %>
 
+                <div class="six wide field centered-form-field">
+                  <%= f.label :name, "Species Name:" %>
+                  <%= f.text_field :name, class: "centered" %>
+                </div>
 
-<% end %>
+                <div class="three wide field centered-form-field">
+                  <%= f.label :category, "Category: " %>
+                  <%= f.select :category, Species::CATEGORIES, class: "centered" %>
+                </div>
+
+                <div class="two wide field centered-form-field" >
+                  <%= f.label :sunlight, "Sun Level: " %>
+                  <%= f.select :sunlight, Species::SUN_LEVELS %>
+                </div>
+
+                <div class="two wide field centered-form-field">
+                  <%= f.label :days_to_maturity, "Days to Maturity: " %>
+                  <%= f.text_field :days_to_maturity, class: "centered" %>
+                </div>
+
+                <div>
+                  <%= f.submit "Submit", class: "ui button" %>
+                </div>
+
+              <% end %>
+
+            </div>
+
+        </div>
+</div>
