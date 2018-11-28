@@ -26,8 +26,9 @@ div {
 
 .field_with_errors {
   color: red;
-  display: inline;
-  margin-left: -2px;
+  /* display: inline; */
+  font-weight: bold;
+  /* margin-left: -2px; */
 }
 
 .error-messages {
