@@ -14,11 +14,20 @@
 
     <h2 class="ui header center aligned underlined"> Active Gardens </h2>
 
-    <% @active_gardens.each do |garden| %>
+    <% if @active_gardens.any? %>
 
-      <%= render partial: "gardens/garden_table_short", locals: { garden: garden } %>
+      <% @active_gardens.each do |garden| %>
+
+        <%= render partial: "gardens/garden_table_short", locals: { garden: garden } %>
+
+      <% end %>
+
+    <% else %>
+
+      <h2 class="ui header center aligned"> Currently there are no active gardens registered. </h2>
 
     <% end %>
+
 
   </div>  <!-- end conatiner for active gardens -->
 
@@ -28,9 +37,17 @@
 
     <h2 class="ui header center aligned underlined"> Inactive Gardens </h2>
 
-    <% @inactive_gardens.each do |garden| %>
+    <% if @inactive_gardens.any? %>
 
-      <%= render partial: "gardens/garden_table_short", locals: { garden: garden } %>
+      <% @inactive_gardens.each do |garden| %>
+
+        <%= render partial: "gardens/garden_table_short", locals: { garden: garden } %>
+
+      <% end %>
+
+    <% else %>
+
+      <h2 class="ui header center aligned"> Currently there are no inactive gardens registered. </h2>
 
     <% end %>
 
