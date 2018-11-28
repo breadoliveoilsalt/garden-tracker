@@ -12,35 +12,10 @@
 
         <div class="ui big form center aligned">
 
-            <%= form_for [current_user, @species] do |f| %>
-
-                <div class="six wide field centered-form-field">
-                  <%= f.label :name, "Species Name:" %>
-                  <%= f.text_field :name, class: "centered" %>
-                </div>
-
-                <div class="three wide field centered-form-field">
-                  <%= f.label :category, "Category: " %>
-                  <%= f.select :category, Species::CATEGORIES, class: "centered" %>
-                </div>
-
-                <div class="two wide field centered-form-field" >
-                  <%= f.label :sunlight, "Sun Level: " %>
-                  <%= f.select :sunlight, Species::SUN_LEVELS %>
-                </div>
-
-                <div class="two wide field centered-form-field">
-                  <%= f.label :days_to_maturity, "Days to Maturity: " %>
-                  <%= f.text_field :days_to_maturity, class: "centered" %>
-                </div>
-
-                <div>
-                  <%= f.submit "Submit", class: "ui button" %>
-                </div>
-
-              <% end %>
+                <%= render partial: "species/form", locals: { species: @species } %>
 
             </div>
 
         </div>
+
 </div>

@@ -1,26 +1,27 @@
+<%= form_for [current_user, species] do |f| %>
 
+    <div class="six wide field centered-form-field">
+      <%= f.label :name, "Species Name:" %>
+      <%= f.text_field :name, class: "centered" %>
+    </div>
 
+    <div class="three wide field centered-form-field">
+      <%= f.label :category, "Category: " %>
+      <%= f.select :category, Species::CATEGORIES, class: "centered" %>
+    </div>
 
-  <div>
-    <%= f.label :name, "Species Name: " %>
-    <%= f.text_field :name %>
-  </div>
+    <div class="two wide field centered-form-field" >
+      <%= f.label :sunlight, "Sun Level: " %>
+      <%= f.select :sunlight, Species::SUN_LEVELS %>
+    </div>
 
-  <div>
-    <%= f.label :category, "Category: " %>
-    <%= f.select :category, Species::CATEGORIES %>
-  </div>
+    <div class="two wide field centered-form-field">
+      <%= f.label :days_to_maturity, "Days to Maturity: " %>
+      <%= f.text_field :days_to_maturity, class: "centered" %>
+    </div>
 
-  <div>
-    <%= f.label :sunlight, "Sun Level: " %>
-    <%= f.select :sunlight, Species::SUN_LEVELS %>
-  </div>
+    <div>
+      <%= f.submit "Submit", class: "ui button" %>
+    </div>
 
-  <div>
-    <%= f.label :days_to_maturity, "Days to Maturity: " %>
-    <%= f.text_field :days_to_maturity %> 
-  </div>
-
-  <div>
-    <%= f.submit "Submit", id: "species_submit", data: { disable_with: false } %>
-  </div>
+  <% end %>

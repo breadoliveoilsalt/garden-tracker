@@ -1,9 +1,21 @@
-<h1> Edit species: </h1>
-
+<div class="ui container center aligned">
   <%= display_any_errors(@species) %>
+</div>
 
-  <%= form_for @species, url: user_species_path(current_user.id, @species.id), method: :patch do |f| %>
+<div class="ui container center aligned">
 
-    <%= render partial: "species/form", locals: { f: f } %>
+    <div>
 
-  <% end %>
+        <h1 class="underlined"> Edit <%= @species.name %> </h1>
+
+        <div class="ui divider divider-spacer"></div>
+
+        <div class="ui big form center aligned">
+
+                <%= render partial: "species/form", locals: { species: @species } %>
+
+            </div>
+
+        </div>
+
+</div>
