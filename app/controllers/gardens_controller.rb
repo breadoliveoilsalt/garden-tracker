@@ -173,6 +173,8 @@ class GardensController < ApplicationController
   #   end
   # end
 
+
+    # CONSIDER WHETHER I NEED @user - global here
   def render_gardens_html
         # Check if the url is a nested url, such as users/1/gardens:
      if params[:user_id]

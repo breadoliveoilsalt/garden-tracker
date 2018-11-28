@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show]
+  # before_action :set_user, only: [:show]
   before_action :check_if_signed_in, only: [:show]
-  before_action :check_permission, only: [:show]
+  # before_action :check_permission, only: [:show]
 
   def new
     if signed_in?
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
   def show
     if signed_in?
-      @active_gardens = Garden.get_active_gardens(@user.id)
+      @active_gardens = Garden.get_active_gardens(current_user.id)
     else
       flash[:message] = "Please sign in or create an account."
       redirect_to root_path

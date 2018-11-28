@@ -12,25 +12,31 @@
 
   <div></div>
 
-  <table class="ui celled table center aligned">
-    <thead>
-      <tr>
-        <th class="eight wide">Garden Name</th>
-        <th class="eight wide">Upcoming Maturities</th>
-      </tr>
-    </thead>
-    <tbody>
+  <% if @active_gardens.empty? %>
 
-      <% @active_gardens.each do |garden| %>
+    <h2 class="ui header center aligned"> Currently there are no active gardens registered. </h2>
+
+  <% else %>
+    <table class="ui celled table center aligned">
+      <thead>
         <tr>
-          <td> <%= link_to garden.name, user_garden_path(@user.id, garden.id)%> </td>
-          <td>
-              <%= render partial: "gardens/upcoming_maturities_short_list", locals: { garden: garden } %>
-          </td>
+          <th class="eight wide">Garden Name</th>
+          <th class="eight wide">Upcoming Maturities</th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
 
-    </tbody>
-  </table>
+        <% @active_gardens.each do |garden| %>
+          <tr>
+            <td> <%= link_to garden.name, user_garden_path(current_user.id, garden.id)%> </td>
+            <td>
+                <%= render partial: "gardens/upcoming_maturities_short_list", locals: { garden: garden } %>
+            </td>
+          </tr>
+        <% end %>
+
+      </tbody>
+    </table>
+  <% end %>
 
 </div>
