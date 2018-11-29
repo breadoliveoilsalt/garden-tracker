@@ -1,7 +1,7 @@
 class SpeciesController < ApplicationController
 
   before_action :check_if_signed_in
-  before_action :set_user
+  # before_action :set_user
   before_action :set_species, only: [:show, :edit, :update, :destroy]
   before_action -> { check_permission(@species)} , only: [:show, :edit, :update, :destroy]
 
