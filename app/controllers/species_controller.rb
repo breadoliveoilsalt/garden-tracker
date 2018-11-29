@@ -20,6 +20,7 @@ class SpeciesController < ApplicationController
     else
       render :new
     end
+  end
 
     # if @species.save
     #   render json: @species, status: 201
@@ -27,7 +28,7 @@ class SpeciesController < ApplicationController
     #   render :json => {:errors => @species.errors.full_messages}, status: 422
     # end
 
-  end
+  # end
 
   def edit
   end
