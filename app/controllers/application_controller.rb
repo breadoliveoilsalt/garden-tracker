@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_permission(object)
+    puts "You hit check permission: ", object
     if params[:user_id].to_i != current_user.id
       flash[:message] = "Sorry, the page you are looking for belongs to another user."
       redirect_to user_path(current_user.id)

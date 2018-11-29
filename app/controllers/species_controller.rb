@@ -1,7 +1,6 @@
 class SpeciesController < ApplicationController
 
   before_action :check_if_signed_in
-  # before_action :set_user
   before_action :set_species, only: [:show, :edit, :update, :destroy]
   before_action -> { check_permission(@species)} , only: [:show, :edit, :update, :destroy]
 
@@ -66,9 +65,6 @@ class SpeciesController < ApplicationController
   def set_species
     @species = Species.find_by(id: params[:id])
   end
-
-
-
 
   # def check_permission
   #   if params[:user_id].to_i != current_user.id
