@@ -27,7 +27,7 @@ function attachSpeciesShowListeners() {
           url: `/users/${userId}/species/${speciesId}.json`,
           method: "GET"
         }).done(function(data){
-          let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
+          let speciesObject = new Species(data["id"], data["name"], data["category"], data["sunlight"], data["gardens"], data["user"])
           displayBox.append(speciesObject.renderShow())
         }).fail(function() {
           displayBox.append("Sorry, there was an error.")
@@ -37,10 +37,10 @@ function attachSpeciesShowListeners() {
 }
 
 class Species {
-  constructor(id, name, product, sunlight, gardens, user) {
+  constructor(id, name, category, sunlight, gardens, user) {
     this.id = id
     this.name = name
-    this.product = product
+    this.category = category
     this.sunlight = sunlight
     this.gardens = gardens
     this.user = user
@@ -49,7 +49,7 @@ class Species {
   renderShow() {
     let gardens = $(this.gardens)
     return `
-      Product: ${this.product} <br>
+      Category: ${this.category} <br>
       Sunlight: ${this.sunlight} <br>
       Your Gardens Where This Appears: <br> ${this.renderGardens(gardens)}
       `
@@ -128,7 +128,7 @@ function attachSpeciesSubmitListener() {
       // all the .then(s) and go straight to .failure().
 
     .then(function(data) {
-      let speciesObject = new Species(data["id"], data["name"], data["product"], data["sunlight"], data["gardens"], data["user"])
+      let speciesObject = new Species(data["id"], data["name"], data["category"], data["sunlight"], data["gardens"], data["user"])
 
       $("#species_list").append(speciesObject.renderAbbreviatedShow())
     })

@@ -19,6 +19,7 @@ function attachGardenListeners() {
 
   $("#next_garden_button").on("click", function(e) {
     e.preventDefault()
+    // debugger
 
     const userId = e.target.dataset.userId
     const gardenId = e.target.dataset.gardenId
@@ -31,31 +32,35 @@ function attachGardenListeners() {
           // Create an "instance" of the gardenObject
       .then(function(data) {
         debugger
-        const gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["user_id"], data["user"], data["species"], data["plantings"])
+        const gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["active"], data["user_id"], data["user"], data["species"], data["plantings"])
 
           // Replace button's data of garden id with gardenObject's id, so that
           // next time the button is pressed, the next garden is retreived.
 
-        $("#next_garden_button").attr("data-garden-id", gardenObject.id)
+        // $("#next_garden_button").attr("data-garden-id", gardenObject.id)
 
           // Render information for gardenObject as "insert"
         const insert = gardenObject.renderGardenShow()
-
+        debugger
         return insert
       })
         // Insert the "insert" into the DOM at the garden_display container
       .then(function(insert) {
-        $(`#garden_display`).html(insert)
+        $(`#garden_container`).html(insert)
+      })
+      .catch(function(error) {
+        console.log("There was an error: ", error)
       })
   })
 }
 
 class Garden {
-  constructor(id, name, description, squareFeet, userId, user, species, plantings) {
+  constructor(id, name, description, squareFeet, active, userId, user, species, plantings) {
     this.id = id
     this.name = name
     this.description = description
     this.squareFeet = squareFeet
+    this.active = active
     this.userId = userId
     this.user = user
     this.species = species
@@ -65,24 +70,40 @@ class Garden {
   renderGardenShow() {
 
     let htmlToInsert = `
-            <h1>${this.name} </h1>
+        <div>
 
-                  <h2>
-                    <a href="/gardens/${this.id}/plantings/new">Add a Planting</a> |
-                    <a href="/gardens/${this.id}/edit">Edit Garden</a> |
-                    <a data-confirm="Are you sure you want to delete this garden?" rel="nofollow" data-method="delete" href="/gardens/${this.id}">Delete Garden</a>
-                </h2>
+        <h1 class="underlined"> ${this.name}</h1>
+
+        <div class="ui four item menu stackable show-menu" id="garden-button-display">
+          <p class="sub-menu-item"><button name="button" type="submit" id="prior_garden_button" data-garden-id="${this.id}" data-user-id="${this.user_id}" class="ui button tiny wide-spacing">&lt;&lt; Jump to Prior Garden Created</button></p>
+
+          <p class="sub-menu-item bold"> <a href="/users/${this.user_id}/gardens/${this.id}/edit">Edit/Update</a> </p>
+          <p class="sub-menu-item bold"> <a data-confirm="Are you sure you want to delete this garden (and all of its plantings)?" rel="nofollow" data-method="delete" href="/users/${this.user_id}/gardens/${this.id}">Delete</a> </p>
+
+          <p class="sub-menu-item"><button name="button" type="submit" id="next_garden_button" data-garden-id="${this.id}" data-user-id="${this.user_id}" class="ui button tiny wide-spacing">Jump to Next Garden Created &gt;&gt;</button></p>
+        </div>
 
 
-            <h2> Creater: <a href="/users/${this.userId}/gardens">${this.user.name}</a></h2>
+        <div class="ui divider divider-spacer"></div>
 
-            <h2> Description: ${this.description} </h2>
+        <h2> Currently Active: ${ this.active ? Yes : No} </h2>
 
-            <h2> Square Feet: ${this.squareFeet}</h2>
+        <div class="ui divider divider-spacer"></div>
 
+        <h2> Square Feet: ${this.squareFeet} </h2>
+
+        <div class="ui divider divider-spacer"></div>
+
+        <h2> Description: </h2>
+
+        <div class="ui container text">
+          <h3> ${this.description} </h3>
+        </div>
+
+        <div class="ui divider divider-spacer"></div>
         `
 
-      htmlToInsert += this.renderPlantings()
+      // htmlToInsert += this.renderPlantings()
 
       return htmlToInsert
 

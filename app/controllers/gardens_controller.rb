@@ -97,6 +97,7 @@ class GardensController < ApplicationController
   def next
     user = User.find_by(id: params[:user_id])
     garden = user.gardens.where("id > ?", params[:garden_id]).first
+    binding.pry
     if garden
       render json: garden
     else
