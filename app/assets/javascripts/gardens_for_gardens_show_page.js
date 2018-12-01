@@ -31,7 +31,6 @@ function attachGardenListeners() {
       })
           // Create an "instance" of the gardenObject
       .then(function(data) {
-        debugger
         const gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["active"], data["user_id"], data["user"], data["species"], data["plantings"])
 
           // Replace button's data of garden id with gardenObject's id, so that
@@ -41,16 +40,18 @@ function attachGardenListeners() {
 
           // Render information for gardenObject as "insert"
         const insert = gardenObject.renderGardenShow()
-        debugger
         return insert
       })
         // Insert the "insert" into the DOM at the garden_display container
       .then(function(insert) {
-        $(`#garden_container`).html(insert)
+        // For some reason, jQuery will not work: $("#garden-container").html(insert)
+        document.getElementById("garden-container").innerHTML = insert
+        // Have to attachGardenListeners b/c button is being rendered anew with the axaj call
+        attachGardenListeners()
       })
-      .catch(function(error) {
-        console.log("There was an error: ", error)
-      })
+      // .fail(function(jqXHR, textStatus) {
+      //   console.log("There was an error: ", textStatus)
+      // })
   })
 }
 
@@ -75,18 +76,18 @@ class Garden {
         <h1 class="underlined"> ${this.name}</h1>
 
         <div class="ui four item menu stackable show-menu" id="garden-button-display">
-          <p class="sub-menu-item"><button name="button" type="submit" id="prior_garden_button" data-garden-id="${this.id}" data-user-id="${this.user_id}" class="ui button tiny wide-spacing">&lt;&lt; Jump to Prior Garden Created</button></p>
+          <p class="sub-menu-item"><button name="button" type="submit" id="prior_garden_button" data-garden-id="${this.id}" data-user-id="${this.userId}" class="ui button tiny wide-spacing">&lt;&lt; Jump to Prior Garden Created</button></p>
 
-          <p class="sub-menu-item bold"> <a href="/users/${this.user_id}/gardens/${this.id}/edit">Edit/Update</a> </p>
-          <p class="sub-menu-item bold"> <a data-confirm="Are you sure you want to delete this garden (and all of its plantings)?" rel="nofollow" data-method="delete" href="/users/${this.user_id}/gardens/${this.id}">Delete</a> </p>
+          <p class="sub-menu-item bold"> <a href="/users/${this.userId}/gardens/${this.id}/edit">Edit/Update</a> </p>
+          <p class="sub-menu-item bold"> <a data-confirm="Are you sure you want to delete this garden (and all of its plantings)?" rel="nofollow" data-method="delete" href="/users/${this.userId}/gardens/${this.id}">Delete</a> </p>
 
-          <p class="sub-menu-item"><button name="button" type="submit" id="next_garden_button" data-garden-id="${this.id}" data-user-id="${this.user_id}" class="ui button tiny wide-spacing">Jump to Next Garden Created &gt;&gt;</button></p>
+          <p class="sub-menu-item"><button name="button" type="submit" id="next_garden_button" data-garden-id="${this.id}" data-user-id="${this.userId}" class="ui button tiny wide-spacing">Jump to Next Garden Created &gt;&gt;</button></p>
         </div>
 
 
         <div class="ui divider divider-spacer"></div>
 
-        <h2> Currently Active: ${ this.active ? Yes : No} </h2>
+        <h2> Currently Active: ${ this.active ? "Yes" : "No"} </h2>
 
         <div class="ui divider divider-spacer"></div>
 
