@@ -1,5 +1,5 @@
 class SpeciesSerializer < ActiveModel::Serializer
-  attributes :id, :name, :category, :sunlight, :user_id
+  attributes :id, :name, :category, :sunlight, :user_id, :days_to_maturity
 
   belongs_to :user
   has_many :gardens
