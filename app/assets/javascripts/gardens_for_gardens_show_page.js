@@ -32,12 +32,6 @@ function attachGardenListeners() {
           // Create an "instance" of the gardenObject
       .then(function(data) {
         const gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["active"], data["user_id"], data["user"], data["species"], data["plantings"])
-
-          // Replace button's data of garden id with gardenObject's id, so that
-          // next time the button is pressed, the next garden is retreived.
-
-        // $("#next_garden_button").attr("data-garden-id", gardenObject.id)
-
           // Render information for gardenObject as "insert"
         const insert = gardenObject.renderGardenShow()
         return insert
@@ -49,9 +43,9 @@ function attachGardenListeners() {
         // Have to attachGardenListeners b/c button is being rendered anew with the axaj call
         attachGardenListeners()
       })
-      // .fail(function(jqXHR, textStatus) {
-      //   console.log("There was an error: ", textStatus)
-      // })
+      .fail(function(jqXHR, textStatus) {
+        console.log("There was an error: ", textStatus)
+      })
   })
 }
 
@@ -101,37 +95,120 @@ class Garden {
           <h3> ${this.description} </h3>
         </div>
 
-        <div class="ui divider divider-spacer"></div>
         `
 
-      // htmlToInsert += this.renderPlantings()
+      htmlToInsert += this.renderPlantingsTable()
 
       return htmlToInsert
 
   }
 
-  renderPlantings() {
+
+  renderPlantingsTable() {
     let htmlToInsert = `
-        <h3> Plantings: </h3>
+        <div class="ui divider divider-spacer"></div>
 
-          <ul>
-      `
+        <h2> Plantings: </h2>
 
-    for (var x of this.plantings) {
-
+        <table class="ui celled table center aligned">
+                        <thead>
+                          <tr>
+                            <th> Name </th>
+                            <th> Quantity </th>
+                            <th> Date Planted </th>
+                            <th> Harvested </th>
+                            <th> Expected Maturity Date </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        `
+    if (!this.plantings.length) {
       htmlToInsert += `
-        <li> <a href="/users/${x.user_Id}/species/${x.species_id}">${x.name}</a> </li>
-          <ul>
-            <li> Quantity: ${x.quantity} </li>
-          </ul>
-        `
+                          <tr>
+                            <td colspan="5">None.</td>
+                          </tr>
+                          `
+    }
+    else {
+
+      for (let planting of this.plantings) {
+
+        let datePlantedString
+        let dateHarvestedString
+        let maturityDateString
+
+        let datePlantedObject = new Date(planting.date_planted)
+        let datePlantedMonth = (datePlantedObject.getUTCMonth() + 1).toString()
+        let datePlantedDay = datePlantedObject.getUTCDate().toString()
+        let datePlantedYear = datePlantedObject.getFullYear().toString()
+        datePlantedString = datePlantedMonth + "/" + datePlantedDay + "/" + datePlantedYear
+
+        if (!planting.date_harvested) {
+          dateHarvestedString = "No"
+        } else {
+          let dateHarvestedObject = new Date(planting.date_harvested)
+          let dateHarvestedMonth = (dateHarvestedObject.getUTCMonth() + 1).toString()
+          let dateHarvestedDay = dateHarvestedObject.getUTCDate().toString()
+          let dateHarvestedYear = dateHarvestedObject.getFullYear().toString()
+          dateHarvestedString = dateHarvestedMonth + "/" + dateHarvestedDay + "/" + dateHarvestedYear
+          maturityDateString = "N/A"
+        }
+
+        if (planting.expected_maturity_date) {
+          let maturityDateObject = new Date(planting.expected_maturity_date)
+          let maturityDateMonth = (maturityDateObject.getUTCMonth() + 1).toString()
+          let maturityDateDay = maturityDateObject.getUTCDate().toString()
+          let maturityDateYear = maturityDateObject.getFullYear().toString()
+          maturityDateString = maturityDateMonth + "/" + maturityDateDay + "/" + maturityDateYear
+        } else {
+          maturityDateString = "Not Available."
+        }
+
+        htmlToInsert += `
+                          <tr>
+
+                            <td> ${planting.name} </td>
+                            <td> ${planting.quantity} </td>
+                            <td> ${datePlantedString} </td>
+                            <td> ${dateHarvestedString} </td>
+                            <td> ${maturityDateString} </td>
+                          </tr>
+                          `
+      }
+
     }
 
-      htmlToInsert += "</ul>"
+      htmlToInsert += `                      </tbody>
+
+                          </table>
+          `
 
       return htmlToInsert
 
   }
+
+  // renderPlantings() {
+  //   let htmlToInsert = `
+  //       <h3> Plantings: </h3>
+  //
+  //         <ul>
+  //     `
+  //
+  //   for (var x of this.plantings) {
+  //
+  //     htmlToInsert += `
+  //       <li> <a href="/users/${x.user_Id}/species/${x.species_id}">${x.name}</a> </li>
+  //         <ul>
+  //           <li> Quantity: ${x.quantity} </li>
+  //         </ul>
+  //       `
+  //   }
+  //
+  //     htmlToInsert += "</ul>"
+  //
+  //     return htmlToInsert
+  //
+  // }
 
   renderGardenListItem() {
     return `
