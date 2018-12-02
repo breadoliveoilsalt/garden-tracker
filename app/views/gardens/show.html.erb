@@ -63,13 +63,13 @@
                         <td> <%= planting.name %> </td>
                         <td> <%= planting.quantity %> </td>
                         <td> <%= planting.date_planted.strftime("%m/%d/%Y")%></td>
-                        <td> <%= planting.date_harvested ? planting.date_planted.strftime("%m/%d/%Y") : "No" %> </td>
+                        <td> <%= planting.date_harvested ? planting.date_harvested.strftime("%m/%d/%Y") : "No" %> </td>
                         <td> <% if planting.date_harvested %>
-                                N/A
+                                Harvested
                               <% elsif planting.expected_maturity_date %>
                                 <%= planting.expected_maturity_date.strftime("%m/%d/%Y") %>
                               <% else %>
-                                Not available.
+                                Not Available
                               <% end %>
                             </td>
 

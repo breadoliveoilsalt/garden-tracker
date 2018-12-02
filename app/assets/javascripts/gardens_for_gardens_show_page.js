@@ -151,17 +151,19 @@ class Garden {
           let dateHarvestedDay = dateHarvestedObject.getUTCDate().toString()
           let dateHarvestedYear = dateHarvestedObject.getFullYear().toString()
           dateHarvestedString = dateHarvestedMonth + "/" + dateHarvestedDay + "/" + dateHarvestedYear
-          maturityDateString = "N/A"
         }
 
-        if (planting.expected_maturity_date) {
+
+        if (planting.date_harvested) {
+          maturityDateString = "Harvested"
+        } else if (planting.expected_maturity_date) {
           let maturityDateObject = new Date(planting.expected_maturity_date)
           let maturityDateMonth = (maturityDateObject.getUTCMonth() + 1).toString()
           let maturityDateDay = maturityDateObject.getUTCDate().toString()
           let maturityDateYear = maturityDateObject.getFullYear().toString()
           maturityDateString = maturityDateMonth + "/" + maturityDateDay + "/" + maturityDateYear
         } else {
-          maturityDateString = "Not Available."
+          maturityDateString = "Not Available"
         }
 
         htmlToInsert += `
