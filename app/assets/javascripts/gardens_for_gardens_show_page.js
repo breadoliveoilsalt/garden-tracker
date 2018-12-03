@@ -142,8 +142,8 @@ class Garden {
         let maturityDateString
 
         let datePlantedObject = new Date(planting.date_planted)
-        let datePlantedMonth = (datePlantedObject.getUTCMonth() + 1).toString()
-        let datePlantedDay = datePlantedObject.getUTCDate().toString()
+        let datePlantedMonth = this.checkValue((datePlantedObject.getUTCMonth() + 1).toString())
+        let datePlantedDay = this.checkValue(datePlantedObject.getUTCDate().toString())
         let datePlantedYear = datePlantedObject.getFullYear().toString()
         datePlantedString = datePlantedMonth + "/" + datePlantedDay + "/" + datePlantedYear
 
@@ -151,8 +151,8 @@ class Garden {
           dateHarvestedString = "No"
         } else {
           let dateHarvestedObject = new Date(planting.date_harvested)
-          let dateHarvestedMonth = (dateHarvestedObject.getUTCMonth() + 1).toString()
-          let dateHarvestedDay = dateHarvestedObject.getUTCDate().toString()
+          let dateHarvestedMonth = this.checkValue((dateHarvestedObject.getUTCMonth() + 1).toString())
+          let dateHarvestedDay = this.checkValue(dateHarvestedObject.getUTCDate().toString())
           let dateHarvestedYear = dateHarvestedObject.getFullYear().toString()
           dateHarvestedString = dateHarvestedMonth + "/" + dateHarvestedDay + "/" + dateHarvestedYear
         }
@@ -162,8 +162,8 @@ class Garden {
           maturityDateString = "Harvested"
         } else if (planting.expected_maturity_date) {
           let maturityDateObject = new Date(planting.expected_maturity_date)
-          let maturityDateMonth = (maturityDateObject.getUTCMonth() + 1).toString()
-          let maturityDateDay = maturityDateObject.getUTCDate().toString()
+          let maturityDateMonth = this.checkValue((maturityDateObject.getUTCMonth() + 1).toString())
+          let maturityDateDay = this.checkValue(maturityDateObject.getUTCDate().toString())
           let maturityDateYear = maturityDateObject.getFullYear().toString()
           maturityDateString = maturityDateMonth + "/" + maturityDateDay + "/" + maturityDateYear
         } else {
@@ -191,6 +191,13 @@ class Garden {
 
       return htmlToInsert
 
+  }
+
+    // If the Rails server returns a day or month represented by 1 digit, the
+    // html reads as "01", "02", etc.  However, the ajax request will return just
+    // "1", "2", etc.  checkValue is here to eliminate this discrepency.  
+  checkValue(value) {
+    return value.length === 1 ? "0" + value : value
   }
 
   renderGardenListItem() {
