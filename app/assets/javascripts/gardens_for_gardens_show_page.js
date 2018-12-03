@@ -7,12 +7,15 @@
     // not species.js:
       // $(document).on('turbolinks:load', function() {} etc.
 
+// Works to come back to later:
 $(function () {
   attachGardenButtonListeners()
 })
-// Try this later:
+
+
+// Does not work:
 // (function () {
-//   attachGardenListeners()
+//   attachGardenButtonListeners()
 // })()
 
 function attachGardenButtonListeners() {
@@ -195,7 +198,7 @@ class Garden {
 
     // If the Rails server returns a day or month represented by 1 digit, the
     // html reads as "01", "02", etc.  However, the ajax request will return just
-    // "1", "2", etc.  checkValue is here to eliminate this discrepency.  
+    // "1", "2", etc.  checkValue is here to eliminate this discrepency.
   checkValue(value) {
     return value.length === 1 ? "0" + value : value
   }
