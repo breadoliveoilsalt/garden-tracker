@@ -1,4 +1,4 @@
-<%= form_for [current_user, garden] do |f| %>
+
 
     <div class="six wide field centered-form-field">
       <%= f.label :name, "Garden Name: " %>
@@ -19,9 +19,3 @@
       <%= f.label :description, "Description (optional): " %>
       <%= f.text_area :description %>
     </div>
-
-    <div>
-      <%= f.submit "Submit", class: "ui button" %>
-    </div>
-
-  <% end %>

@@ -12,7 +12,15 @@
 
         <div class="ui big form center aligned">
 
-          <%= render partial: "gardens/form", locals: { garden: @garden } %>
+          <%= form_for [current_user, @garden] do |f| %>
+
+            <%= render partial: "gardens/form", locals: { f: f } %>
+
+            <div>
+              <%= f.submit "Submit", class: "ui button" %>
+            </div>
+
+          <% end %>
 
         </div>
 
