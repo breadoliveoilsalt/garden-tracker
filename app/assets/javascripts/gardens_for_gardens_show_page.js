@@ -193,29 +193,6 @@ class Garden {
 
   }
 
-  // renderPlantings() {
-  //   let htmlToInsert = `
-  //       <h3> Plantings: </h3>
-  //
-  //         <ul>
-  //     `
-  //
-  //   for (var x of this.plantings) {
-  //
-  //     htmlToInsert += `
-  //       <li> <a href="/users/${x.user_Id}/species/${x.species_id}">${x.name}</a> </li>
-  //         <ul>
-  //           <li> Quantity: ${x.quantity} </li>
-  //         </ul>
-  //       `
-  //   }
-  //
-  //     htmlToInsert += "</ul>"
-  //
-  //     return htmlToInsert
-  //
-  // }
-
   renderGardenListItem() {
     return `
       ${this.name} |

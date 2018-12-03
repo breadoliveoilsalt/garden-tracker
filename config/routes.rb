@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     # resources :gardens, only: [:index, :show] do
     resources :gardens do
       get "/next", to: "gardens#next"
+      get "/previous", to: "gardens#previous"
     end
     resources :species
   end

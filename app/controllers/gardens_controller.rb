@@ -104,6 +104,16 @@ class GardensController < ApplicationController
     end
   end
 
+  def previous
+    user = User.find_by(id: params[:user_id])
+    garden = user.gardens.where("id < ?", params[:garden_id]).last
+    if garden
+      render json: garden
+    else
+      render json: user.gardens.last
+    end
+  end
+
   def largest
     @garden = Garden.largest_garden
     if @garden == nil
