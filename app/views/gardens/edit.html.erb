@@ -16,6 +16,12 @@
 
             <%= render partial: "gardens/form", locals: { f: f } %>
 
+            <% if @garden.plantings.any? %>
+
+              <%= render partial: "plantings/form", locals: {plantings: @garden.plantings} %>
+
+            <% end %>
+
             <div>
               <%= f.submit "Submit", class: "ui button" %>
             </div>
