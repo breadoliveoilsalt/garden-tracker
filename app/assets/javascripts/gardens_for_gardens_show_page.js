@@ -8,25 +8,29 @@
       // $(document).on('turbolinks:load', function() {} etc.
 
 $(function () {
-  attachGardenListeners()
+  attachGardenButtonListeners()
 })
 // Try this later:
 // (function () {
 //   attachGardenListeners()
 // })()
 
-function attachGardenListeners() {
+function attachGardenButtonListeners() {
 
-  $("#next_garden_button").on("click", function(e) {
-    e.preventDefault()
-    // debugger
+  $("#next_garden_button").on("click", {param1: "next"}, getGardenInfo)
+  $("#previous_garden_button").on("click", {param1: "previous"}, getGardenInfo)
+}
 
-    const userId = e.target.dataset.userId
-    const gardenId = e.target.dataset.gardenId
+function getGardenInfo(event) {
+    event.preventDefault()
+
+    const userId = event.target.dataset.userId
+    const gardenId = event.target.dataset.gardenId
+    const urlRequest = `/users/${userId}/gardens/${gardenId}/` + event.data.param1
 
     $.ajax({
           // Get the json representing the ids of a user's gardens
-        url: `/users/${userId}/gardens/${gardenId}/next`,
+        url: urlRequest,
         method: "GET"
       })
           // Create an "instance" of the gardenObject
@@ -41,13 +45,13 @@ function attachGardenListeners() {
         // For some reason, jQuery will not work: $("#garden-container").html(insert)
         document.getElementById("garden-container").innerHTML = insert
         // Have to attachGardenListeners b/c button is being rendered anew with the axaj call
-        attachGardenListeners()
+        attachGardenButtonListeners()
       })
       .fail(function(jqXHR, textStatus) {
         console.log("There was an error: ", textStatus)
+        alert("Sorry, there was an error. Please try something else.")
       })
-  })
-}
+    }
 
 class Garden {
   constructor(id, name, description, squareFeet, active, userId, user, species, plantings) {
@@ -70,7 +74,7 @@ class Garden {
         <h1 class="underlined"> ${this.name}</h1>
 
         <div class="ui four item menu stackable show-menu" id="garden-button-display">
-          <p class="sub-menu-item"><button name="button" type="submit" id="prior_garden_button" data-garden-id="${this.id}" data-user-id="${this.userId}" class="ui button tiny wide-spacing">&lt;&lt; Jump to Prior Garden Created</button></p>
+          <p class="sub-menu-item"><button name="button" type="submit" id="previous_garden_button" data-garden-id="${this.id}" data-user-id="${this.userId}" class="ui button tiny wide-spacing">&lt;&lt; Jump to Prior Garden Created</button></p>
 
           <p class="sub-menu-item bold"> <a href="/users/${this.userId}/gardens/${this.id}/edit">Edit/Update</a> </p>
           <p class="sub-menu-item bold"> <a data-confirm="Are you sure you want to delete this garden (and all of its plantings)?" rel="nofollow" data-method="delete" href="/users/${this.userId}/gardens/${this.id}">Delete</a> </p>
