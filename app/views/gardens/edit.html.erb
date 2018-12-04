@@ -8,6 +8,8 @@
 
         <h1 class="underlined"> Edit Garden </h1>
 
+          <span class="bold"><%= link_to "Or Delete Garden", user_garden_path(current_user.id, @garden.id), method: :delete, data: { confirm: 'Are you sure you want to delete this garden (and all of its plantings)?' }%> </span>
+
         <div class="ui divider divider-spacer"></div>
 
         <div class="ui big form center aligned">
@@ -21,6 +23,7 @@
               <%= render partial: "plantings/form", locals: {f: f, plantings: @garden.plantings} %>
 
             <% end %>
+        </div>
 
             <div>
               <%= f.submit "Submit", class: "ui button" %>
@@ -28,9 +31,6 @@
 
 
           <% end %>
-
-
-        </div>
 
     </div>
 
