@@ -17,6 +17,5 @@
 
 //= require_tree .
 
-// require gardens_for_gardens_show_page
-// require gardens_for_user_show_page
-// require species_for_user_show_page
+// require garden_buttons_for_gardens_show_page
+// menu_buttons
