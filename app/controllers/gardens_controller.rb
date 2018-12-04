@@ -27,6 +27,9 @@ class GardensController < ApplicationController
   end
 
   def update
+      # check_for_blank_harvest_dates makes sure that if the date_harvested attribute comes back as "",
+      # it is set to nil.  Otherwise, the empty string will create an unnecessary validation error. 
+    check_for_blank_harvest_dates
     if @garden.update(garden_params)
       flash[:message] = "#{@garden.name} was updated."
       redirect_to user_garden_path(current_user.id, @garden.id)
@@ -149,6 +152,16 @@ class GardensController < ApplicationController
 
   def set_garden
     @garden = Garden.find_by(id: params[:id])
+  end
+
+  def check_for_blank_harvest_dates
+    if garden_params[:plantings_attributes]
+      garden_params[:plantings_attributes].each do | num, attributes|
+        if attributes["date_harvested"] == ""
+          attributes["date_harvested"] = nil
+        end
+      end
+    end
   end
 
   # def set_user
