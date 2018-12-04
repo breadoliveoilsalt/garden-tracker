@@ -37,12 +37,12 @@ class PlantingsController < ApplicationController
     @planting = Planting.find_by(id: params[:id])
   end
 
-  def check_permission
-    if @planting.user.id != current_user.id
-      flash[:message] = "Sorry, request denied. That planting belongs to another user."
-      redirect_to user_path(current_user.id)
-    end
-  end
+  # def check_permission
+  #   if @planting.user.id != current_user.id
+  #     flash[:message] = "Sorry, request denied. That planting belongs to another user."
+  #     redirect_to user_path(current_user.id)
+  #   end
+  # end
 
   def set_garden
     @garden = Garden.find_by(id: params[:garden_id])

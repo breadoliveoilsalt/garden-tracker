@@ -120,7 +120,7 @@ class Garden {
         <table class="ui celled table center aligned">
                         <thead>
                           <tr>
-                            <th> Name </th>
+                            <th> Species </th>
                             <th> Quantity </th>
                             <th> Date Planted </th>
                             <th> Harvested </th>
