@@ -18,7 +18,7 @@ class Planting < ActiveRecord::Base
     begin
       Date.parse(self.date_planted_before_type_cast)
     rescue
-      self.errors.add(:date_planted, "is not a valid date")
+      self.errors.add(:date_planted, "for #{self.name} is not a valid date")
     end
   end
 
@@ -27,7 +27,7 @@ class Planting < ActiveRecord::Base
       begin
         Date.parse(self.date_harvested_before_type_cast)
       rescue
-        self.errors.add(:date_harvested, "is not a valid date")
+        self.errors.add(:date_harvested, "for #{self.name} is not a valid date")
       end
     end
   end
