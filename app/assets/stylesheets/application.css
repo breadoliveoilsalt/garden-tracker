@@ -26,6 +26,7 @@ div {
 
 .field_with_errors {
   color: red;
+  border: .1em solid red;
   /* display: inline; */
   font-weight: bold;
   /* margin-left: -2px; */
