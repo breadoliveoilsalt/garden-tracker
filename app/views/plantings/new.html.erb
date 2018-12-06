@@ -1,3 +1,4 @@
+<div id="new-planting-form">
 
 <%= display_any_errors(@planting) %>
 
@@ -5,13 +6,15 @@
 
   <div>
 
-    <%= form_for @planting, url: garden_plantings_path, method: :post do | planting_attrib | %>
+    <%= form_for @planting, url: user_garden_plantings_path, method: :post do | planting_attrib | %>
 
       <%= planting_attrib.hidden_field :garden_id, :value => @garden.id %>
 
-      <%= render partial: 'plantings/form', locals: {planting_attrib: planting_attrib} %>
+      <%# <%= render partial: 'plantings/form', locals: {planting_attrib: planting_attrib} %>
 
       <%= planting_attrib.submit "Submit" %>
     <% end %>
 
   </div>
+
+</div>

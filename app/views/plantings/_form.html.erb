@@ -3,8 +3,8 @@
 
 <h2> Plantings: </h2>
 
-<div id="add-planting-display">
-  <p class="sub-menu-item bold"> <a id="add-planting-link" href=""> Add a Planting </a></p>
+<div id="new-planting-container">
+  <p class="sub-menu-item bold"> <a id="add-planting-link" data-user-id="<%=current_user.id%>" data-garden-id="<%=plantings.first.garden_id%>" href=""> Add a Planting </a></p>
 </div>
 
 <table class="ui celled table center aligned">

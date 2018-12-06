@@ -32,7 +32,7 @@ function getGardenInfo(event) {
     const urlRequest = `/users/${userId}/gardens/${gardenId}/` + event.data.param1
 
     $.ajax({
-          // Get the json representing the ids of a user's gardens
+          // Get the json representing the information for the next or previous garden
         url: urlRequest,
         method: "GET"
       })
