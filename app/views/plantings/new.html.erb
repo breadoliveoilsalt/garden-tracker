@@ -10,8 +10,6 @@
 
       <%= planting_attrib.hidden_field :garden_id, :value => @garden.id %>
 
-
-
       <table class="ui celled table center aligned">
         <thead>
           <tr>
@@ -19,28 +17,23 @@
             <th> Quantity </th>
             <th> Date Planted </th>
             <th> Date Harvested </th>
-            <th> Delete Planting </th>
           </tr>
         </thead>
 
         <tbody>
-
-          <%= f.fields_for :plantings do | planting | %>
-            <%= planting.hidden_field :user_id, :value => current_user.id %>
             <tr>
-              <td> <%= planting.collection_select :species_id, current_user.species, :id, :name %> </td>
-              <td> <%= planting.text_field :quantity, class: "centered" %> </td>
-              <td> <%= planting.date_field :date_planted, class: "centered" %></td>
-              <td> <%= planting.date_field :date_harvested, class: "centered" %></td>
+              <td> <%= planting_attrib.collection_select :species_id, current_user.species, :id, :name %> </td>
+              <td> <%= planting_attrib.text_field :quantity, class: "centered" %> </td>
+              <td> <%= planting_attrib.date_field :date_planted, class: "centered" %></td>
+              <td> <%= planting_attrib.date_field :date_harvested, class: "centered" %></td>
 
             </tr>
-
-      <% end %>
 
         </tbody>
       </table>
 
       <%= planting_attrib.submit "Submit", class: "ui button" %>
+
     <% end %>
 
   </div>

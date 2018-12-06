@@ -14,7 +14,7 @@ class PlantingsController < ApplicationController
     if @planting.save
       @planting.garden.species << @planting.species
       flash[:message] = "#{@planting.name} added to #{@planting.garden.name}."
-      redirect_to user_garden_path(current_user.id, @planting.garden.id)
+      redirect_to edit_user_garden_path(current_user.id, @planting.garden_id)
     else
       set_garden
       render :new
