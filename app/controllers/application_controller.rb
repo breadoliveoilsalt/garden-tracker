@@ -42,7 +42,8 @@ class ApplicationController < ActionController::Base
     elsif !object
       flash[:message] = "Sorry, the page you are looking for does not appear to exist."
       redirect_to user_path(current_user.id)
-    elsif object.user.id != current_user.id
+        # below, changed from user.id to user_id
+    elsif object.user_id != current_user.id
      flash[:message] = "Sorry, the page you are looking for belongs to another user."
      redirect_to user_path(current_user.id)
     end

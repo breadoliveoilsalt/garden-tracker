@@ -1,8 +1,8 @@
 class PlantingsController < ApplicationController
 
   before_action :check_if_signed_in
-  before_action :set_planting, only: [:update, :destroy]
-  before_action :check_permission, only: [:update, :destroy]
+  before_action :set_planting, only: [:destroy]
+  before_action -> { check_permission(@planting) }, only: [:destroy]
 
   def new
     set_garden
@@ -24,7 +24,8 @@ class PlantingsController < ApplicationController
   def destroy
     @planting.destroy
     flash[:message] = "#{@planting.species.name} planting deleted."
-    redirect_to garden_path(@planting.garden.id)
+    # UP TO HERE - CHECKING IF DELETE WORKS AND THEN SEEING IF I CAN REDIRECT BACK TO THE GARDEN EDIT PAGE, WITH FLASH MESSAGE OF COURSE
+    redirect_to edit_user_garden_path(current_user.id, @planting.garden_id)
   end
 
   private
