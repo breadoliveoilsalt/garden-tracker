@@ -2,7 +2,7 @@
 
 <%= display_any_errors(@planting) %>
 
-<h1> Create a Planting for <%= @garden.name %> </h1>
+<h1> Add a Planting for <%= @garden.name %> </h1>
 
   <div>
 
@@ -12,7 +12,7 @@
 
       <%# <%= render partial: 'plantings/form', locals: {planting_attrib: planting_attrib} %>
 
-      <%= planting_attrib.submit "Submit" %>
+      <%= planting_attrib.submit "Submit", class: "ui button" %>
     <% end %>
 
   </div>
