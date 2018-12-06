@@ -60,7 +60,7 @@
                     <% @garden.plantings.each do |planting| %>
                       <tr>
 
-                        <td> <%= planting.name %> </td>
+                        <td> <%= link_to planting.name, user_species_path(current_user.id, planting.species_id) %> </td>
                         <td> <%= planting.quantity %> </td>
                         <td> <%= planting.date_planted.strftime("%m/%d/%Y")%></td>
                         <td> <%= planting.date_harvested ? planting.date_harvested.strftime("%m/%d/%Y") : "No" %> </td>
