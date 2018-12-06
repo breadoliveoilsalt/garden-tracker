@@ -1,43 +1,47 @@
-<div id="new-planting-form">
+<div id="new-planting-form" class="ui container center aligned">
 
 <%= display_any_errors(@planting) %>
 
-<h1> Add a Planting for <%= @garden.name %> </h1>
-
   <div>
 
-    <%= form_for @planting, url: user_garden_plantings_path, method: :post do | planting_attrib | %>
+    <h1> Add a Planting for <%= @garden.name %> </h1>
 
-      <%= planting_attrib.hidden_field :garden_id, :value => @garden.id %>
+      <div>
 
-      <table class="ui celled table center aligned">
-        <thead>
-          <tr>
-            <th> Species </th>
-            <th> Quantity </th>
-            <th> Date Planted </th>
-            <th> Date Harvested </th>
-          </tr>
-        </thead>
+        <%= form_for @planting, url: user_garden_plantings_path, method: :post do | planting_attrib | %>
 
-        <tbody>
-            <tr>
-              <td> <%= planting_attrib.collection_select :species_id, current_user.species, :id, :name %> </td>
-              <td> <%= planting_attrib.text_field :quantity, class: "centered" %> </td>
-              <td> <%= planting_attrib.date_field :date_planted, class: "centered" %></td>
-              <td> <%= planting_attrib.date_field :date_harvested, class: "centered" %></td>
+          <%= planting_attrib.hidden_field :garden_id, :value => @garden.id %>
 
-            </tr>
+          <table class="ui celled table center aligned">
+            <thead>
+              <tr>
+                <th> Species </th>
+                <th> Quantity </th>
+                <th> Date Planted </th>
+                <th> Date Harvested </th>
+              </tr>
+            </thead>
 
-        </tbody>
-      </table>
+            <tbody>
+                <tr>
+                  <td> <%= planting_attrib.collection_select :species_id, current_user.species, :id, :name %> </td>
+                  <td> <%= planting_attrib.text_field :quantity, class: "centered" %> </td>
+                  <td> <%= planting_attrib.date_field :date_planted, class: "centered" %></td>
+                  <td> <%= planting_attrib.date_field :date_harvested, class: "centered" %></td>
 
-      <%= planting_attrib.submit "Submit", class: "ui button" %>
+                </tr>
 
-    <% end %>
+            </tbody>
+          </table>
 
-      <p class="sub-menu-item bold"><%= link_to "Click here if you need to add a species", new_user_species_path(current_user.id)%> </p>
+          <%= planting_attrib.submit "Submit", class: "ui button centered" %>
 
-  </div>
+        <% end %>
+
+          <p class="sub-menu-item bold"><%= link_to "Click here if you need to add a species", new_user_species_path(current_user.id)%> </p>
+
+      </div>
+
+    </div>
 
 </div>
