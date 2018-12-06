@@ -27,9 +27,6 @@ class GardensController < ApplicationController
   end
 
   def update
-      # check_for_blank_harvest_dates makes sure that if the date_harvested attribute comes back as "",
-      # it is set to nil.  Otherwise, the empty string will create an unnecessary validation error.
-    # check_for_blank_harvest_dates
     if @garden.update(garden_params)
       flash[:message] = "#{@garden.name} was updated."
       redirect_to user_garden_path(current_user.id, @garden.id)
@@ -38,56 +35,8 @@ class GardensController < ApplicationController
     end
   end
 
-  # def update
-  #     # The logic here was done to ensure that errors appear when non-valid data is submitted
-  #     # in a nested edit form.  See README_gardens_controller_with_explanations for explanations.
-  #   if !garden_params[:plantings_attributes]
-  #     @garden.update(garden_params)
-  #     test_update_and_redirect
-  #   else
-  #     @garden.custom_updater_for_nested_params(garden_params)
-  #     test_update_and_redirect
-  #   end
-  # end
-
-  # def index
-  #   respond_to do |format|
-  #     format.html { render_gardens_html }
-  #     format.json { render_gardens_json }
-  #   end
-  # end
-
   def show
-
-      #   # Check if the user id in the url is valid and if the garden specified
-      #   #(and set by set_garden) belongs to the user specified in the url.
-      #   # If yes to all, render the show page:
-      # @user = User.find_by(id: params[:user_id])
-      # if @user && @user.gardens.include?(@garden)
-      #   respond_to do |format|
-      #     format.html { render :show }
-      #     format.json { render json: @garden }
-      #   end
-      #
-      # else
-      #  flash[:message] = "Sorry, user or garden does not exist."
-      #  redirect_to user_path(current_user.id)
-      # end
-
-        # ON REVAMP -- PRETTY SURE I DON'T NEED THIS ANYMORE:
-        # If not a nested route, check that #set_garden has identified an existing
-        # garden and show that garden if so:
-    # elsif @garden
-    #   respond_to do |format|
-    #     format.html { render :show }
-    #     format.json { render json: @garden }
-    #   end
-
-    # else
-    #    flash[:message] = "Sorry, garden does not exist."
-    #    redirect_to user_path(current_user.id)
-    #  end
- end
+  end
 
   def destroy
     destroy_associated_plantings(@garden)
@@ -117,33 +66,6 @@ class GardensController < ApplicationController
     end
   end
 
-  def largest
-    @garden = Garden.largest_garden
-    if @garden == nil
-      flash[:message] = "Sorry, no gardens have been created yet."
-      redirect_to redirect_to user_path(current_user.id)
-    else
-      flash[:message] = "This is currently the largest garden:"
-      redirect_to garden_path(@garden.id)
-    end
-  end
-
-  def most_plantings
-    @garden = Garden.garden_with_most_plantings
-    if @garden == nil
-      flash[:message] = "Sorry, no gardens have been created yet."
-      redirect_to redirect_to user_path(current_user.id)
-    else
-      flash[:message] = "This is currently the garden with the most plantings:"
-      redirect_to garden_path(@garden.id)
-    end
-  end
-
-  def get_garden_ids
-    garden_ids = Garden.get_garden_ids_by_user_id(params[:id])
-    render json: garden_ids.to_json
-  end
-
   private
 
   def garden_params
@@ -154,78 +76,8 @@ class GardensController < ApplicationController
     @garden = Garden.find_by(id: params[:id])
   end
 
-    # This doesn't do anything helpful.  Still gets sent to validator for harvest dates with date_harvested == ""
-  # def check_for_blank_harvest_dates
-  #   if garden_params[:plantings_attributes]
-  #     garden_params[:plantings_attributes].each do | num, attributes|
-  #       if attributes["date_harvested"] == ""
-  #         attributes["date_harvested"] = nil
-  #       end
-  #     end
-  #   end
-  # end
-
-  # def set_user
-  #   @user = current_user
-  # end
-
-  # def check_permission
-  #     # For handling gardens index page, where there is params[:user_id]:
-  #   if params[:user_id].to_i != current_user.id
-  #     flash[:message] = "Sorry, the page you are looking for belongs to another user."
-  #     redirect_to user_path(current_user.id)
-  #   end
-  #     # For handling garden CRUD pages (other than index), where there are params[:user_id] and then params[:id]
-  #   if params[:id]
-  #     if @garden.user.id != current_user.id
-  #      flash[:message] = "Sorry, the page you are looking for belongs to another user."
-  #      redirect_to user_path(current_user.id)
-  #    end
-  #   end
-  # end
-
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(garden_id: @garden.id).destroy_all
-  end
-
-  # def test_update_and_redirect
-  #   if @garden.errors.messages != {}
-  #     render :edit
-  #   else
-  #     flash[:message] = "#{@garden.name} was updated."
-  #     redirect_to garden_path(@garden.id)
-  #   end
-  # end
-
-
-    # CONSIDER WHETHER I NEED @user - global here
-  def render_gardens_html
-        # Check if the url is a nested url, such as users/1/gardens:
-     if params[:user_id]
-
-         # See if user id params is valid, and if so, define @gardens:
-       if @user = User.find_by(id: params[:user_id])
-         @gardens = @user.gardens
-         render :index
-       else
-         flash[:message] = "Sorry, user does not exist."
-         redirect_to user_path(current_user.id)
-       end
-
-         # If the url is not a nested url, show all the gardens:
-     else
-       @gardens = Garden.all
-       render :index
-     end
-  end
-
-  def render_gardens_json
-
-    if params[:user_id].to_i == current_user.id
-      user = User.find_by(id: params[:user_id])
-      @gardens = user.gardens
-      render json: @gardens
-    end
   end
 
 end

@@ -21,14 +21,4 @@ Rails.application.routes.draw do
     resources :species
   end
 
-  # get 'users/:id/get_garden_ids', to: 'gardens#get_garden_ids'
-
-  # get 'gardens/most_plantings', to: 'gardens#most_plantings'
-  # get 'gardens/largest', to: 'gardens#largest'
-
-  # resources :gardens do
-  #   resources :plantings, only: [:new, :create, :destroy]
-  # end
-
-
 end
