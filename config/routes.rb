@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :gardens do
       get "/next", to: "gardens#next"
       get "/previous", to: "gardens#previous"
-      resources :plantings
+      resources :plantings, only: [:new, :create, :destroy]
     end
     resources :species
   end
