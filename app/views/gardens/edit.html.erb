@@ -24,15 +24,15 @@
 
             <%= render partial: "gardens/form", locals: { f: f } %>
 
-            <% if @garden.plantings.any? %>
-
                 <div class="ui divider divider-spacer"></div>
 
                 <h2> Plantings: </h2>
 
                 <div id="add-planting-link-container">
-                  <p class="sub-menu-item bold"> <a id="add-planting-link" data-user-id="<%=current_user.id%>" data-garden-id="<%=@garden.plantings.first.garden_id%>" href=""> Add a Planting </a></p>
+                  <p class="sub-menu-item bold"> <a id="add-planting-link" data-user-id="<%=current_user.id%>" data-garden-id="<%=@garden.id%>" href=""> Add a Planting </a></p>
                 </div>
+
+            <% if @garden.plantings.any? %>
 
               <%= render partial: "plantings/edit_form", locals: {f: f, plantings: @garden.plantings} %>
 
