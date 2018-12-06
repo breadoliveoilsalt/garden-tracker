@@ -18,4 +18,5 @@
 //= require_tree .
 
 // require garden_buttons_for_gardens_show_page
+// require add_planting_link_garden_edit_page
 // menu_buttons

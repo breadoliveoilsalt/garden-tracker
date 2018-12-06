@@ -22,14 +22,6 @@ class SpeciesController < ApplicationController
     end
   end
 
-    # if @species.save
-    #   render json: @species, status: 201
-    # else
-    #   render :json => {:errors => @species.errors.full_messages}, status: 422
-    # end
-
-  # end
-
   def edit
   end
 
@@ -43,10 +35,6 @@ class SpeciesController < ApplicationController
   end
 
   def show
-    # respond_to do |format|
-    #   format.html { render :show }
-    #   format.json { render json: @species }
-    # end
   end
 
   def destroy
@@ -66,19 +54,6 @@ class SpeciesController < ApplicationController
   def set_species
     @species = Species.find_by(id: params[:id])
   end
-
-  # def check_permission
-  #   if params[:user_id].to_i != current_user.id
-  #     flash[:message] = "Sorry, the page you are looking for belongs to another user."
-  #     redirect_to user_path(current_user.id)
-  #   elsif !@species
-  #     flash[:message] = "Sorry, the page you are looking for does not appear to exist."
-  #     redirect_to user_path(current_user.id)
-  #   elsif @species.user.id != current_user.id
-  #    flash[:message] = "Sorry, the page you are looking for belongs to another user."
-  #    redirect_to user_path(current_user.id)
-  #   end
-  # end
 
   def destroy_associated_SpeciesGarden_entries
     SpeciesGarden.where(species_id: @species.id).destroy_all
