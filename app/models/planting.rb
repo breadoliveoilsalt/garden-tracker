@@ -24,6 +24,10 @@ class Planting < ActiveRecord::Base
 
   def valid_date_harvested?
     if self.date_harvested_before_type_cast
+
+        # short circuit as ok if form has "", meaning date was not entered
+      return true if self.date_harvested_before_type_cast == ""
+
       begin
         Date.parse(self.date_harvested_before_type_cast)
       rescue
