@@ -24,7 +24,6 @@ class PlantingsController < ApplicationController
   def destroy
     @planting.destroy
     flash[:message] = "#{@planting.species.name} planting deleted."
-    # UP TO HERE - CHECKING IF DELETE WORKS AND THEN SEEING IF I CAN REDIRECT BACK TO THE GARDEN EDIT PAGE, WITH FLASH MESSAGE OF COURSE
     redirect_to edit_user_garden_path(current_user.id, @planting.garden_id)
   end
 
@@ -37,13 +36,6 @@ class PlantingsController < ApplicationController
   def set_planting
     @planting = Planting.find_by(id: params[:id])
   end
-
-  # def check_permission
-  #   if @planting.user.id != current_user.id
-  #     flash[:message] = "Sorry, request denied. That planting belongs to another user."
-  #     redirect_to user_path(current_user.id)
-  #   end
-  # end
 
   def set_garden
     @garden = Garden.find_by(id: params[:garden_id])
