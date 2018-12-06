@@ -16,33 +16,35 @@
 
         <div class="ui divider divider-spacer"></div>
 
-            <div id="edit-garden-container" class="ui big form center aligned">
+        <div id="new-planting-form-container"> </div>
 
-              <%= form_for [current_user, @garden] do |f| %>
+        <div id="edit-garden-container" class="ui big form center aligned">
 
-                <%= render partial: "gardens/form", locals: { f: f } %>
+          <%= form_for [current_user, @garden] do |f| %>
 
-                <% if @garden.plantings.any? %>
+            <%= render partial: "gardens/form", locals: { f: f } %>
 
-                    <div class="ui divider divider-spacer"></div>
+            <% if @garden.plantings.any? %>
 
-                    <h2> Plantings: </h2>
+                <div class="ui divider divider-spacer"></div>
 
-                    <div id="new-planting-container">
-                      <p class="sub-menu-item bold"> <a id="add-planting-link" data-user-id="<%=current_user.id%>" data-garden-id="<%=@garden.plantings.first.garden_id%>" href=""> Add a Planting </a></p>
-                    </div>
+                <h2> Plantings: </h2>
 
-                  <%= render partial: "plantings/edit_form", locals: {f: f, plantings: @garden.plantings} %>
-
-                <% end %>
-
-                <div>
-                  <%= f.submit "Submit", class: "ui button" %>
+                <div id="add-planting-link-container">
+                  <p class="sub-menu-item bold"> <a id="add-planting-link" data-user-id="<%=current_user.id%>" data-garden-id="<%=@garden.plantings.first.garden_id%>" href=""> Add a Planting </a></p>
                 </div>
 
-              <% end %>
+              <%= render partial: "plantings/edit_form", locals: {f: f, plantings: @garden.plantings} %>
 
+            <% end %>
+
+            <div>
+              <%= f.submit "Submit", class: "ui button" %>
             </div>
+
+          <% end %>
+
+        </div>
 
     </div>
 
