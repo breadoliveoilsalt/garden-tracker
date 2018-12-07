@@ -12,7 +12,10 @@ class PlantingsController < ApplicationController
   def create
     @planting = current_user.plantings.build(planting_params)
     if @planting.save
-      @planting.garden.species << @planting.species
+        # Confirmed - I do need this next line:
+      if !(@planting.garden.species.include?(@planting.species))
+        @planting.garden.species << @planting.species
+      end
       flash[:message] = "#{@planting.name} added to #{@planting.garden.name}."
       redirect_to edit_user_garden_path(current_user.id, @planting.garden_id)
     else
@@ -23,6 +26,7 @@ class PlantingsController < ApplicationController
 
   def destroy
     @planting.destroy
+    check_garden_for_species_removal
     flash[:message] = "#{@planting.species.name} planting deleted."
     redirect_to edit_user_garden_path(current_user.id, @planting.garden_id)
   end
@@ -40,5 +44,18 @@ class PlantingsController < ApplicationController
   def set_garden
     @garden = Garden.find_by(id: params[:garden_id])
   end
+
+  def check_garden_for_species_removal
+      # If, after deleting the planting, the garden has no further plantings of
+      # the same species, then remove the species from the garden's list of
+      # species.
+    associated_garden = @planting.garden
+    associated_species = @planting.species
+    if !(associated_garden.plantings.include?(associated_species))
+      join_table_record = SpeciesGarden.where("garden_id = ? AND species_id = ?", associated_garden.id, associated_species.id)[0]
+      SpeciesGarden.destroy(join_table_record.id)
+    end
+  end
+    # UP TO HERE
 
 end
