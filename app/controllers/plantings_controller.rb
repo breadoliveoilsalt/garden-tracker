@@ -50,11 +50,21 @@ class PlantingsController < ApplicationController
       # the same species, then remove the species from the garden's list of
       # species.
     associated_garden = @planting.garden
-    associated_species = @planting.species
-    if !(associated_garden.plantings.include?(associated_species))
-      join_table_record = SpeciesGarden.where("garden_id = ? AND species_id = ?", associated_garden.id, associated_species.id)[0]
-      SpeciesGarden.destroy(join_table_record.id)
+    associated_species_id = @planting.species_id
+
+      # Short curcuit the function, returning true, if any of the plantings in
+      # the associated_garden have the associated species.
+    associated_garden.plantings.each do | planting |
+      binding.pry
+      if planting.species_id == associated_species_id
+        return true
+      end
     end
+
+      # Otherwise, remove the species from the garden.
+    join_table_record = SpeciesGarden.where("garden_id = ? AND species_id = ?", associated_garden.id, associated_species_id)[0]
+    SpeciesGarden.destroy(join_table_record.id)
+
   end
     # UP TO HERE
 
