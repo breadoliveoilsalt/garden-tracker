@@ -15,6 +15,10 @@
   <% if @active_gardens.empty? %>
 
     <h2 class="ui header center aligned"> Currently there are no active gardens registered. </h2>
+    <div class="ui container center aligned">
+      <p class="ui center aligned sub-menu-item medium-font bold"> <%= link_to "Add a New Garden", new_user_garden_path(current_user.id) %> </p>
+      <p class="ui center aligned sub-menu-item medium-font bold"> <%= link_to "Add a New Species", new_user_species_path(current_user.id) %> </p>
+    </div>
 
   <% else %>
     <table class="ui celled table center aligned">

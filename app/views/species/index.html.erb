@@ -3,7 +3,7 @@
   <div></div>
 
   <div class="ui container center aligned">
-      <p class="ui center aligned sub-menu-item medium-font bold"> <%= link_to "Add a New Species", new_user_species_path %> </p>
+      <p class="ui center aligned sub-menu-item medium-font bold"> <%= link_to "Add a New Species", new_user_species_path(current_user.id) %> </p>
   </div>
 
   <h1 class="ui header center aligned"> <%= current_user.name %>'s Species </h1>
@@ -17,7 +17,7 @@
           <div class="ui item centered medium-font"> <%= link_to species.name, user_species_path(current_user.id, species.id) %></div>
       <% end %>
     <% else %>
-          <div class="item"> No species have been added yet. </div>
+          <div class="item centered"> No species have been added yet. </div>
     <% end %>
   </div>
 
