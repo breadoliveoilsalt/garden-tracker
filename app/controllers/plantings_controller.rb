@@ -11,7 +11,6 @@ class PlantingsController < ApplicationController
 
   def create
     @planting = current_user.plantings.build(planting_params)
-    binding.pry
     if @planting.save
         # Confirmed - I do need this next line:
       if !(@planting.garden.species.include?(@planting.species))
