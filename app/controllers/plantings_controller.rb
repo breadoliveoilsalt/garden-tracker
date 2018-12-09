@@ -11,6 +11,7 @@ class PlantingsController < ApplicationController
 
   def create
     @planting = current_user.plantings.build(planting_params)
+    binding.pry
     if @planting.save
         # Confirmed - I do need this next line:
       if !(@planting.garden.species.include?(@planting.species))
@@ -34,7 +35,7 @@ class PlantingsController < ApplicationController
   private
 
   def planting_params
-    params.require(:planting).permit(:quantity, :garden_id, :species_id, :user_id)
+    params.require(:planting).permit(:quantity, :garden_id, :species_id, :user_id, :date_planted, :date_harvested)
   end
 
   def set_planting
@@ -55,7 +56,6 @@ class PlantingsController < ApplicationController
       # Short curcuit the function, returning true, if any of the plantings in
       # the associated_garden have the associated species.
     associated_garden.plantings.each do | planting |
-      binding.pry
       if planting.species_id == associated_species_id
         return true
       end

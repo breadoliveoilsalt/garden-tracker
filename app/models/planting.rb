@@ -14,6 +14,7 @@ class Planting < ActiveRecord::Base
   before_save :set_expected_maturity_date
 
   def valid_date_planted?
+    binding.pry
     begin
       Date.parse(self.date_planted_before_type_cast)
     rescue
