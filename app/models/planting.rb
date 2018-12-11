@@ -45,4 +45,14 @@ class Planting < ActiveRecord::Base
     end
   end
 
+  def maturity_date_display
+    if self.date_harvested
+        return "Harvested"
+    elsif self.expected_maturity_date
+        return self.expected_maturity_date.strftime("%m/%d/%Y")
+    else
+        return "Not Available"
+    end
+  end
+
 end
