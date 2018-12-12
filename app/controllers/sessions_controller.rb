@@ -1,7 +1,12 @@
 class SessionsController < ApplicationController
 
   def new
-    @user = User.new
+    if signed_in?
+      flash[:message] = "You have an account already."
+      redirect_to user_path(current_user.id)
+    else
+      @user = User.new
+    end
   end
 
   def create
