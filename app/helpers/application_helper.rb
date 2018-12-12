@@ -1,13 +1,29 @@
 module ApplicationHelper
 
   def flash_message
-    if flash[:message]
-      content_tag(:h3, flash[:message], class: "message")
-    end
+    render partial: 'layouts/message', locals: {message: flash[:message]} if flash[:message]
   end
 
-    # Do not need these any more, but keeping as possible precedents. I previously
-    # used these as helper methods in users/show view.
+  def display_any_errors(object)
+    render partial: 'layouts/errors', locals: {errors: object.errors} if object.errors.any?
+  end
+
+  def visiting_initial_pages
+    params[:action] == "home"
+  end
+
+end
+
+
+# Do not need these any more, but keeping as possible precedents. I previously
+# used these as helper methods in users/show view.
+
+  # def flash_message
+  #   if flash[:message]
+  #     content_tag(:h3, flash[:message], class: "message")
+  #   end
+  # end
+
   # def link_to_largest_garden
   #   if Garden.any?
   #     largest_garden = Garden.largest_garden
@@ -25,13 +41,3 @@ module ApplicationHelper
   #     "No gardens have been created yet."
   #   end
   # end
-
-  def display_any_errors(object)
-    render partial: 'layouts/errors', locals: {errors: object.errors} if object.errors.any?
-  end
-
-  def visiting_initial_pages
-    params[:action] == "home"
-  end
-
-end
