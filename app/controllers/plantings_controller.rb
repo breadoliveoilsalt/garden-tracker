@@ -65,6 +65,5 @@ class PlantingsController < ApplicationController
     SpeciesGarden.destroy(join_table_record.id)
 
   end
-    # UP TO HERE
 
 end

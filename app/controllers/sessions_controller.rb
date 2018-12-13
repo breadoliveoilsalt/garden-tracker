@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
    session[:user_id] = user.id
    flash[:message] = "Successfully signed in with GitHub"
    redirect_to user_path(user.id)
- end
+  end
 
   def destroy
     if signed_in_with_github?

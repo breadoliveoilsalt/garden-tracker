@@ -27,9 +27,7 @@ div {
 .field_with_errors {
   color: red;
   border: .1em solid red;
-  /* display: inline; */
   font-weight: bold;
-  /* margin-left: -2px; */
 }
 
 .error-messages {
@@ -45,18 +43,6 @@ a.indented {
   display: inline-block;
   text-indent: 40px;
 }
-
-/* form div.centered-form-field {
-  margin: 0rem auto;
-}
- */
-/* .centered-form-field {
-  display: inline-block;
-  clear: right;
-} */
-/* .garden_button {
-  background-color: pink;
-} */
 
 .hidden {
   visibility: hidden;

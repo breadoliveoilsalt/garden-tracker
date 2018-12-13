@@ -6,5 +6,4 @@ class SpeciesGarden < ActiveRecord::Base
   belongs_to :species
   belongs_to :garden
 
-
 end

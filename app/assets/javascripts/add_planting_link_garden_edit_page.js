@@ -12,6 +12,7 @@
 
     (function($, window, document) {
 
+      // Start of heart of code.
       // On document ready:
     $(function () {
       attachAddPlantingLinkListener()
@@ -41,6 +42,6 @@
            scrollTop: $("#new-planting-form-container").offset().top
        }, 1000);
       })
-    }
+    } // End of heart of code.
   }
 ))
