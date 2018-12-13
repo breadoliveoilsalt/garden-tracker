@@ -5,7 +5,12 @@
 
     setupForNewPlanting(window.jQuery, window, document)
 
-  } (function($, window, document) {
+  }
+    // Starting with this first parenthesis below: this basically (1) calls the anonymous
+    // function AND (2) passes in all of the stuff below as the anonymous
+    // function's argument, the original "setupForNewPlanting"
+
+    (function($, window, document) {
 
       // On document ready:
     $(function () {

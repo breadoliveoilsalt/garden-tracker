@@ -11,13 +11,15 @@ To use this app:
 2. In your terminal, `cd` into the parent directory for Garden Tracker.  
 
 3. In your terminal run: `rake db:migrate`
-  - If you want to have some fake data to play with, then after, run: `rake db:seed`.
+  - If you want to have some fake data to play with, then run: `rake db:seed`.
 
 4. Also in your terminal, run: `rails s`.
 
 5. Head to localhost:3000 in your browser.  Then you can create an account for yourself, add gardens, add species, and add plantings to your gardens.  
 
-To close out the program, close your browser, and in the terminal where you ran `rails s`, hit control+c (on a Mac).  
+To close out the program, close your browser, and in the terminal where you ran `rails s`, hit control+c (on a Mac).
+
+If you signed in with GitHub, make sure to log out of GitHub to log out of Garden Tracker fully.  
 
 To run the program again, repeat step 2 and then step 4.  
 
