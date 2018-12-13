@@ -49,7 +49,7 @@ gem 'autoprefixer-rails'
 gem 'therubyracer'
 # gem 'mini_racer'
 # gem 'mini_racer', platforms: :ruby
-#gem 'dotenv-rails' - had to move this up above
+# gem 'dotenv-rails' - had to move this up above
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
