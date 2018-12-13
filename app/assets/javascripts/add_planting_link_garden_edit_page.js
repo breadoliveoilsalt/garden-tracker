@@ -4,7 +4,7 @@
 (
   function(setupForNewPlanting){
 
-    setupForNewPlanting(window.jQuery, window, document);
+    setupForNewPlanting(window.jQuery, window, document)
 
   } (function($, window, document) {
 
