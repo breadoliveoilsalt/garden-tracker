@@ -42,7 +42,9 @@ class GardensController < ApplicationController
     destroy_associated_plantings(@garden)
     destroy_associated_SpeciesGarden_entries
     @garden.destroy
-    flash[:message] = "#{@garden.name} was deleted from your list of gardens."
+    # NOTE: flash[:message]= not working on redirect, despite different ways of trying.
+    # To work on later.
+    # redirect_to user_gardens_path(current_user.id), flash: {message: "#{@garden.name} was deleted from your list of gardens."
     redirect_to user_gardens_path(current_user.id)
   end
 
