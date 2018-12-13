@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
 
   def destroy
     if signed_in_with_github?
-      flash[:message] = "****You must go to github.com and sign out there to completely sign out here!!!****"
+      flash[:message] = "**** PLEASE NOTE: You must go to github.com and sign out there to completely sign out of Garden Tracker! ****"
     end
     session.clear
     redirect_to root_path

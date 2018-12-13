@@ -79,6 +79,10 @@ a.indented {
   margin: 2rem 0rem;
 }
 
+.ui.table.spacer {
+  margin: 4rem 0rem;
+}
+
 p.sub-menu-item {
   display:inline-block;
   margin: 0.5rem 2rem;
