@@ -1,3 +1,5 @@
+// jQuery iife.  For formatting and reasoning, see here:
+// http://gregfranko.com/blog/jquery-best-practices/
 
 (function(setupForMenuLinks){
   setupForMenuLinks(window.jQuery, window, document)

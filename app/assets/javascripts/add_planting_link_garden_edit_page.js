@@ -1,8 +1,7 @@
 // jQuery iife.  For formatting and reasoning, see here:
 // http://gregfranko.com/blog/jquery-best-practices/
 
-(
-  function(setupForNewPlanting){
+(function(setupForNewPlanting){
 
     setupForNewPlanting(window.jQuery, window, document)
 
