@@ -33,6 +33,7 @@
                 // Create an "instance" of the gardenObject
             .then(function(data) {
               const gardenObject = new Garden(data["id"], data["name"], data["description"], data["square_feet"], data["active"], data["user_id"], data["user"], data["species"], data["plantings"])
+              console.log("Garden Object: ", gardenObject)
                 // Render information for gardenObject as "insert"
               const insert = gardenObject.renderGardenShow()
               return insert
@@ -169,7 +170,7 @@
               htmlToInsert += `
                                 <tr>
 
-                                  <td> ${planting.name} </td>
+                                  <td> <a href="/users/${planting.user_id}/species/${planting.species_id}"> ${planting.name} </td>
                                   <td> ${planting.quantity} </td>
                                   <td> ${datePlantedString} </td>
                                   <td> ${dateHarvestedString} </td>
